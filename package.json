@@ -1,0 +1,22 @@
+{
+  "name": "ludum-46",
+  "version": "1.0.0",
+  "description": "Ludum Dare 46 Game Jam (April 17-20, 2020)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/excaliburjs/ludum-46.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/excaliburjs/ludum-46/issues"
+  },
+  "homepage": "https://github.com/excaliburjs/ludum-46#readme",
+  "dependencies": {
+    "parcel-bundler": "1.12.4"
+  }
+}
