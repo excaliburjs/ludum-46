@@ -4,7 +4,7 @@
   "description": "Ludum Dare 46 Game Jam (April 17-20, 2020)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/excaliburjs/ludum-46#readme",
   "dependencies": {
+    "excalibur": "0.23.0",
     "parcel-bundler": "1.12.4"
+  },
+  "devDependencies": {
+    "typescript": "^3.8.3"
   }
 }
