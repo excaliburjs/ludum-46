@@ -4,7 +4,8 @@
   "description": "Ludum Dare 46 Game Jam (April 17-20, 2020)",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "repository": {
     "type": "git",
