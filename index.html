@@ -1,14 +1,22 @@
 <html>
-  <head>
-    <title>Ludum Dare 46</title>
-    <link rel="stylesheet" href="app.css" />
-  </head>
-  <body>
-    <a
-      id="commitRef"
-      href="https://github.com/excaliburjs/ludum-46/commit/{{ commitRef }}"
-      >{{ commitRef }}</a
-    >
-    <script src="./src/index.ts"></script>
-  </body>
+
+<head>
+  <title>Ludum Dare 46</title>
+  <link rel="stylesheet" href="app.css" />
+</head>
+
+<body>
+  <a id="commitRef" href="https://github.com/excaliburjs/ludum-46/commit/{{ commitRef }}">{{ commitRef }}</a>
+  <script src="./src/index.ts"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46390208-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-46390208-1');
+  </script>
+</body>
+
 </html>
