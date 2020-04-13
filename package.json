@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html",
-    "build:excalibur": "cd lib/excalibur && npm install && npm run core:bundle"
+    "build": "npm run build:excalibur && parcel build index.html",
+    "build:excalibur": "cd lib/excalibur && npm install && npm run core && cd ../../"
   },
   "alias": {
     "excalibur": "./lib/excalibur/build/dist"
