@@ -1,0 +1,9 @@
+#commitRef {
+  position: absolute;
+  bottom: 3;
+  right: 3;
+  font-family: "Fira Code", "Dank Mono", "Consolas", monospace;
+  font-size: 10px;
+  opacity: 0.5;
+  color: #333;
+}
