@@ -10,6 +10,10 @@ Ludum Dare 46 Game Jam (April 17-20, 2020)
 
 2.  Navigate into the root directory `ludum-46` in your favorite command line tool
 
+3.  Run the install to download the tools
+       
+        npm install
+
 3.  Run the following (only needed once or if the submodule is changed) commands to setup the git submodule
 
         git submodule init
