@@ -5,4 +5,4 @@ const game = new Engine();
 
 game.start();
 
-window.game = game;
+(window as any).game = game;
