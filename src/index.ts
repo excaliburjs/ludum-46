@@ -26,7 +26,7 @@ const emitter = new ParticleEmitter({
     minSize: 0.5,
     acceleration: vec(0, 460),
     sprite: sprite,
-    particleRotationalVelocity: Math.PI / 2,
+    particleRotationalVelocity: Math.PI,
     randomRotation: true
   });
 
