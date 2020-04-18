@@ -7,7 +7,7 @@ Engine._useWebGL = true;
 const game = new Engine({ height: Config.GameHeight, width: Config.GameWidth });
 const loader = new Loader();
 for (let r in Resources) {
-  loader.addResource(Resources[r]);
+  loader.addResource((Resources as any)[r]);
 }
 
 game.start(loader).then(() => {
