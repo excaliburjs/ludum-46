@@ -1,4 +1,4 @@
-import { Actor, Color, Engine, Graphics } from "excalibur";
+import { Actor, Color, Engine, Graphics, Vector, vec } from "excalibur";
 
 export interface CueCardOptions {
   // The lifetime in seconds of the cue card
@@ -33,7 +33,9 @@ export class CueCard extends Actor {
 
     this._setUpBackground();
     this._setUpTimer();
-    this._setUpSymbols();
+    this._setUpLocationSymbol();
+    this._setUpPropSymbol();
+    this._setUpCostumeSymbol();
   }
 
   public onInitialize(engine: Engine) {}
@@ -78,8 +80,11 @@ export class CueCard extends Actor {
     timerLayer.show(this.timerRect);
   }
 
-  private _setUpSymbols(): void {
-    const symbolLayer = this.graphics.createLayer({ name: "goals", order: 2 });
+  private _setUpLocationSymbol(): void {
+    const locationSymbolLayer = this.graphics.createLayer({
+      name: "locationSymbol",
+      order: 2,
+    });
     //Symbol Loc1
     const locationSprite = new Graphics.Rect({
       width: 50,
@@ -87,18 +92,32 @@ export class CueCard extends Actor {
       color: Color.Red,
     });
 
+    locationSymbolLayer.offset = vec(10, 0);
+    locationSymbolLayer.show(locationSprite);
+  }
+  private _setUpPropSymbol(): void {
+    const propSymbolLayer = this.graphics.createLayer({
+      name: "propSymbol",
+      order: 2,
+    });
     const propSprite = new Graphics.Rect({
       width: 50,
       height: 100,
       color: Color.Red,
+    });
+
+    propSymbolLayer.show(propSprite);
+  }
+  private _setUpCostumeSymbol(): void {
+    const costumeSymbolLayer = this.graphics.createLayer({
+      name: "costumeSymbol",
+      order: 2,
     });
     const constumeSprite = new Graphics.Rect({
       width: 50,
       height: 100,
       color: Color.Red,
     });
-    symbolLayer.show(locationSprite);
-    symbolLayer.show(propSprite);
-    symbolLayer.show(constumeSprite);
+    costumeSymbolLayer.show(constumeSprite);
   }
 }
