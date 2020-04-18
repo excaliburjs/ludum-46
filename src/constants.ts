@@ -11,4 +11,5 @@ export enum StageProps {
 
 export enum Costumes {
   vikingHat = "vikingHat",
+  jesterHat = "jesterHat",
 }

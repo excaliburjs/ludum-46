@@ -200,14 +200,15 @@ export class CueCard extends Actor {
     costumeSymbolLayer.offset = this._calculateRelativePosition(3);
 
     const vikingHatSprite = Graphics.Sprite.from(Resources.vikingHatImage);
+    const jesterHatSprite = Graphics.Sprite.from(Resources.jesterHatImage);
 
     switch (requiredCostume) {
       case Costumes.vikingHat:
         costumeSymbolLayer.show(vikingHatSprite);
         break;
-      //   case Costumes.clown:
-      //     costumeSymbolLayer.show(stageRightSprite);
-      //     break;
+      case Costumes.jesterHat:
+        costumeSymbolLayer.show(jesterHatSprite);
+        break;
       default:
         costumeSymbolLayer.show(vikingHatSprite);
     }
