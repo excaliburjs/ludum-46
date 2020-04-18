@@ -39,7 +39,6 @@ export class CueCardManager {
     const enumValues = Object.keys(anEnum);
     const randomIndex = Math.floor(Math.random() * enumValues.length);
     const randomEnumValue = enumValues[randomIndex];
-    console.log(randomEnumValue);
     return randomEnumValue;
   }
 
@@ -47,7 +46,7 @@ export class CueCardManager {
     return new CueCard({
       lifeTime: Math.random() * 5 + 1,
       requiredCostume: this.randomEnum(Costumes),
-      requiredLocation: this.randomEnum(Locations),
+      requiredLocation: Object.keys(Locations)[num - 1],
       requiredProp: this.randomEnum(StageProps),
       cueCardHeight: this.cueCardHeight,
       cueCardWidth: this.cueCardWidth,
