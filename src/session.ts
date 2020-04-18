@@ -1,15 +1,16 @@
 import { Engine } from "excalibur";
 import { Stats } from "./stats";
 
-let stats: Stats;
+let gameStats: Stats;
 
-export function getStats() {
-  return stats;
+// call this function to access and modify the game stats
+export function stats() {
+  return gameStats;
 }
 
 export function newgame(game: Engine) {
   // clear stats
-  // TODO
+  gameStats = new Stats();
 
   // begin main scene
   game.goToScene("main");

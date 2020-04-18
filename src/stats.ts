@@ -5,6 +5,9 @@ interface Payload {
   commit: string; // the current commit of the game
   started: number; // the time
   duration: number; // the duration of the game session
+  numLinesDelivered: number;
+  numPropsused: number;
+  numCostumeChanges: number;
 }
 
 export class Analytics {
