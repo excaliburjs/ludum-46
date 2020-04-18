@@ -1,5 +1,5 @@
 import { Actor, Color, Engine, Graphics, Vector, vec } from "excalibur";
-
+import {Resources} from "./resources";
 export interface CueCardOptions {
   // The lifetime in seconds of the cue card
   lifeTime: number;
@@ -85,15 +85,11 @@ export class CueCard extends Actor {
       name: "locationSymbol",
       order: 2,
     });
-    //Symbol Loc1
-    const locationSprite = new Graphics.Rect({
-      width: 50,
-      height: 100,
-      color: Color.Red,
-    });
+
+    let stageLeftSprite = Graphics.Sprite.from(Resources.stageLeftImage);
 
     locationSymbolLayer.offset = vec(10, 0);
-    locationSymbolLayer.show(locationSprite);
+    locationSymbolLayer.show(stageLeftSprite);
   }
   private _setUpPropSymbol(): void {
     const propSymbolLayer = this.graphics.createLayer({

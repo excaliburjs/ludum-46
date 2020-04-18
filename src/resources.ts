@@ -14,7 +14,7 @@ import player5long from "../img/char-sprites/player-5-long.png";
 
 import { Graphics, Resource } from "excalibur";
 
-export const Resources: { [key: string]: Resource<any> } = {
+export const Resources = {
   swordImage: new Graphics.RawImage(sword),
   stageLeftImage: new Graphics.RawImage(stageLeft),
   stageRightImage: new Graphics.RawImage(stageRight),
