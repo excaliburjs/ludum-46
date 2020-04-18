@@ -9,6 +9,6 @@ export enum StageProps {
   umbrella = "umbrella",
 }
 
-export enum Wardrobe {
+export enum Costumes {
   vikingHat = "vikingHat",
 }

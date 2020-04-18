@@ -9,13 +9,13 @@ import {
   Resource,
 } from "excalibur";
 import { Resources } from "./resources";
-import { Locations, StageProps } from "./constants";
+import { Locations, StageProps, Costumes } from "./constants";
 export interface CueCardOptions {
   // The lifetime in seconds of the cue card
   lifeTime: number;
-  requiredLocation: any;
-  requiredProp: any;
-  requiredCostume: any;
+  requiredLocation: Locations;
+  requiredProp: StageProps;
+  requiredCostume: Costumes;
   cueCardHeight: number;
   cueCardWidth: any;
   cueCardLoc: Vector;
@@ -73,7 +73,7 @@ export class CueCard extends Actor {
     this._setUpCostumeSymbol(options.requiredCostume);
   }
 
-  public onInitialize(engine: Engine) { }
+  public onInitialize(engine: Engine) {}
 
   public update(engine: Engine, delta: number) {
     this.timer -= delta / 1000;
@@ -171,6 +171,7 @@ export class CueCard extends Actor {
     );
 
     propSymbolLayer.offset = this._calculateRelativePosition(2);
+
     switch (requiredProp) {
       case StageProps.rubberChicken:
         propSymbolLayer.show(rubberChickenSprite);
@@ -181,7 +182,6 @@ export class CueCard extends Actor {
       default:
         propSymbolLayer.show(propSprite);
     }
-    propSymbolLayer.show(propSprite);
   }
 
   private _setUpCostumeSymbol(requiredCostume: any): void {
@@ -195,6 +195,18 @@ export class CueCard extends Actor {
       color: Color.Red,
     });
     costumeSymbolLayer.offset = this._calculateRelativePosition(3);
-    costumeSymbolLayer.show(costumeSprite);
+
+    const vikingHatSprite = Graphics.Sprite.from(Resources.rubberChickenImage);
+
+    switch (requiredCostume) {
+      case Costumes.vikingHat:
+        costumeSymbolLayer.show(vikingHatSprite);
+        break;
+      // case Costumes.umbrella:
+      //   costumeSymbolLayer.show(stageRightSprite);
+      //   break;
+      default:
+        costumeSymbolLayer.show(costumeSprite);
+    }
   }
 }
