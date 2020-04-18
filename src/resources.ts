@@ -1,8 +1,9 @@
 import sword from "../img/sword.png";
-import stageLeft from "../img/stage-left.png";
-import stageRight from "../img/stage-right.png";
-import stageCenter from "../img/stage-center.png";
-import rubberChicken from "../img/rubber-chicken.png";
+import stageLeft from "../img/locations/stage-left.png";
+import stageRight from "../img/locations/stage-right.png";
+import stageCenter from "../img/locations/stage-center.png";
+import rubberChicken from "../img/props/rubber-chicken.png";
+import vikingHat from "../img/costumes/viking-hat.png";
 import player1 from "../img/char-sprites/player-1.png";
 import player2 from "../img/char-sprites/player-2.png";
 import player3 from "../img/char-sprites/player-3.png";
@@ -23,6 +24,7 @@ export const Resources = {
   stageRightImage: new Graphics.RawImage(stageRight),
   stageCenterImage: new Graphics.RawImage(stageCenter),
   rubberChickenImage: new Graphics.RawImage(rubberChicken),
+  vikingHatImage: new Graphics.RawImage(vikingHat),
   charSheet1: new Graphics.RawImage(player1),
   charSheet2: new Graphics.RawImage(player2),
   charSheet3: new Graphics.RawImage(player3),

@@ -160,11 +160,6 @@ export class CueCard extends Actor {
       name: "propSymbol",
       order: 3,
     });
-    const propSprite = new Graphics.Rect({
-      width: this.symbolWidth,
-      height: this.symbolHeight,
-      color: Color.Red,
-    });
 
     const rubberChickenSprite = Graphics.Sprite.from(
       Resources.rubberChickenImage
@@ -180,7 +175,7 @@ export class CueCard extends Actor {
       //   propSymbolLayer.show(stageRightSprite);
       //   break;
       default:
-        propSymbolLayer.show(propSprite);
+        propSymbolLayer.show(rubberChickenSprite);
     }
   }
 
@@ -189,14 +184,10 @@ export class CueCard extends Actor {
       name: "costumeSymbol",
       order: 4,
     });
-    const costumeSprite = new Graphics.Rect({
-      width: this.symbolWidth,
-      height: this.symbolHeight,
-      color: Color.Red,
-    });
+
     costumeSymbolLayer.offset = this._calculateRelativePosition(3);
 
-    const vikingHatSprite = Graphics.Sprite.from(Resources.rubberChickenImage);
+    const vikingHatSprite = Graphics.Sprite.from(Resources.vikingHatImage);
 
     switch (requiredCostume) {
       case Costumes.vikingHat:
@@ -206,7 +197,7 @@ export class CueCard extends Actor {
       //   costumeSymbolLayer.show(stageRightSprite);
       //   break;
       default:
-        costumeSymbolLayer.show(costumeSprite);
+        costumeSymbolLayer.show(vikingHatSprite);
     }
   }
 }
