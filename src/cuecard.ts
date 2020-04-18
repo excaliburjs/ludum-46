@@ -1,5 +1,13 @@
-import { Actor, Color, Engine, Graphics, Vector, vec } from "excalibur";
-import {Resources} from "./resources";
+import {
+  Actor,
+  Color,
+  Engine,
+  Graphics,
+  Vector,
+  vec,
+  GameEvent,
+} from "excalibur";
+import { Resources } from "./resources";
 export interface CueCardOptions {
   // The lifetime in seconds of the cue card
   lifeTime: number;
@@ -8,11 +16,17 @@ export interface CueCardOptions {
   requiredCostume: any;
 }
 
+export enum CueCardEvents {
+  CueCardExpired = "CueCardExpired",
+}
+
 export class CueCard extends Actor {
   private timer: number;
-  private timerRect: Graphics.Rect;
+  private timerRect!: Graphics.Rect;
   private lifeTime: number;
-  private cueCardWidth: number = 1000;
+  private cueCardWidth: number = 300;
+  private cueCardHeight: number = 100;
+
   // the spacing between symbols as a % of cue card max width
   // There are 4 padding sections
   // The rest of the spacing is given equally to the three symbols
@@ -25,7 +39,8 @@ export class CueCard extends Actor {
   //  |                                             |
   //  |----------------------------------------------
   //
-  private padding: number = 5;
+  private padding: number = 0.05 * this.cueCardWidth;
+  private symbolWidth:number =  (1-this.padding) * this.cueCardWidth / 3;
 
   constructor(options: CueCardOptions) {
     super();
@@ -33,19 +48,20 @@ export class CueCard extends Actor {
 
     this._setUpBackground();
     this._setUpTimer();
-    this._setUpLocationSymbol();
-    this._setUpPropSymbol();
-    this._setUpCostumeSymbol();
+    this._setUpLocationSymbol(options.requiredLocation);
+    this._setUpPropSymbol(options.requiredProp);
+    this._setUpCostumeSymbol(options.requiredCostume);
   }
 
   public onInitialize(engine: Engine) {}
 
   public update(engine: Engine, delta: number) {
     this.timer -= delta / 1000;
-    this.timerRect.width = (1000 * this.timer) / this.lifeTime;
+    this.timerRect.width = (this.cueCardWidth * this.timer) / this.lifeTime;
 
     if (this.timer <= 0) {
       //do something with points
+      this.emit(CueCardEvents.CueCardExpired, new GameEvent());
       this.kill();
     }
   }
@@ -55,6 +71,11 @@ export class CueCard extends Actor {
     return false;
   }
 
+  private _calculateRelativePosition(symbolNumber: number): Vector {
+    const totalPadding = symbolNumber * this.padding;
+    const positionalOffset = (symbolNumber - 1) * this.symbolWidth;
+    return vec(this.vel.x + totalPadding + positionalOffset, this.vel.y);
+  }
   private _setUpBackground(): void {
     const background = this.graphics.createLayer({
       name: "background",
@@ -62,7 +83,7 @@ export class CueCard extends Actor {
     });
     const backgroundRect = new Graphics.Rect({
       width: this.cueCardWidth,
-      height: 100,
+      height: this.cueCardHeight,
       color: Color.White,
     });
     backgroundRect.opacity = 0.33;
@@ -72,48 +93,48 @@ export class CueCard extends Actor {
   private _setUpTimer(): void {
     const timerLayer = this.graphics.createLayer({ name: "timer", order: 0 });
     this.timerRect = new Graphics.Rect({
-      width: 100,
-      height: 100,
+      width: this.cueCardWidth,
+      height: this.cueCardHeight,
       color: Color.White,
     });
 
     timerLayer.show(this.timerRect);
   }
 
-  private _setUpLocationSymbol(): void {
+  private _setUpLocationSymbol(requiredLocation: any): void {
     const locationSymbolLayer = this.graphics.createLayer({
       name: "locationSymbol",
       order: 2,
     });
 
-    let stageLeftSprite = Graphics.Sprite.from(Resources.stageLeftImage);
-
-    locationSymbolLayer.offset = vec(10, 0);
+    const stageLeftSprite = Graphics.Sprite.from(Resources.stageLeftImage);
+    locationSymbolLayer.offset = this._calculateRelativePosition(1);
     locationSymbolLayer.show(stageLeftSprite);
   }
-  private _setUpPropSymbol(): void {
+  private _setUpPropSymbol(requiredProp: any): void {
     const propSymbolLayer = this.graphics.createLayer({
       name: "propSymbol",
-      order: 2,
+      order: 3,
     });
     const propSprite = new Graphics.Rect({
-      width: 50,
+      width: this.symbolWidth,
       height: 100,
       color: Color.Red,
     });
-
+    propSymbolLayer.offset = this._calculateRelativePosition(2);
     propSymbolLayer.show(propSprite);
   }
-  private _setUpCostumeSymbol(): void {
+  private _setUpCostumeSymbol(requiredCostume: any): void {
     const costumeSymbolLayer = this.graphics.createLayer({
       name: "costumeSymbol",
-      order: 2,
+      order: 4,
     });
     const constumeSprite = new Graphics.Rect({
-      width: 50,
+      width: this.symbolWidth,
       height: 100,
       color: Color.Red,
     });
+    costumeSymbolLayer.offset = this._calculateRelativePosition(3);
     costumeSymbolLayer.show(constumeSprite);
   }
 }
