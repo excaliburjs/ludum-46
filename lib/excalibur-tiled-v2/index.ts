@@ -5,9 +5,11 @@ import {
   TileSprite,
   SpriteSheet,
   Logger,
+  Graphics,
 } from "excalibur";
 import { ITiledMap, ITiledTileSet } from "./ITiledMap";
 import pako from "pako";
+import { RawImage } from "../excalibur/build/dist/Graphics";
 
 export * from "./ITiledMap";
 
@@ -165,9 +167,19 @@ export class TiledResource extends Resource<ITiledMap> {
     );
 
     // register sprite sheets for each tileset in map
+    const newmap: { [key: string]: Graphics.SpriteSheet } = {};
     for (var ts of this.data.tilesets) {
       var cols = Math.floor(ts.imagewidth / ts.tilewidth);
       var rows = Math.floor(ts.imageheight / ts.tileheight);
+      const newss = Graphics.SpriteSheet.fromGrid({
+        image: RawImage.fromLegacyTexture(ts.imageTexture),
+        grid: {
+          rows: rows,
+          columns: cols,
+          spriteWidth: ts.tilewidth,
+          spriteHeight: ts.tileheight,
+        },
+      });
       var ss = new SpriteSheet(
         ts.imageTexture,
         cols,
@@ -177,6 +189,7 @@ export class TiledResource extends Resource<ITiledMap> {
       );
 
       map.registerSpriteSheet(ts.firstgid.toString(), ss);
+      newmap[ts.firstgid.toString()] = newss;
     }
 
     for (var layer of this.data.layers) {
@@ -189,6 +202,9 @@ export class TiledResource extends Resource<ITiledMap> {
 
             map.data[i].sprites.push(
               new TileSprite(ts.firstgid.toString(), gid - ts.firstgid)
+            );
+            map.data[i].graphics.show(
+              newmap[ts.firstgid.toString()].sprites[gid - ts.firstgid]
             );
           }
         }
