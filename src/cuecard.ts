@@ -40,8 +40,9 @@ export class CueCard extends Actor {
   //  |----------------------------------------------
   //
   private paddingPercent: number = 0.15;
-  private padding: number = this.paddingPercent * this.cueCardWidth / 4;
-  private symbolWidth:number =  (1-this.paddingPercent) * this.cueCardWidth / 3;
+  private padding: number = (this.paddingPercent * this.cueCardWidth) / 4;
+  private symbolWidth: number =
+    ((1 - this.paddingPercent) * this.cueCardWidth) / 3;
 
   constructor(options: CueCardOptions) {
     super();
@@ -130,12 +131,12 @@ export class CueCard extends Actor {
       name: "costumeSymbol",
       order: 4,
     });
-    const constumeSprite = new Graphics.Rect({
+    const costumeSprite = new Graphics.Rect({
       width: this.symbolWidth,
       height: 100,
       color: Color.Red,
     });
     costumeSymbolLayer.offset = this._calculateRelativePosition(3);
-    costumeSymbolLayer.show(constumeSprite);
+    costumeSymbolLayer.show(costumeSprite);
   }
 }
