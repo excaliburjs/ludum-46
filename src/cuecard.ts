@@ -165,6 +165,7 @@ export class CueCard extends Actor {
     const rubberChickenSprite = Graphics.Sprite.from(
       Resources.rubberChickenImage
     );
+    const umbrellaSprite = Graphics.Sprite.from(Resources.umbrellaImage);
 
     propSymbolLayer.offset = this._calculateRelativePosition(2);
 
@@ -172,9 +173,9 @@ export class CueCard extends Actor {
       case StageProps.rubberChicken:
         propSymbolLayer.show(rubberChickenSprite);
         break;
-      // case StageProps.umbrella:
-      //   propSymbolLayer.show(stageRightSprite);
-      //   break;
+      case StageProps.umbrella:
+        propSymbolLayer.show(umbrellaSprite);
+        break;
       default:
         propSymbolLayer.show(rubberChickenSprite);
     }
@@ -194,9 +195,9 @@ export class CueCard extends Actor {
       case Costumes.vikingHat:
         costumeSymbolLayer.show(vikingHatSprite);
         break;
-      // case Costumes.umbrella:
-      //   costumeSymbolLayer.show(stageRightSprite);
-      //   break;
+      //   case Costumes.clown:
+      //     costumeSymbolLayer.show(stageRightSprite);
+      //     break;
       default:
         costumeSymbolLayer.show(vikingHatSprite);
     }
