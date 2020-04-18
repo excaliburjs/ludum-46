@@ -15,6 +15,9 @@ export interface CueCardOptions {
   requiredLocation: any;
   requiredProp: any;
   requiredCostume: any;
+  cueCardHeight: number;
+  cueCardWidth: any;
+  cueCardLoc: Vector;
 }
 
 export enum CueCardEvents {
@@ -31,8 +34,8 @@ export class CueCard extends Actor {
   private timer: number;
   private timerRect!: Graphics.Rect;
   private lifeTime: number;
-  private cueCardWidth: number = 300;
-  private cueCardHeight: number = 100;
+  private cueCardWidth: number;
+  private cueCardHeight: number;
 
   // the spacing between symbols as a % of cue card max width
   // There are 4 padding sections
@@ -46,16 +49,27 @@ export class CueCard extends Actor {
   //  |                                             |
   //  |----------------------------------------------
   //
-  private xPaddingPercent: number = 0.15;
-  private xPadding: number = this.xPaddingPercent * this.cueCardWidth / 4;
-  private symbolWidth:number =  (1-this.xPaddingPercent) * this.cueCardWidth / 3;
-  private yPaddingPercent: number = 0.20;
-  private yPadding: number = this.yPaddingPercent * this.cueCardHeight / 2;
-  private symbolHeight: number = (1-this.yPaddingPercent) * this.cueCardHeight;
+  private xPaddingPercent: number;
+  private xPadding: number;
+  private symbolWidth: number;
+  private yPaddingPercent: number;
+  private yPadding: number;
+  private symbolHeight: number;
 
   constructor(options: CueCardOptions) {
     super();
     this.timer = this.lifeTime = 10;
+
+    this.vel = options.cueCardLoc;
+    this.cueCardHeight = options.cueCardHeight;
+    this.cueCardWidth = options.cueCardWidth
+    this.xPaddingPercent = 0.15;
+    this.xPadding = this.xPaddingPercent * this.cueCardWidth / 4;
+    this.symbolWidth =  (1-this.xPaddingPercent) * this.cueCardWidth / 3;
+    this.yPaddingPercent = 0.20;
+    this.yPadding = this.yPaddingPercent * this.cueCardHeight / 2;
+    this.symbolHeight = (1-this.yPaddingPercent) * this.cueCardHeight;
+
     this._setUpBackground();
     this._setUpTimer();
     this._setUpLocationSymbol(options.requiredLocation);
