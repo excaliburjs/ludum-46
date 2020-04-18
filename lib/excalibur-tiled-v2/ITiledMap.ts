@@ -1,3 +1,5 @@
+import { Texture } from "excalibur";
+
 /**
  * Tiled Map Interface
  *
@@ -91,7 +93,7 @@ export interface ITiledTileSet {
   /**
    * Excalibur texture associated with this tileset
    */
-  imageTexture: ex.Texture;
+  imageTexture: Texture;
   imageheight: number;
   imagewidth: number;
   margin: number;

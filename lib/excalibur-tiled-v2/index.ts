@@ -7,7 +7,9 @@ import {
   Logger,
 } from "excalibur";
 import { ITiledMap, ITiledTileSet } from "./ITiledMap";
-import * as pako from "pako";
+import pako from "pako";
+
+export * from "./ITiledMap";
 
 export enum TiledMapFormat {
   /**
@@ -65,97 +67,68 @@ export class TiledResource extends Resource<ITiledMap> {
 
   public load(): Promise<ITiledMap> {
     return new Promise((resolve, reject) => {
-      var promises: Promise<any>[] = [];
-      this.data.tilesets.forEach((ts) => {
-        if (ts.source) {
-          var tileset = new Resource<ITiledTileSet>(
-            this.externalTilesetPathAccessor(ts.source, ts),
-            "json"
-          );
+      super.load().then((map) => {
+        var promises: Promise<any>[] = [];
 
-          promises.push(
-            tileset.load().then((external) => {
-              (Object as any).assign(ts, external);
-            })
-          );
-        }
-      });
+        // Loop through loaded tileset data
+        // If we find an image property, then
+        // load the image and sprite
 
-      this.data.tilesets.forEach((ts) => {
-        var tx = new Texture(this.imagePathAccessor(ts.image, ts));
-        ts.imageTexture = tx;
-        promises.push(tx.load());
+        // If we find a source property, then
+        // load the tileset data, merge it with
+        // existing data, and load the image and sprite
 
-        Logger.getInstance().debug(
-          "[Tiled] Loading associated tileset: " + ts.image
+        this.data.tilesets.forEach((ts) => {
+          if (ts.source) {
+            var tileset = new Resource<ITiledTileSet>(
+              this.externalTilesetPathAccessor(ts.source, ts),
+              "json"
+            );
+
+            promises.push(
+              tileset.load().then((external) => {
+                (Object as any).assign(ts, external);
+              })
+            );
+          }
+        });
+
+        // wait or immediately resolve pending promises
+        // for external tilesets
+        Promise.all(promises).then(
+          () => {
+            // clear pending promises
+            promises = [];
+
+            // retrieve images from tilesets and create textures
+            this.data.tilesets.forEach((ts) => {
+              var tx = new Texture(this.imagePathAccessor(ts.image, ts));
+              ts.imageTexture = tx;
+              promises.push(tx.load());
+
+              Logger.getInstance().debug(
+                "[Tiled] Loading associated tileset: " + ts.image
+              );
+            });
+
+            Promise.all(promises).then(
+              () => {
+                resolve(map);
+              },
+              (value?: any) => {
+                reject(value);
+              }
+            );
+          },
+          (value?: any) => {
+            reject(value);
+          }
         );
       });
     });
-    var p = new Promise<ITiledMap>();
-
-    super.load().then((map) => {
-      var promises: Promise<any>[] = [];
-
-      // Loop through loaded tileset data
-      // If we find an image property, then
-      // load the image and sprite
-
-      // If we find a source property, then
-      // load the tileset data, merge it with
-      // existing data, and load the image and sprite
-
-      this.data.tilesets.forEach((ts) => {
-        if (ts.source) {
-          var tileset = new Resource<ITiledTileSet>(
-            this.externalTilesetPathAccessor(ts.source, ts),
-            "json"
-          );
-
-          promises.push(
-            tileset.load().then((external) => {
-              (Object as any).assign(ts, external);
-            })
-          );
-        }
-      });
-
-      // wait or immediately resolve pending promises
-      // for external tilesets
-      Promise.join.apply(this, promises).then(
-        () => {
-          // clear pending promises
-          promises = [];
-
-          // retrieve images from tilesets and create textures
-          this.data.tilesets.forEach((ts) => {
-            var tx = new Texture(this.imagePathAccessor(ts.image, ts));
-            ts.imageTexture = tx;
-            promises.push(tx.load());
-
-            Logger.getInstance().debug(
-              "[Tiled] Loading associated tileset: " + ts.image
-            );
-          });
-
-          Promise.join.apply(this, promises).then(
-            () => {
-              p.resolve(map);
-            },
-            (value?: any) => {
-              p.reject(value);
-            }
-          );
-        },
-        (value?: any) => {
-          p.reject(value);
-        }
-      );
-    });
-
-    return p;
   }
 
-  public processData(data: ITiledMap): ITiledMap {
+  public processData(data: ITiledMap): ITiledMap | undefined {
     if (typeof data !== "object") {
       throw `Tiled map resource ${this.path} is not the correct content type`;
     }
@@ -169,7 +142,7 @@ export class TiledResource extends Resource<ITiledMap> {
     }
   }
 
-  public getTilesetForTile(gid: number): ITiledTileSet {
+  public getTilesetForTile(gid: number): ITiledTileSet | null {
     for (var i = this.data.tilesets.length - 1; i >= 0; i--) {
       var ts = this.data.tilesets[i];
 
@@ -287,7 +260,7 @@ var decompressors = {
     var PLUS_URL_SAFE = "-".charCodeAt(0);
     var SLASH_URL_SAFE = "_".charCodeAt(0);
 
-    function decode(elt) {
+    function decode(elt: string): number {
       var code = elt.charCodeAt(0);
       if (code === PLUS || code === PLUS_URL_SAFE) return 62; // '+'
       if (code === SLASH || code === SLASH_URL_SAFE) return 63; // '/'
@@ -295,6 +268,7 @@ var decompressors = {
       if (code < NUMBER + 10) return code - NUMBER + 26 + 26;
       if (code < UPPER + 26) return code - UPPER;
       if (code < LOWER + 26) return code - LOWER + 26;
+      return -1;
     }
 
     // the number of equal signs (place holders)
@@ -314,7 +288,7 @@ var decompressors = {
 
     var L = 0;
 
-    function push(v) {
+    function push(v: number) {
       arr[L++] = v;
     }
 
