@@ -1,6 +1,6 @@
 import { CueCard, CueCardEvents, CueCardExpiredEvent } from "./cuecard";
 import { GameEvent, Scene, vec, EventDispatcher } from "excalibur";
-
+import { Locations, StageProps, Costumes } from "./constants";
 export class CueCardManager {
   private firstCueCard: CueCard;
   private secondCueCard: CueCard;
@@ -35,12 +35,20 @@ export class CueCardManager {
     this.eventDispatcher.on(CueCardEvents.CueCardSatisfied, this.CueCardExpired.bind(this) as any);
   }
 
+  private randomEnum<T>(anEnum: T): T[keyof T] {
+    const enumValues = Object.keys(anEnum);
+    const randomIndex = Math.floor(Math.random() * enumValues.length);
+    const randomEnumValue = enumValues[randomIndex];
+    console.log(randomEnumValue);
+    return randomEnumValue;
+  }
+
   private _GenerateCueCard(num: number): CueCard {
     return new CueCard({
       lifeTime: Math.random() * 5 + 1,
-      requiredCostume: {},
-      requiredLocation: {},
-      requiredProp: {},
+      requiredCostume: this.randomEnum(Costumes),
+      requiredLocation: this.randomEnum(Locations),
+      requiredProp: this.randomEnum(StageProps),
       cueCardHeight: this.cueCardHeight,
       cueCardWidth: this.cueCardWidth,
       cueCardLoc: this._calculateCueCardPosition(num),
