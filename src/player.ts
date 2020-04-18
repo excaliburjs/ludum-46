@@ -18,6 +18,7 @@ export class Player extends Actor {
   }
 
   public onInitialize(engine: Engine) {
+    this._setupDrawing(engine);
     this.body.collider.type = CollisionType.Active;
     engine.input.keyboard.on("hold", (keyHeld: Input.KeyEvent) => {
       // if (!State.gameOver) {
@@ -104,6 +105,7 @@ export class Player extends Actor {
     this.graphics.add("up", upSprite);
     this.graphics.add("left", leftSprite);
     this.graphics.add("right", rightSprite);
+    this.graphics.add(downSprite); //default
 
     let walkDownAnim = Graphics.Animation.fromSpriteSheet(
       sheet,
@@ -128,20 +130,21 @@ export class Player extends Actor {
     let walkRightAnim = Graphics.Animation.fromSpriteSheet(sheet, [9, 8], 200);
     walkRightAnim.origin?.setTo(0, 0.2);
     this.graphics.add("walkRight", walkRightAnim);
-
-    this.setDrawing("down");
   }
 
   public getCharSprite(): Graphics.RawImage {
     let gameRandom = new Random(Date.now());
     let charSheets = [];
-    for (let r in Resource) {
+    for (let r in Resources) {
+      console.log(r);
       if (r.search("charSheet") != -1) {
         charSheets.push(Resources[r]);
       }
     }
+    console.log(charSheets);
     let randCharSheets = gameRandom.shuffle(charSheets);
     let result = randCharSheets[0];
+    console.log(result);
     return <Graphics.RawImage>result;
   }
 }

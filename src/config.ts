@@ -6,7 +6,6 @@ export default {
   PlayerWidth: 25,
   PlayerHeight: 25,
   PlayerVel: 100,
-  PlayerStart: new Vector(0, 0),
   GameWidth: 1280,
   GameHeight: 720,
 };
