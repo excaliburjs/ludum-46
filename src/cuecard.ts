@@ -94,7 +94,7 @@ export class CueCard extends Actor {
   public trySatisfyCueCard(player: any): void {
     if (this.isSatisfied(player)) {
       this.emit(CueCardEvents.CueCardSatisfied, new GameEvent());
-      this.kill();
+      // this.kill(); //TODO this kills the whole game
     }
   }
 
