@@ -1,4 +1,4 @@
-import { CueCard, CueCardEvents } from "./cuecard";
+import { CueCard, CueCardEvents, CueCardExpiredEvent } from "./cuecard";
 import { GameEvent, Scene, vec, EventDispatcher } from "excalibur";
 
 export class CueCardManager {
@@ -31,13 +31,13 @@ export class CueCardManager {
   }
 
   private SetUpEventHooks(): void {
-    this.eventDispatcher.on(CueCardEvents.CueCardExpired, this.CueCardExpired);
-    this.eventDispatcher.on(CueCardEvents.CueCardSatisfied, this.CueCardSatisfied);
+    this.eventDispatcher.on(CueCardEvents.CueCardExpired, this.CueCardExpired.bind(this) as any);
+    this.eventDispatcher.on(CueCardEvents.CueCardSatisfied, this.CueCardExpired.bind(this) as any);
   }
 
   private _GenerateCueCard(num: number): CueCard {
     return new CueCard({
-      lifeTime: 10,
+      lifeTime: Math.random() * 5 + 1,
       requiredCostume: {},
       requiredLocation: {},
       requiredProp: {},
@@ -47,33 +47,19 @@ export class CueCardManager {
     });
   }
 
-  private CueCardExpired(gameEvent: GameEvent<CueCard, false>){
-    const target = gameEvent.target;
-    switch(target){
-      case this.firstCueCard:
+  private CueCardExpired(cueCardEvent: CueCardExpiredEvent) {
+    const target = cueCardEvent.cueCard;
+    if(target == this.firstCueCard) {
         this.firstCueCard = this._GenerateCueCard(1);
-        break;
-      case this.secondCueCard:
+        this.scene.add(this.firstCueCard);
+    } else if (target == this.secondCueCard) {
         this.secondCueCard = this._GenerateCueCard(2);
-        break;
-      case this.thirdCueCard:
+        this.scene.add(this.secondCueCard);
+    } else if (target == this.thirdCueCard) {
         this.thirdCueCard = this._GenerateCueCard(3);
-        break;
-      default:
-        throw new Error();
-    }
-  }
-
-  private CueCardSatisfied(gameEvent: GameEvent<CueCard, false>){
-    switch(target){
-      case this.firstCueCard:
-        break;
-      case this.secondCueCard:
-        break;
-      case this.thirdCueCard:
-        break;
-      default:
-        throw new Error();
+        this.scene.add(this.thirdCueCard);
+    } else {
+      throw new Error;
     }
   }
 }

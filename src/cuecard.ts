@@ -26,6 +26,12 @@ export enum CueCardEvents {
   CueCardSatisfied = "CueCardSatisfied",
 }
 
+export class CueCardExpiredEvent extends GameEvent<CueCard, false> {
+  constructor(public cueCard: CueCard) {
+    super();
+  }
+}
+
 export class CueCard extends Actor {
   private timer: number;
   private timerRect!: Graphics.Rect;
@@ -55,7 +61,7 @@ export class CueCard extends Actor {
 
   constructor(options: CueCardOptions) {
     super();
-    this.timer = this.lifeTime = 10;
+    this.timer = this.lifeTime = options.lifeTime;
 
     this.options = options;
     this.vel = options.cueCardLoc;
@@ -83,7 +89,9 @@ export class CueCard extends Actor {
 
     if (this.timer <= 0) {
       //do something with points
-      this.emit(CueCardEvents.CueCardExpired, new GameEvent<this, false>());
+      const event = new CueCardExpiredEvent(this);
+      this.scene.emit(CueCardEvents.CueCardExpired, event);
+      this.kill();
     }
   }
 
@@ -94,7 +102,9 @@ export class CueCard extends Actor {
 
   public trySatisfyCueCard(player: any): void {
     if (this.isSatisfied(player)) {
-      this.emit(CueCardEvents.CueCardSatisfied, new GameEvent<this, false>());
+      const event = new CueCardExpiredEvent(this);
+      this.scene.emit(CueCardEvents.CueCardSatisfied, event);
+      this.kill();
     }
   }
 
@@ -127,7 +137,7 @@ export class CueCard extends Actor {
     this.timerRect = new Graphics.Rect({
       width: this.cueCardWidth,
       height: this.cueCardHeight,
-      color: Color.White,
+      color: Color.Red,
     });
     timerLayer.offset = this.vel;
     timerLayer.show(this.timerRect);
