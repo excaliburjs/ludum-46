@@ -1,3 +1,5 @@
 [submodule "lib/excalibur"]
 	path = lib/excalibur
 	url = https://github.com/excaliburjs/Excalibur.git
+  branch = ludum-46
+  ignore = dirty
