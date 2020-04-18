@@ -22,11 +22,6 @@ export enum CueCardEvents {
   CueCardSatisfied = "CueCardSatisfied",
 }
 
-export enum CueCardLocations {
-  stageLeft = "stageLeft",
-  stageRight = "stageRight",
-  stageCenter = "StageCenter",
-}
 export class CueCard extends Actor {
   private timer: number;
   private timerRect!: Graphics.Rect;
@@ -47,11 +42,13 @@ export class CueCard extends Actor {
   //  |----------------------------------------------
   //
   private xPaddingPercent: number = 0.15;
-  private xPadding: number = this.xPaddingPercent * this.cueCardWidth / 4;
-  private symbolWidth:number =  (1-this.xPaddingPercent) * this.cueCardWidth / 3;
-  private yPaddingPercent: number = 0.20;
-  private yPadding: number = this.yPaddingPercent * this.cueCardHeight / 2;
-  private symbolHeight: number = (1-this.yPaddingPercent) * this.cueCardHeight;
+  private xPadding: number = (this.xPaddingPercent * this.cueCardWidth) / 4;
+  private symbolWidth: number =
+    ((1 - this.xPaddingPercent) * this.cueCardWidth) / 3;
+  private yPaddingPercent: number = 0.2;
+  private yPadding: number = (this.yPaddingPercent * this.cueCardHeight) / 2;
+  private symbolHeight: number =
+    (1 - this.yPaddingPercent) * this.cueCardHeight;
 
   constructor(options: CueCardOptions) {
     super();
@@ -82,7 +79,7 @@ export class CueCard extends Actor {
   }
 
   public trySatisfyCueCard(player: any): void {
-    if(this.isSatisfied(player)){
+    if (this.isSatisfied(player)) {
       this.emit(CueCardEvents.CueCardSatisfied, new GameEvent());
       this.kill();
     }
@@ -91,7 +88,10 @@ export class CueCard extends Actor {
   private _calculateRelativePosition(symbolNumber: number): Vector {
     const totalPadding = symbolNumber * this.xPadding;
     const positionalOffset = (symbolNumber - 1) * this.symbolWidth;
-    return vec(this.vel.x + totalPadding + positionalOffset, this.vel.y + this.yPadding);
+    return vec(
+      this.vel.x + totalPadding + positionalOffset,
+      this.vel.y + this.yPadding
+    );
   }
   private _setUpBackground(): void {
     const background = this.graphics.createLayer({
