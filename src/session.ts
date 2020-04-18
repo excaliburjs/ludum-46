@@ -1,9 +1,10 @@
-import { Engine } from "excalibur";
+import { Engine, vec } from "excalibur";
 import { Stats } from "./stats";
 import { Theater } from "./theater-scene";
 import { CueCard } from "./cuecard";
 import { Player } from "./player";
 import Config from "./config";
+import { CueCardManager } from "./cuecardmanager";
 
 let gameStats: Stats;
 
@@ -17,14 +18,9 @@ export function newgame(game: Engine) {
   gameStats = new Stats();
 
   const theater = new Theater(game);
-  const cueCard = new CueCard({
-    lifeTime: 10,
-    requiredCostume: {},
-    requiredLocation: {},
-    requiredProp: {},
-  });
+  const cueCardManager = new CueCardManager(theater);
+
   const player = new Player(Config.GameWidth / 2, Config.GameHeight / 2);
-  theater.add(cueCard);
   theater.add(player);
   game.addScene("main", theater);
   game.goToScene("main");
