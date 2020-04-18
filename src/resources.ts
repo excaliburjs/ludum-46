@@ -13,7 +13,7 @@ import player3long from "../img/char-sprites/player-3-long.png";
 import player4long from "../img/char-sprites/player-4-long.png";
 import player5long from "../img/char-sprites/player-5-long.png";
 
-import { Graphics, Resource } from "excalibur";
+import { Graphics } from "excalibur";
 import { TiledResource } from "excalibur-tiled";
 
 export const Resources = {
