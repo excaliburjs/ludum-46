@@ -73,7 +73,7 @@ export class CueCard extends Actor {
     this._setUpCostumeSymbol(options.requiredCostume);
   }
 
-  public onInitialize(engine: Engine) {}
+  public onInitialize(engine: Engine) { }
 
   public update(engine: Engine, delta: number) {
     this.timer -= delta / 1000;
@@ -116,6 +116,7 @@ export class CueCard extends Actor {
       height: this.cueCardHeight,
       color: Color.White,
     });
+    background.offset = this.vel;
     backgroundRect.opacity = 0.33;
     background.show(backgroundRect);
   }
@@ -127,7 +128,7 @@ export class CueCard extends Actor {
       height: this.cueCardHeight,
       color: Color.White,
     });
-
+    timerLayer.offset = this.vel;
     timerLayer.show(this.timerRect);
   }
 

@@ -4,6 +4,8 @@ import { Scene, vec } from "excalibur";
 export class CueCardManager {
   private numberOfCueCards: number = 3;
   private cueCards: Array<CueCard> = new Array<CueCard>();
+  private cueCardHeight: number = 100;
+  private cueCardWidth: number = 300;
 
   constructor(scene: Scene) {
     this.cueCards.push(
@@ -12,14 +14,32 @@ export class CueCardManager {
         requiredCostume: {},
         requiredLocation: {},
         requiredProp: {},
-        cueCardHeight: 100,
-        cueCardWidth: 300,
-        cueCardLoc: vec(0, 0),
+        cueCardHeight: this.cueCardHeight,
+        cueCardWidth: this.cueCardWidth,
+        cueCardLoc: vec(10, 10),
+      }),
+      new CueCard({
+        lifeTime: 10,
+        requiredCostume: {},
+        requiredLocation: {},
+        requiredProp: {},
+        cueCardHeight: this.cueCardHeight,
+        cueCardWidth: this.cueCardWidth,
+        cueCardLoc: vec(this.cueCardWidth * 2, 10),
+      }),
+      new CueCard({
+        lifeTime: 10,
+        requiredCostume: {},
+        requiredLocation: {},
+        requiredProp: {},
+        cueCardHeight: this.cueCardHeight,
+        cueCardWidth: this.cueCardWidth,
+        cueCardLoc: vec(this.cueCardWidth * 3, 10),
       })
     );
 
-    for(let card of this.cueCards) {
-        scene.add(card);
+    for (let card of this.cueCards) {
+      scene.add(card);
     }
   }
 }
