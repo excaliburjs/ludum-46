@@ -51,11 +51,13 @@ export class CueCard extends Actor {
   private yPaddingPercent: number;
   private yPadding: number;
   private symbolHeight: number;
+  private options: CueCardOptions;
 
   constructor(options: CueCardOptions) {
     super();
     this.timer = this.lifeTime = 10;
 
+    this.options = options;
     this.vel = options.cueCardLoc;
     this.cueCardHeight = options.cueCardHeight;
     this.cueCardWidth = options.cueCardWidth;
@@ -81,8 +83,7 @@ export class CueCard extends Actor {
 
     if (this.timer <= 0) {
       //do something with points
-      this.emit(CueCardEvents.CueCardExpired, new GameEvent());
-      this.kill();
+      this.emit(CueCardEvents.CueCardExpired, new GameEvent<this, false>());
     }
   }
 
@@ -93,8 +94,7 @@ export class CueCard extends Actor {
 
   public trySatisfyCueCard(player: any): void {
     if (this.isSatisfied(player)) {
-      this.emit(CueCardEvents.CueCardSatisfied, new GameEvent());
-      // this.kill(); //TODO this kills the whole game
+      this.emit(CueCardEvents.CueCardSatisfied, new GameEvent<this, false>());
     }
   }
 
@@ -106,6 +106,7 @@ export class CueCard extends Actor {
       this.vel.y + this.yPadding
     );
   }
+
   private _setUpBackground(): void {
     const background = this.graphics.createLayer({
       name: "background",
