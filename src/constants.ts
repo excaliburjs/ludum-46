@@ -3,3 +3,12 @@ export enum Locations {
   stageRight = "stageRight",
   stageCenter = "stageCenter",
 }
+
+export enum StageProps {
+  rubberChicken = "rubberChicken",
+  umbrella = "umbrella",
+}
+
+export enum Wardrobe {
+  vikingHat = "vikingHat",
+}

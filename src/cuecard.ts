@@ -9,7 +9,7 @@ import {
   Resource,
 } from "excalibur";
 import { Resources } from "./resources";
-import { Locations } from "./constants";
+import { Locations, StageProps } from "./constants";
 export interface CueCardOptions {
   // The lifetime in seconds of the cue card
   lifeTime: number;
@@ -165,7 +165,22 @@ export class CueCard extends Actor {
       height: this.symbolHeight,
       color: Color.Red,
     });
+
+    const rubberChickenSprite = Graphics.Sprite.from(
+      Resources.rubberChickenImage
+    );
+
     propSymbolLayer.offset = this._calculateRelativePosition(2);
+    switch (requiredProp) {
+      case StageProps.rubberChicken:
+        propSymbolLayer.show(rubberChickenSprite);
+        break;
+      // case StageProps.umbrella:
+      //   propSymbolLayer.show(stageRightSprite);
+      //   break;
+      default:
+        propSymbolLayer.show(propSprite);
+    }
     propSymbolLayer.show(propSprite);
   }
 
