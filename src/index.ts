@@ -1,7 +1,7 @@
 import { Engine, Loader } from "excalibur";
 import { Theater } from "./theater-scene";
 import { Resources } from "./resources";
-import { CueCard } from "./cuecard";
+import { CueCard, CueCardOptions } from "./cuecard";
 import { newgame } from "./session";
 import { Player } from "./player";
 import Config from "./config";
@@ -16,7 +16,8 @@ for (let r in Resources) {
 const theater = new Theater(game);
 game.addScene("main", theater);
 
-const cueCard = new CueCard();
+const cueCard = new CueCard({lifeTime: 10, requiredCostume: {}, requiredLocation: {}, requiredProp:{}});
+
 const player = new Player(Config.PlayerStart.x, Config.PlayerStart.y);
 theater.add(cueCard);
 theater.add(player);

@@ -9,8 +9,8 @@ export interface CueCardOptions {
 }
 
 export class CueCard extends Actor {
-  private timerRect: Graphics.Rect;
   private timer: number;
+  private timerRect: Graphics.Rect;
   private lifeTime: number;
   private cueCardWidth: number = 1000;
   // the spacing between symbols as a % of cue card max width
@@ -44,8 +44,8 @@ export class CueCard extends Actor {
     backgroundRect.opacity = 0.33;
     background.show(backgroundRect);
     //#endregion background
-
-    const timerRect = new Graphics.Rect({
+    const timerLayer = this.graphics.createLayer({name: 'timer', order: 0});
+    this.timerRect = new Graphics.Rect({
       width: 100,
       height: 100,
       color: Color.White,
