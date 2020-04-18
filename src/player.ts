@@ -80,7 +80,7 @@ export class Player extends Actor {
     //  });
   }
   private _setupDrawing(engine: Engine) {
-    var sheet = Graphics.SpriteSheet.fromGrid({
+    let sheet = Graphics.SpriteSheet.fromGrid({
       image: this.getCharSprite(),
       grid: {
         rows: 1,
@@ -89,11 +89,11 @@ export class Player extends Actor {
         spriteWidth: 45,
       },
     });
-    var sprites = sheet.sprites;
-    var downSprite = sprites[0];
-    var upSprite = sprites[3];
-    var leftSprite = sprites[7];
-    var rightSprite = sprites[9];
+    let sprites = sheet.sprites;
+    let downSprite = sprites[0];
+    let upSprite = sprites[3];
+    let leftSprite = sprites[7];
+    let rightSprite = sprites[9];
 
     downSprite.origin?.setTo(0, 0.2);
     upSprite.origin?.setTo(0, 0.2);
@@ -105,7 +105,7 @@ export class Player extends Actor {
     this.graphics.add("left", leftSprite);
     this.graphics.add("right", rightSprite);
 
-    var walkDownAnim = Graphics.Animation.fromSpriteSheet(
+    let walkDownAnim = Graphics.Animation.fromSpriteSheet(
       sheet,
       [0, 1, 0, 2],
       180
@@ -113,7 +113,7 @@ export class Player extends Actor {
     walkDownAnim.origin?.setTo(0, 0.2);
     this.graphics.add("walkDown", walkDownAnim);
 
-    var walkUpAnim = Graphics.Animation.fromSpriteSheet(
+    let walkUpAnim = Graphics.Animation.fromSpriteSheet(
       sheet,
       [3, 4, 3, 5],
       180
@@ -121,11 +121,11 @@ export class Player extends Actor {
     walkUpAnim.origin?.setTo(0, 0.2);
     this.graphics.add("walkUp", walkUpAnim);
 
-    var walkLeftAnim = Graphics.Animation.fromSpriteSheet(sheet, [7, 6], 200);
+    let walkLeftAnim = Graphics.Animation.fromSpriteSheet(sheet, [7, 6], 200);
     walkLeftAnim.origin?.setTo(0, 0.2);
     this.graphics.add("walkLeft", walkLeftAnim);
 
-    var walkRightAnim = Graphics.Animation.fromSpriteSheet(sheet, [9, 8], 200);
+    let walkRightAnim = Graphics.Animation.fromSpriteSheet(sheet, [9, 8], 200);
     walkRightAnim.origin?.setTo(0, 0.2);
     this.graphics.add("walkRight", walkRightAnim);
 
@@ -133,15 +133,15 @@ export class Player extends Actor {
   }
 
   public getCharSprite(): Graphics.RawImage {
-    var gameRandom = new Random(Date.now());
+    let gameRandom = new Random(Date.now());
     let charSheets = [];
-    for (var r in Resource) {
+    for (let r in Resource) {
       if (r.search("charSheet") != -1) {
         charSheets.push(Resources[r]);
       }
     }
-    var randCharSheets = gameRandom.shuffle(charSheets);
-    var result = randCharSheets[0];
+    let randCharSheets = gameRandom.shuffle(charSheets);
+    let result = randCharSheets[0];
     return <Graphics.RawImage>result;
   }
 }

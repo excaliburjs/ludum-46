@@ -3,7 +3,10 @@ import { Theater } from "./theater-scene";
 import { Resources } from "./resources";
 import { CueCard } from "./cuecard";
 import { newgame } from "./session";
+<<<<<<< HEAD
+=======
 import { Player } from "./player";
+>>>>>>> let
 import Config from "./config";
 
 Engine._useWebGL = true;

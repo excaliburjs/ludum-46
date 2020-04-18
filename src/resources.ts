@@ -1,16 +1,16 @@
 import sword from "../img/sword.png";
 import stageLeft from "./assets/stage-left.png";
 import stageRight from "./assets/stage-right.png";
-import player1 from "img/char-sprites/player-1.png";
-import player2 from "img/char-sprites/player-2.png";
-import player3 from "img/char-sprites/player-3.png";
-import player4 from "img/char-sprites/player-4.png";
-import player5 from "img/char-sprites/player-5.png";
-import player1long from "img/char-sprites/player-1-long.png";
-import player2long from "img/char-sprites/player-2-long.png";
-import player3long from "img/char-sprites/player-3-long.png";
-import player4long from "img/char-sprites/player-4-long.png";
-import player5long from "img/char-sprites/player-5-long.png";
+import player1 from "../img/char-sprites/player-1.png";
+import player2 from "../img/char-sprites/player-2.png";
+import player3 from "../img/char-sprites/player-3.png";
+import player4 from "../img/char-sprites/player-4.png";
+import player5 from "../img/char-sprites/player-5.png";
+import player1long from "../img/char-sprites/player-1-long.png";
+import player2long from "../img/char-sprites/player-2-long.png";
+import player3long from "../img/char-sprites/player-3-long.png";
+import player4long from "../img/char-sprites/player-4-long.png";
+import player5long from "../img/char-sprites/player-5-long.png";
 
 import { Graphics, Resource } from "excalibur";
 
