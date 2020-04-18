@@ -6,6 +6,7 @@ import {
   Vector,
   vec,
   GameEvent,
+  Resource,
 } from "excalibur";
 import { Resources } from "./resources";
 export interface CueCardOptions {
@@ -21,6 +22,11 @@ export enum CueCardEvents {
   CueCardSatisfied = "CueCardSatisfied",
 }
 
+export enum CueCardLocations {
+  stageLeft = "stageLeft",
+  stageRight = "stageRight",
+  stageCenter = "StageCenter",
+}
 export class CueCard extends Actor {
   private timer: number;
   private timerRect!: Graphics.Rect;
@@ -119,8 +125,20 @@ export class CueCard extends Actor {
     });
 
     const stageLeftSprite = Graphics.Sprite.from(Resources.stageLeftImage);
+    const stageRightSprite = Graphics.Sprite.from(Resources.stageRightImage);
+    const stageCenterSprite = Graphics.Sprite.from(Resources.stageCenterImage);
+
     locationSymbolLayer.offset = this._calculateRelativePosition(1);
-    locationSymbolLayer.show(stageLeftSprite);
+    switch (requiredLocation) {
+      case CueCardLocations.stageLeft:
+        locationSymbolLayer.show(stageLeftSprite);
+        break;
+      case CueCardLocations.stageRight:
+        locationSymbolLayer.show(stageRightSprite);
+        break;
+      default:
+        locationSymbolLayer.show(stageCenterSprite);
+    }
   }
 
   private _setUpPropSymbol(requiredProp: any): void {
