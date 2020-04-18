@@ -31,50 +31,9 @@ export class CueCard extends Actor {
     super();
     this.timer = this.lifeTime = 10;
 
-    //#region  background
-    const background = this.graphics.createLayer({
-      name: "background",
-      order: -1,
-    });
-    const backgroundRect = new Graphics.Rect({
-      width: this.cueCardWidth,
-      height: 100,
-      color: Color.White,
-    });
-    backgroundRect.opacity = 0.33;
-    background.show(backgroundRect);
-    //#endregion background
-    const timerLayer = this.graphics.createLayer({name: 'timer', order: 0});
-    this.timerRect = new Graphics.Rect({
-      width: 100,
-      height: 100,
-      color: Color.White,
-    });
-    timerLayer.show(this.timerRect);
-    //#endregion timer
-
-    //#region Symbol Layer
-    const symbolLayer = this.graphics.createLayer({ name: "goals", order: 2 });
-    //Symbol Loc1
-    const locationSprite = new Graphics.Rect({
-        width: 50,
-        height: 100,
-        color: Color.Red,
-    });
-    const propSprite = new Graphics.Rect({
-        width: 50,
-        height: 100,
-        color: Color.Red,
-    });
-    const constumeSprite = new Graphics.Rect({
-        width: 50,
-        height: 100,
-        color: Color.Red,
-    });
-    symbolLayer.show(locationSprite);
-    symbolLayer.show(propSprite);
-    symbolLayer.show(constumeSprite);
-    //#endregion
+    this._setUpBackground();
+    this._setUpTimer();
+    this._setUpSymbols();
   }
 
   public onInitialize(engine: Engine) {}
@@ -92,5 +51,54 @@ export class CueCard extends Actor {
   public isSatisfied(player: any): boolean {
     // if player location in spot, return true;
     return false;
+  }
+
+  private _setUpBackground(): void {
+    const background = this.graphics.createLayer({
+      name: "background",
+      order: -1,
+    });
+    const backgroundRect = new Graphics.Rect({
+      width: this.cueCardWidth,
+      height: 100,
+      color: Color.White,
+    });
+    backgroundRect.opacity = 0.33;
+    background.show(backgroundRect);
+  }
+
+  private _setUpTimer(): void {
+    const timerLayer = this.graphics.createLayer({ name: "timer", order: 0 });
+    this.timerRect = new Graphics.Rect({
+      width: 100,
+      height: 100,
+      color: Color.White,
+    });
+
+    timerLayer.show(this.timerRect);
+  }
+
+  private _setUpSymbols(): void {
+    const symbolLayer = this.graphics.createLayer({ name: "goals", order: 2 });
+    //Symbol Loc1
+    const locationSprite = new Graphics.Rect({
+      width: 50,
+      height: 100,
+      color: Color.Red,
+    });
+
+    const propSprite = new Graphics.Rect({
+      width: 50,
+      height: 100,
+      color: Color.Red,
+    });
+    const constumeSprite = new Graphics.Rect({
+      width: 50,
+      height: 100,
+      color: Color.Red,
+    });
+    symbolLayer.show(locationSprite);
+    symbolLayer.show(propSprite);
+    symbolLayer.show(constumeSprite);
   }
 }
