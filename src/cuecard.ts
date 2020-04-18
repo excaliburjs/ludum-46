@@ -39,8 +39,9 @@ export class CueCard extends Actor {
   //  |                                             |
   //  |----------------------------------------------
   //
-  private padding: number = 0.05 * this.cueCardWidth;
-  private symbolWidth:number =  (1-this.padding) * this.cueCardWidth / 3;
+  private paddingPercent: number = 0.15;
+  private padding: number = this.paddingPercent * this.cueCardWidth / 4;
+  private symbolWidth:number =  (1-this.paddingPercent) * this.cueCardWidth / 3;
 
   constructor(options: CueCardOptions) {
     super();
