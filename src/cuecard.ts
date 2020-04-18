@@ -18,6 +18,7 @@ export interface CueCardOptions {
 
 export enum CueCardEvents {
   CueCardExpired = "CueCardExpired",
+  CueCardSatisfied = "CueCardSatisfied",
 }
 
 export class CueCard extends Actor {
@@ -39,15 +40,16 @@ export class CueCard extends Actor {
   //  |                                             |
   //  |----------------------------------------------
   //
-  private paddingPercent: number = 0.15;
-  private padding: number = (this.paddingPercent * this.cueCardWidth) / 4;
-  private symbolWidth: number =
-    ((1 - this.paddingPercent) * this.cueCardWidth) / 3;
+  private xPaddingPercent: number = 0.15;
+  private xPadding: number = this.xPaddingPercent * this.cueCardWidth / 4;
+  private symbolWidth:number =  (1-this.xPaddingPercent) * this.cueCardWidth / 3;
+  private yPaddingPercent: number = 0.20;
+  private yPadding: number = this.yPaddingPercent * this.cueCardHeight / 2;
+  private symbolHeight: number = (1-this.yPaddingPercent) * this.cueCardHeight;
 
   constructor(options: CueCardOptions) {
     super();
     this.timer = this.lifeTime = 10;
-
     this._setUpBackground();
     this._setUpTimer();
     this._setUpLocationSymbol(options.requiredLocation);
@@ -73,10 +75,17 @@ export class CueCard extends Actor {
     return false;
   }
 
+  public trySatisfyCueCard(player: any): void {
+    if(this.isSatisfied(player)){
+      this.emit(CueCardEvents.CueCardSatisfied, new GameEvent());
+      this.kill();
+    }
+  }
+
   private _calculateRelativePosition(symbolNumber: number): Vector {
-    const totalPadding = symbolNumber * this.padding;
+    const totalPadding = symbolNumber * this.xPadding;
     const positionalOffset = (symbolNumber - 1) * this.symbolWidth;
-    return vec(this.vel.x + totalPadding + positionalOffset, this.vel.y);
+    return vec(this.vel.x + totalPadding + positionalOffset, this.vel.y + this.yPadding);
   }
   private _setUpBackground(): void {
     const background = this.graphics.createLayer({
@@ -113,6 +122,7 @@ export class CueCard extends Actor {
     locationSymbolLayer.offset = this._calculateRelativePosition(1);
     locationSymbolLayer.show(stageLeftSprite);
   }
+
   private _setUpPropSymbol(requiredProp: any): void {
     const propSymbolLayer = this.graphics.createLayer({
       name: "propSymbol",
@@ -120,12 +130,13 @@ export class CueCard extends Actor {
     });
     const propSprite = new Graphics.Rect({
       width: this.symbolWidth,
-      height: 100,
+      height: this.symbolHeight,
       color: Color.Red,
     });
     propSymbolLayer.offset = this._calculateRelativePosition(2);
     propSymbolLayer.show(propSprite);
   }
+
   private _setUpCostumeSymbol(requiredCostume: any): void {
     const costumeSymbolLayer = this.graphics.createLayer({
       name: "costumeSymbol",
@@ -133,7 +144,7 @@ export class CueCard extends Actor {
     });
     const costumeSprite = new Graphics.Rect({
       width: this.symbolWidth,
-      height: 100,
+      height: this.symbolHeight,
       color: Color.Red,
     });
     costumeSymbolLayer.offset = this._calculateRelativePosition(3);
