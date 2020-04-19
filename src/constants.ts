@@ -1,6 +1,6 @@
 export enum Locations {
-  stageCenter = "stageCenter",
   stageLeft = "stageLeft",
+  stageCenter = "stageCenter",
   stageRight = "stageRight",
 }
 

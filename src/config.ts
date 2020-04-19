@@ -2,6 +2,7 @@ import { Vector, vec } from "excalibur";
 
 export default {
   AnalyticsEndpoint: "https://ludum46stats.azurewebsites.net/api/LD46Stats",
+  RandomSeed: 12345, // classic
 
   PlayerWidth: 35,
   PlayerHeight: 35,
@@ -16,6 +17,8 @@ export default {
   CueCardTopOffset: 100, // how far from the top of the game window the cue cards are placed
   CueCardHeight: 75,
   CueCardWidth: 300,
+  CueCardLifeMinSeconds: 15,
+  CueCardLifeMaxSeconds: 35,
 
   AudienceMeterMaxWidth: 600,
   AudienceMeterStartingWidth: 400,

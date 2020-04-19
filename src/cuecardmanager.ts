@@ -1,5 +1,5 @@
 import { CueCard, CueCardEvents, CueCardExpiredEvent } from "./cuecard";
-import { Scene, vec, EventDispatcher, Vector } from "excalibur";
+import { Scene, vec, EventDispatcher, Vector, Random } from "excalibur";
 import { Locations, StageProps, Costumes } from "./constants";
 import Config from "./config";
 import { stats } from "./session";
@@ -8,6 +8,7 @@ import { Inventory } from "./inventory";
 import { Resources } from "./resources";
 
 export class CueCardManager {
+  private _random: Random = new Random(Config.RandomSeed);
   private stageLeftCueCard: CueCard;
   private stageCenterCueCard: CueCard;
   private stageRightCueCard: CueCard;
@@ -49,14 +50,17 @@ export class CueCardManager {
 
   private randomEnum<T extends Record<string, string>>(anEnum: T): T[keyof T] {
     const enumValues = Object.keys(anEnum);
-    const randomIndex = Math.floor(Math.random() * enumValues.length);
+    const randomIndex = this._random.integer(0, enumValues.length - 1);
     const randomEnumValue = enumValues[randomIndex];
     return randomEnumValue as T[keyof T];
   }
 
   private _GenerateCueCard(num: number): CueCard {
     return new CueCard({
-      lifeTime: Math.random() * 5 + 1,
+      lifeTime: this._random.integer(
+        Config.CueCardLifeMinSeconds,
+        Config.CueCardLifeMaxSeconds
+      ),
       requiredCostume: this.randomEnum(Costumes),
       requiredLocation: <Locations>Object.keys(Locations)[num - 1],
       requiredProp: this.randomEnum(StageProps),
