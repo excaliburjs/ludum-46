@@ -153,6 +153,10 @@ export class CueCard extends Actor {
     const stageRightSprite = Graphics.Sprite.from(Resources.stageRightImage);
     const stageCenterSprite = Graphics.Sprite.from(Resources.stageCenterImage);
 
+    this._setUpSymbolWidthHeight(stageLeftSprite);
+    this._setUpSymbolWidthHeight(stageRightSprite);
+    this._setUpSymbolWidthHeight(stageCenterSprite);
+
     locationSymbolLayer.offset = this._calculateRelativePosition(1);
     switch (requiredLocation) {
       case Locations.stageLeft:
@@ -166,16 +170,22 @@ export class CueCard extends Actor {
     }
   }
 
+  private _setUpSymbolWidthHeight(sprite: Graphics.Sprite) {
+    sprite.destSize.width = this.symbolWidth;
+    sprite.destSize.height = this.symbolHeight;
+  }
+
   private _setUpPropSymbol(requiredProp: any): void {
     const propSymbolLayer = this.graphics.createLayer({
       name: "propSymbol",
       order: 3,
     });
 
-    const rubberChickenSprite = Graphics.Sprite.from(
-      Resources.rubberChickenImage
-    );
+    const rubberChickenSprite = Graphics.Sprite.from(Resources.rubberChickenImage);
     const umbrellaSprite = Graphics.Sprite.from(Resources.umbrellaImage);
+
+    this._setUpSymbolWidthHeight(rubberChickenSprite);
+    this._setUpSymbolWidthHeight(umbrellaSprite);
 
     propSymbolLayer.offset = this._calculateRelativePosition(2);
 
@@ -201,6 +211,9 @@ export class CueCard extends Actor {
 
     const vikingHatSprite = Graphics.Sprite.from(Resources.vikingHatImage);
     const jesterHatSprite = Graphics.Sprite.from(Resources.jesterHatImage);
+
+    this._setUpSymbolWidthHeight(vikingHatSprite);
+    this._setUpSymbolWidthHeight(jesterHatSprite);
 
     switch (requiredCostume) {
       case Costumes.vikingHat:
