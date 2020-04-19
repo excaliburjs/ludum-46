@@ -7,8 +7,7 @@
     "start": "parcel index.html",
     "typecheck": "tsc -p . --noEmit",
     "build": "npm run build:excalibur && parcel build index.html",
-    "build:excalibur": "cd lib/excalibur && npm install && npm run core && cd ../../",
-    "precommit": "pretty-quick --staged"
+    "build:excalibur": "cd lib/excalibur && npm install && npm run core && cd ../../"
   },
   "alias": {
     "excalibur": "./lib/excalibur/build/dist",
@@ -43,13 +42,10 @@
     "storejs": "^1.0.25",
     "typescript": "^3.8.3"
   },
+  "assetsPath": "static/",
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "pretty-quick --staged"
     }
-  },
-  "lint-staged": {
-    "*.{js,ts,css,html,md}": "prettier --write"
-  },
-  "assetsPath": "static/"
+  }
 }
