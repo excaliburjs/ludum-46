@@ -7,7 +7,8 @@
     "start": "parcel index.html",
     "typecheck": "tsc -p . --noEmit",
     "build": "npm run build:excalibur && parcel build index.html",
-    "build:excalibur": "cd lib/excalibur && npm install && npm run core && cd ../../"
+    "build:excalibur": "cd lib/excalibur && npm install && npm run core && cd ../../",
+    "precommit": "pretty-quick --staged"
   },
   "alias": {
     "excalibur": "./lib/excalibur/build/dist",
