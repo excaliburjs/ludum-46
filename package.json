@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/excaliburjs/ludum-46#readme",
   "dependencies": {
+    "items": "^2.1.2",
     "parcel-bundler": "1.12.4",
     "store": "^2.0.12"
   },
