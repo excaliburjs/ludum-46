@@ -1,4 +1,5 @@
 import Config from "./config";
+import Inventory from "./inventory";
 
 interface Payload {
   date: string; // the current date
@@ -23,12 +24,17 @@ export class Analytics {
 }
 
 export class Stats {
+  private _inventory = new Inventory();
   protected startTime = Date.now();
   public get start() {
     return this.startTime;
   }
   public get duration() {
     return Date.now() - this.startTime;
+  }
+
+  public get inventory() {
+    return this._inventory;
   }
   public numLinesDelivered = 0;
   public numPropsUsed = 0;
