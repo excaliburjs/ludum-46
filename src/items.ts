@@ -1,25 +1,21 @@
-import { StageProps, Costumes, Locations } from "./constants";
+import { IconPosition } from "./constants";
 import { Resources } from "./resources";
 import { Graphics } from "excalibur";
 
 export default class Items {
-  public static getLocationSprite(location: Locations): Graphics.Sprite {
-    let key = `${location}Image`;
-    return this._getSprite(key);
-  }
+  public static getIconSprite(key: string): Graphics.Sprite {
+    const spriteSheet = Graphics.SpriteSheet.fromGrid({
+      image: <Graphics.RawImage>Resources.icons,
+      grid: {
+        rows: 6,
+        columns: 5,
+        spriteHeight: 80,
+        spriteWidth: 80,
+      },
+    });
 
-  public static getPropSprite(prop: StageProps): Graphics.Sprite {
-    let key = `${prop}Image`;
-    return this._getSprite(key);
-  }
-
-  public static getCostumeSprite(costume: Costumes): Graphics.Sprite {
-    let key = `${costume}Image`;
-    return this._getSprite(key);
-  }
-
-  private static _getSprite(key: string): Graphics.Sprite {
-    let resource = <Graphics.RawImage>Resources[key];
-    return Graphics.Sprite.from(resource);
+    const index = IconPosition[key];
+    const sprite = spriteSheet.sprites[index];
+    return sprite;
   }
 }

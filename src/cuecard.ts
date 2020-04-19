@@ -149,7 +149,7 @@ export class CueCard extends Actor {
 
     locationSymbolLayer.offset = this._calculateRelativePosition(1);
 
-    let sprite = Items.getLocationSprite(requiredLocation);
+    let sprite = Items.getIconSprite(requiredLocation);
     this._setUpSymbolWidthHeight(sprite);
     locationSymbolLayer.show(sprite);
   }
@@ -167,7 +167,7 @@ export class CueCard extends Actor {
 
     propSymbolLayer.offset = this._calculateRelativePosition(2);
 
-    let sprite = Items.getPropSprite(requiredProp);
+    let sprite = Items.getIconSprite(requiredProp);
     this._setUpSymbolWidthHeight(sprite);
     propSymbolLayer.show(sprite);
   }
@@ -180,7 +180,7 @@ export class CueCard extends Actor {
 
     costumeSymbolLayer.offset = this._calculateRelativePosition(3);
 
-    let sprite = Items.getCostumeSprite(requiredCostume);
+    let sprite = Items.getIconSprite(requiredCostume);
     this._setUpSymbolWidthHeight(sprite);
     costumeSymbolLayer.show(sprite);
   }
