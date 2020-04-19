@@ -10,6 +10,7 @@ import {
 } from "excalibur";
 import { Resources } from "./resources";
 import { Locations, StageProps, Costumes } from "./constants";
+import Items from "./items";
 export interface CueCardOptions {
   // The lifetime in seconds of the cue card
   lifeTime: number;
@@ -133,31 +134,17 @@ export class CueCard extends Actor {
     timerLayer.show(this.timerRect);
   }
 
-  private _setUpLocationSymbol(requiredLocation: any): void {
+  private _setUpLocationSymbol(requiredLocation: Locations): void {
     const locationSymbolLayer = this.graphics.createLayer({
       name: "locationSymbol",
       order: 2,
     });
 
-    const stageLeftSprite = Graphics.Sprite.from(Resources.stageLeftImage);
-    const stageRightSprite = Graphics.Sprite.from(Resources.stageRightImage);
-    const stageCenterSprite = Graphics.Sprite.from(Resources.stageCenterImage);
-
-    this._setUpSymbolWidthHeight(stageLeftSprite);
-    this._setUpSymbolWidthHeight(stageRightSprite);
-    this._setUpSymbolWidthHeight(stageCenterSprite);
-
     locationSymbolLayer.offset = this._calculateRelativePosition(1);
-    switch (requiredLocation) {
-      case Locations.stageLeft:
-        locationSymbolLayer.show(stageLeftSprite);
-        break;
-      case Locations.stageRight:
-        locationSymbolLayer.show(stageRightSprite);
-        break;
-      default:
-        locationSymbolLayer.show(stageCenterSprite);
-    }
+
+    let sprite = Items.getLocationSprite(requiredLocation);
+    this._setUpSymbolWidthHeight(sprite);
+    locationSymbolLayer.show(sprite);
   }
 
   private _setUpSymbolWidthHeight(sprite: Graphics.Sprite) {
@@ -165,40 +152,20 @@ export class CueCard extends Actor {
     sprite.destSize.height = this.symbolHeight;
   }
 
-  private _setUpPropSymbol(requiredProp: any): void {
+  private _setUpPropSymbol(requiredProp: StageProps): void {
     const propSymbolLayer = this.graphics.createLayer({
       name: "propSymbol",
       order: 3,
     });
 
-    const rubberChickenSprite = Graphics.Sprite.from(
-      Resources.rubberChickenImage
-    );
-    const umbrellaSprite = Graphics.Sprite.from(Resources.umbrellaImage);
-    const trumpetSprite = Graphics.Sprite.from(Resources.trumpetImage);
-
-    this._setUpSymbolWidthHeight(rubberChickenSprite);
-    this._setUpSymbolWidthHeight(umbrellaSprite);
-    this._setUpSymbolWidthHeight(trumpetSprite);
-
     propSymbolLayer.offset = this._calculateRelativePosition(2);
 
-    switch (requiredProp) {
-      case StageProps.rubberChicken:
-        propSymbolLayer.show(rubberChickenSprite);
-        break;
-      case StageProps.umbrella:
-        propSymbolLayer.show(umbrellaSprite);
-        break;
-      case StageProps.trumpet:
-        propSymbolLayer.show(trumpetSprite);
-        break;
-      default:
-        propSymbolLayer.show(rubberChickenSprite);
-    }
+    let sprite = Items.getPropSprite(requiredProp);
+    this._setUpSymbolWidthHeight(sprite);
+    propSymbolLayer.show(sprite);
   }
 
-  private _setUpCostumeSymbol(requiredCostume: any): void {
+  private _setUpCostumeSymbol(requiredCostume: Costumes): void {
     const costumeSymbolLayer = this.graphics.createLayer({
       name: "costumeSymbol",
       order: 4,
@@ -206,26 +173,8 @@ export class CueCard extends Actor {
 
     costumeSymbolLayer.offset = this._calculateRelativePosition(3);
 
-    const vikingHatSprite = Graphics.Sprite.from(Resources.vikingHatImage);
-    const jesterHatSprite = Graphics.Sprite.from(Resources.jesterHatImage);
-    const topHatSprite = Graphics.Sprite.from(Resources.topHatImage);
-
-    this._setUpSymbolWidthHeight(vikingHatSprite);
-    this._setUpSymbolWidthHeight(jesterHatSprite);
-    this._setUpSymbolWidthHeight(topHatSprite);
-
-    switch (requiredCostume) {
-      case Costumes.vikingHat:
-        costumeSymbolLayer.show(vikingHatSprite);
-        break;
-      case Costumes.jesterHat:
-        costumeSymbolLayer.show(jesterHatSprite);
-        break;
-      case Costumes.topHat:
-        costumeSymbolLayer.show(topHatSprite);
-        break;
-      default:
-        costumeSymbolLayer.show(vikingHatSprite);
-    }
+    let sprite = Items.getCostumeSprite(requiredCostume);
+    this._setUpSymbolWidthHeight(sprite);
+    costumeSymbolLayer.show(sprite);
   }
 }
