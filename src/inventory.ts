@@ -12,9 +12,9 @@ export class Inventory extends Actor {
   private _propSprite: any;
 
   constructor(engine: Engine, x: number, y: number) {
-    super(x, y, 200, 60);
+    super(x, y, 200, 80);
     this._engine = engine;
-    this._setUpBackground();
+    this._setUpLayers();
     this._costumeSprite = Items.getIconSprite(Costumes.topHat);
     this._propSprite = Items.getIconSprite(StageProps.rubberChicken);
   }
@@ -51,7 +51,7 @@ export class Inventory extends Actor {
     return 15;
   }
 
-  private _setUpBackground() {
+  private _setUpLayers() {
     const background = this.graphics.createLayer({
       name: "background",
       order: -1,

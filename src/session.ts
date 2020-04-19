@@ -17,7 +17,7 @@ export function newgame(game: Engine) {
   let inventory = new Inventory(
     game,
     Config.GameWidth / 2,
-    Config.GameHeight - 30
+    Config.GameHeight - 40
   );
   gameStats = new Stats(inventory);
   const audienceMeter = new AudienceMeter();
