@@ -16,23 +16,6 @@ export enum Costumes {
   topHat = "topHat",
 }
 
-export const IconSize = {
-  width: 100,
-  height: 100,
-};
-
-export const RowCoordinates = {
-  1: 0,
-  2: 400,
-  3: 600,
-};
-
-export const ColumnCoordinates = {
-  1: 0,
-  2: 200,
-  3: 300,
-};
-
 export const IconPosition = {
   rubberChicken: 0,
   trumpet: 1,
