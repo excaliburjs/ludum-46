@@ -14,7 +14,7 @@ export function stats() {
 
 export function newgame(game: Engine) {
   // clear stats
-  let inventory = new Inventory(game, Config.GameWidth / 2, Config.GameHeight);
+  let inventory = new Inventory(game, Config.GameWidth / 2, Config.GameHeight - 30);
   gameStats = new Stats(inventory);
   const audienceMeter = new AudienceMeter();
   const theater = new Theater(game);
