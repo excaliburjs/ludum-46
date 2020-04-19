@@ -5,7 +5,9 @@ import { stats } from "./session";
 export class AudienceMeter extends Actor {
   private meterWidth: number = Config.AudienceMeterMaxWidth;
   private meterHeight: number = Config.AudienceMeterHeight;
+  private meterSpeed: number = 3;
   private meterRect!: Graphics.Rect;
+  private targetScore!: number;
 
   constructor() {
     super({
@@ -33,6 +35,12 @@ export class AudienceMeter extends Actor {
     background.show(backgroundRect);
   }
 
+  update(gameEngine: Engine, delta: number) {
+    super.update(gameEngine, delta);
+    const difference = (stats().currentAudienceScore - this.meterRect.width) * (delta/1000) / 3;
+    this.meterRect.width += difference;
+  }
+
   private _setUpMeter(): void {
     const meterLayer = this.graphics.createLayer({ name: "meter", order: 0 });
     this.meterRect = new Graphics.Rect({
@@ -40,6 +48,7 @@ export class AudienceMeter extends Actor {
       height: this.meterHeight,
       color: Color.Green,
     });
+    this.targetScore = stats().currentAudienceScore;
     meterLayer.show(this.meterRect);
   }
 }
