@@ -18,7 +18,7 @@ export enum Costumes {
   topHat = "topHat",
 }
 
-export const IconPosition = {
+export const IconPosition: { [key: string]: number } = {
   rubberChicken: 0,
   trumpet: 1,
   umbrella: 2,
