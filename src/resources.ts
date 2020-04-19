@@ -10,6 +10,7 @@ import player2long from "../img/char-sprites/player-2-long.png";
 import player3long from "../img/char-sprites/player-3-long.png";
 import player4long from "../img/char-sprites/player-4-long.png";
 import player5long from "../img/char-sprites/player-5-long.png";
+import background from "../img/background.png";
 
 import { Graphics, Sound } from "excalibur";
 import { TiledResource } from "excalibur-tiled";
@@ -28,6 +29,7 @@ export const Resources = {
   charSheet9: new Graphics.RawImage(player4long),
   charSheet10: new Graphics.RawImage(player5long),
   map: new TiledResource("./map/map.json"),
+  background: new Graphics.RawImage(background),
 
   music: /* todo */ new Sound(""),
   sndDoorOpen: new Sound("./wav/doorOpen.wav"),

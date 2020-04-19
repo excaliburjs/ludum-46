@@ -70,6 +70,15 @@ export class Theater extends Scene {
     });
 
     this.spawnItems();
+    let backgroundActor = new Actor({
+      width: 50,
+      height: 50,
+      x: Config.GameWidth / 2,
+      y: Config.GameHeight / 2,
+    });
+    backgroundActor.graphics.add(Graphics.Sprite.from(Resources.background));
+    this.add(backgroundActor);
+    backgroundActor.z = -10;
   }
 
   /**
