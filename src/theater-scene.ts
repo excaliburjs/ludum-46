@@ -1,6 +1,20 @@
-import { Scene, Engine, TileMap, Actor, vec, Color, Graphics } from "excalibur";
-import { Resources } from "./resources";
+import {
+  Scene,
+  Engine,
+  TileMap,
+  Actor,
+  vec,
+  Color,
+  Graphics,
+  CollisionType,
+  ActorArgs,
+} from "excalibur";
 import { ITiledMapLayer } from "excalibur-tiled";
+import Config from "./config";
+import { Resources } from "./resources";
+import { CueCardManager } from "./cuecardmanager";
+import { Player } from "./player";
+import { StageCenterTrigger } from "./stageCenterTrigger";
 
 const LAYER_IMPASSABLE = "walls";
 const LAYER_TRIGGERS = "triggers";
@@ -12,8 +26,15 @@ const OBJECT_TRIGGERS = {
 
 export class Theater extends Scene {
   public stageTileMap!: TileMap;
+  private player!: Player;
+  private cuecardmanager!: CueCardManager;
 
   public onInitialize(engine: Engine) {
+    this.cuecardmanager = new CueCardManager(this);
+    this.player = new Player(Config.GameWidth / 2, Config.GameHeight / 2);
+    this.add(this.player);
+    this.player.body.collider.type = CollisionType.Active;
+
     // add a blackout area behind stage
     const stageBlackout = new Actor({
       anchor: vec(0, 0),
@@ -65,12 +86,25 @@ export class Theater extends Scene {
       return;
 
     for (const trigger of layer.objects) {
+      const triggerArgs: ActorArgs = {
+        anchor: vec(0, 0),
+        pos: vec(this.stageTileMap.x + trigger.x, this.stageTileMap.y + trigger.y),
+        width: trigger.width,
+        height: trigger.height,
+      };
+
       switch (trigger.name) {
         case OBJECT_TRIGGERS.StageLeftTrigger:
           console.log("todo stageLeftTrigger", trigger);
           break;
         case OBJECT_TRIGGERS.StageCenterTrigger:
-          console.log("todo stageCenterTrigger", trigger);
+          const stageCenterTrigger = new StageCenterTrigger(
+            this.player,
+            this.cuecardmanager,
+            triggerArgs
+          );
+          this.add(stageCenterTrigger);
+          stageCenterTrigger.setZIndex(-2);
           break;
         case OBJECT_TRIGGERS.StageRightTrigger:
           console.log("todo stageRightCenter", trigger);

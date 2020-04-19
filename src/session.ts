@@ -1,12 +1,8 @@
-import { Engine, vec, Actor, CollisionType } from "excalibur";
+import { Engine } from "excalibur";
+import Config from './config';
 import { Stats } from "./stats";
 import { Theater } from "./theater-scene";
-import { CueCard } from "./cuecard";
-import { Player } from "./player";
-import Config from "./config";
-import { CueCardManager } from "./cuecardmanager";
 import { Inventory } from "./inventory";
-import { StageCenterTrigger } from "./stageCenterTrigger";
 
 let gameStats: Stats;
 
@@ -25,12 +21,6 @@ export function newgame(game: Engine) {
   );
 
   const theater = new Theater(game);
-  const cuecardmanager = new CueCardManager(theater);
-  const player = new Player(Config.GameWidth / 2, Config.GameHeight / 2);
-  theater.add(player);
-  player.body.collider.type = CollisionType.Active;
-  const stageCenterTrigger = new StageCenterTrigger(player, cuecardmanager);
-  theater.add(stageCenterTrigger);
 
   game.addScene("main", theater);
   game.goToScene("main");
