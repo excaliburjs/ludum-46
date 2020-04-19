@@ -7,6 +7,7 @@ import {
   EnterTriggerEvent,
   ExitTriggerEvent,
   ActorArgs,
+  Logger,
 } from "excalibur";
 import { Player } from "./player";
 import { CueCardManager } from "./cuecardmanager";
@@ -40,7 +41,8 @@ export class CueCardTrigger extends Actor {
       target: this.player,
       repeat: -1,
     });
-    this.trigger.anchor.setTo(this.anchor.x, this.anchor.y);
+    // WORKAROUND: body not being updated onInitialize to use new anchor
+    this.trigger.body.useBoxCollider(this.width, this.height, this.anchor);
     this.trigger.on("enter", this.onTriggerEnter.bind(this));
     this.trigger.on("exit", this.onTriggerExit.bind(this));
     this.rect = new Graphics.Rect({
@@ -54,9 +56,13 @@ export class CueCardTrigger extends Actor {
 
   public update(engine: Engine, delta: number) {
     super.update(engine, delta);
+
+    if (!this.triggered) return;
+
     this.timer += delta / 1000;
 
     if (this.timer >= this.waitTime) {
+      Logger.getInstance().info("Stage trigger", this.triggerPosition);
       switch (this.triggerPosition) {
         case StageTriggerLocation.StageCenter:
           this.cueCardManager.SatisfyStageCenter(this.player);

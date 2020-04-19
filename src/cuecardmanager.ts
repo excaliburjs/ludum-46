@@ -1,5 +1,5 @@
 import { CueCard, CueCardEvents, CueCardExpiredEvent } from "./cuecard";
-import { GameEvent, Scene, vec, EventDispatcher } from "excalibur";
+import { Scene, vec, EventDispatcher } from "excalibur";
 import { Locations, StageProps, Costumes } from "./constants";
 import Config from "./config";
 

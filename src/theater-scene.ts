@@ -94,7 +94,6 @@ export class Theater extends Scene {
         ),
         width: trigger.width,
         height: trigger.height,
-        z: -2,
       };
 
       switch (trigger.name) {
@@ -106,6 +105,7 @@ export class Theater extends Scene {
             triggerArgs
           );
           this.add(stageLeftTrigger);
+          stageLeftTrigger.setZIndex(-2);
           break;
         case OBJECT_TRIGGERS.StageCenterTrigger:
           const stageCenterTrigger = new CueCardTrigger(
@@ -115,6 +115,7 @@ export class Theater extends Scene {
             triggerArgs
           );
           this.add(stageCenterTrigger);
+          stageCenterTrigger.setZIndex(-2);
           break;
         case OBJECT_TRIGGERS.StageRightTrigger:
           const stageRightTrigger = new CueCardTrigger(
@@ -124,6 +125,7 @@ export class Theater extends Scene {
             triggerArgs
           );
           this.add(stageRightTrigger);
+          stageRightTrigger.setZIndex(-2);
           break;
       }
     }
