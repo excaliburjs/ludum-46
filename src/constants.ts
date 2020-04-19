@@ -19,6 +19,7 @@ export enum Costumes {
   jesterHat = "jesterHat",
   topHat = "topHat",
   sherifHat = "sherifHat",
+  magicianHat = "magicianHat",
 }
 
 export const IconPosition: { [key: string]: number } = {
@@ -31,6 +32,7 @@ export const IconPosition: { [key: string]: number } = {
   jesterHat: 11,
   topHat: 12,
   sherifHat: 13,
+  magicianHat: 14,
   stageCenter: 25,
   stageLeft: 26,
   stageRight: 27,
