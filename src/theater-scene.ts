@@ -13,7 +13,7 @@ export class Theater extends Scene {
       anchor: vec(0, 0),
       pos: vec(0, 168),
       width: engine.canvasWidth,
-      height: engine.canvasHeight - 168
+      height: engine.canvasHeight - 168,
     });
     stageBlackout.graphics.add(
       new Graphics.Rect({
