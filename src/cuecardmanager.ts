@@ -5,9 +5,9 @@ import Config from "./config";
 
 import { Player } from "./player";
 export class CueCardManager {
-  private firstCueCard: CueCard;
-  private secondCueCard: CueCard;
-  private thirdCueCard: CueCard;
+  private stageLeftCueCard: CueCard;
+  private stageCenterCueCard: CueCard;
+  private stageRightCueCard: CueCard;
   private cardPadding: number = Config.CueCardPadding;
   private cardTopOffset: number = Config.CueCardTopOffset;
   private cueCardHeight: number = Config.CueCardHeight;
