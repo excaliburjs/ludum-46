@@ -18,6 +18,7 @@ import { Player } from "./player";
 import { CueCardTrigger, StageTriggerLocation } from "./cuecardtrigger";
 import { StageProps, Costumes } from "./constants";
 import Items from "./items";
+import { stats } from "./session";
 
 const LAYER_IMPASSABLE = "walls";
 const LAYER_TRIGGERS = "triggers";
@@ -167,16 +168,32 @@ export class Theater extends Scene {
     for (let i = 0; i < stageProps.length; i++) {
       let resourceName = stageProps[i];
       let point = propPoints[i];
+      let sprite = Items.getIconSprite(resourceName);
       let actor = new Actor(point.x, point.y);
-      actor.graphics.show(Items.getIconSprite(resourceName));
+      actor.graphics.show(sprite);
+      actor.body.collider.type = CollisionType.Passive;
+      actor.on("precollision", (event) => {
+        if (event.other instanceof Player) {
+          actor.kill();
+          stats().inventory.addProp(<StageProps>resourceName, point);
+        }
+      });
       this.add(actor);
     }
 
     for (let i = 0; i < costumes.length; i++) {
       let resourceName = costumes[i];
       let point = costumePoints[i];
+      let sprite = Items.getIconSprite(resourceName);
       let actor = new Actor(point.x, point.y);
-      actor.graphics.show(Items.getIconSprite(resourceName));
+      actor.graphics.show(sprite);
+      actor.body.collider.type = CollisionType.Passive;
+      actor.on("precollision", (event) => {
+        if (event.other instanceof Player) {
+          actor.kill();
+          stats().inventory.addCostume(<Costumes>resourceName, point);
+        }
+      });
       this.add(actor);
     }
   }
