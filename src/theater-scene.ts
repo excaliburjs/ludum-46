@@ -67,13 +67,14 @@ export class Theater extends Scene {
     for (const trigger of layer.objects) {
       switch (trigger.name) {
         case OBJECT_TRIGGERS.StageLeftTrigger:
-          console.log(trigger);
+          console.log("todo stageLeftTrigger", trigger);
           break;
         case OBJECT_TRIGGERS.StageCenterTrigger:
-          console.log(trigger);
+          console.log("todo stageCenterTrigger", trigger);
           break;
         case OBJECT_TRIGGERS.StageRightTrigger:
-          console.log(trigger);
+          console.log("todo stageRightCenter", trigger);
+          break;
       }
     }
   }
