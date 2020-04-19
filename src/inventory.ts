@@ -11,11 +11,11 @@ export class Inventory extends Actor {
   private _propSprite: any;
 
   constructor(engine: Engine, x: number, y: number) {
-    super(x, y);
+    super(x, y, 45, 100);
     this._engine = engine;
   }
 
-  public update(engine: Engine, delta: number) {}
+  public onPostUpdate(engine: Engine, delta: number) {}
 
   public addWardrobeItem(item: Costumes) {
     // drop the item if holding one
