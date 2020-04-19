@@ -22,18 +22,18 @@ export class Inventory extends Actor {
   public onPreUpdate() {
     if (this._costumeSprite) {
       let layer = this.graphics.getLayer("costume");
-      let heightOffset = (this.height / 2) - (this._costumeSprite.height / 2);
-      let widthOffset = (this.width / 3) - (this._costumeSprite.width / 2);
+      let heightOffset = this.height / 2 - this._costumeSprite.height / 2;
+      let widthOffset = this.width / 3 - this._costumeSprite.width / 2;
       layer!.offset = new Vector(widthOffset, heightOffset);
-      layer?.show(this._costumeSprite)
+      layer?.show(this._costumeSprite);
     }
 
     if (this._propSprite) {
-        let layer = this.graphics.getLayer("prop");
-        let heightOffset = (this.height / 2) - (this._propSprite.height / 2);
-        let widthOffset = (this.width * 2 / 3) - (this._propSprite.width / 2);
-        layer!.offset = new Vector(widthOffset, heightOffset);
-        layer?.show(this._propSprite)
+      let layer = this.graphics.getLayer("prop");
+      let heightOffset = this.height / 2 - this._propSprite.height / 2;
+      let widthOffset = (this.width * 2) / 3 - this._propSprite.width / 2;
+      layer!.offset = new Vector(widthOffset, heightOffset);
+      layer?.show(this._propSprite);
     }
   }
 
@@ -47,7 +47,9 @@ export class Inventory extends Actor {
     this._propSprite = Items.getIconSprite(item);
   }
 
-  public getQueueCardScore(card: CueCard): number {return 15;}
+  public getQueueCardScore(card: CueCard): number {
+    return 15;
+  }
 
   private _setUpBackground() {
     const background = this.graphics.createLayer({
@@ -56,14 +58,14 @@ export class Inventory extends Actor {
     });
 
     this.graphics.createLayer({
-        name: "costume",
-        order: 1,
-      });
+      name: "costume",
+      order: 1,
+    });
 
-      this.graphics.createLayer({
-        name: "prop",
-        order: 2,
-      });
+    this.graphics.createLayer({
+      name: "prop",
+      order: 2,
+    });
     const backgroundRect = new Graphics.Rect({
       width: this.width,
       height: this.height,
