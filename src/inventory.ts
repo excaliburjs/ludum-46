@@ -16,8 +16,6 @@ export class Inventory extends Actor {
     this._setUpBackground();
   }
 
-  public onPostUpdate(engine: Engine, delta: number) {}
-
   public addWardrobeItem(item: Costumes) {
     // drop the item if holding one
   }
