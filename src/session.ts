@@ -1,4 +1,4 @@
-import { Engine } from "excalibur";
+import { Engine, PostUpdateEvent } from "excalibur";
 import Config from "./config";
 import { Stats } from "./stats";
 import { Theater } from "./theater-scene";
@@ -26,10 +26,16 @@ export function newgame(game: Engine) {
   theater.add(inventory);
   game.addScene("main", theater);
   game.goToScene("main");
+  game.on("postupdate", function checkGameOver(event: PostUpdateEvent) {
+    if (gameStats.currentAudienceScore == 0) {
+      gameover(game);
+    }
+  });
   // begin main scene
 }
 
 export function gameover(game: Engine) {
+  game.stop();
   // TODO publish stats
   // TODO bring up player score scene or popup
 }

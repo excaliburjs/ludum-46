@@ -48,7 +48,6 @@ export class Stats {
     } else {
       this.currentAudienceScore = 0;
     }
-
   }
 
   public increaseAudienceMeter(amount: number) {
@@ -57,7 +56,6 @@ export class Stats {
     } else {
       this.currentAudienceScore = Config.AudienceMeterMaxWidth;
     }
-
   }
 
   public numLinesDelivered = 0;
