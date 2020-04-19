@@ -3,6 +3,7 @@ import Config from "./config";
 import { Stats } from "./stats";
 import { Theater } from "./theater-scene";
 import { Inventory } from "./inventory";
+import { AudienceMeter } from "./audienceMeter";
 
 let gameStats: Stats;
 
@@ -15,7 +16,9 @@ export function newgame(game: Engine) {
   // clear stats
   let inventory = new Inventory(game, Config.GameWidth / 2, Config.GameHeight);
   gameStats = new Stats(inventory);
+  const audienceMeter = new AudienceMeter();
   const theater = new Theater(game);
+  theater.add(audienceMeter);
   theater.add(inventory);
   game.addScene("main", theater);
   game.goToScene("main");

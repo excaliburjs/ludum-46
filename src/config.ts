@@ -16,4 +16,8 @@ export default {
   CueCardTopOffset: 100, // how far from the top of the game window the cue cards are placed
   CueCardHeight: 75,
   CueCardWidth: 300,
+
+  AudienceMeterMaxWidth: 600,
+  AudienceMeterStartingWidth: 400,
+  AudienceMeterHeight: 50,
 };

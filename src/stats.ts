@@ -42,7 +42,24 @@ export class Stats {
     return this._inventory;
   }
 
+  public reduceAudienceMeter(amount: number) {
+    if (amount < this.currentAudienceScore) {
+      this.currentAudienceScore -= amount; //TODO don't reduce this all at once, add some sort of animation of fast reduction of points to the audience meter
+    } else {
+      this.currentAudienceScore = 0;
+    }
+  }
+
+  public increaseAudienceMeter(amount: number) {
+    if (amount < this.currentAudienceScore + Config.AudienceMeterMaxWidth) {
+      this.currentAudienceScore += amount;
+    } else {
+      this.currentAudienceScore = Config.AudienceMeterMaxWidth;
+    }
+  }
+
   public numLinesDelivered = 0;
   public numPropsUsed = 0;
   public numCostumeChanges = 0;
+  public currentAudienceScore = Config.AudienceMeterStartingWidth;
 }
