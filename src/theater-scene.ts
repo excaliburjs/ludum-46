@@ -3,6 +3,12 @@ import { Resources } from "./resources";
 import { ITiledMapLayer } from "excalibur-tiled";
 
 const LAYER_IMPASSABLE = "walls";
+const LAYER_TRIGGERS = "triggers";
+const OBJECT_TRIGGERS = {
+  StageLeftTrigger: "stageLeftTrigger",
+  StageCenterTrigger: "stageCenterTrigger",
+  StageRightTrigger: "stageRightTrigger",
+};
 
 export class Theater extends Scene {
   public stageTileMap!: TileMap;
@@ -31,6 +37,7 @@ export class Theater extends Scene {
 
     Resources.map.data.layers.forEach((layer) => {
       this.collectSolidTiles(layer);
+      this.collectStageTriggers(layer);
     });
   }
 
@@ -45,6 +52,28 @@ export class Theater extends Scene {
     for (let i = 0; i < layer.data.length; i++) {
       if (layer.data[i] !== 0) {
         this.stageTileMap.data[i].solid = true;
+      }
+    }
+  }
+
+  collectStageTriggers(layer: ITiledMapLayer) {
+    if (
+      layer.name !== LAYER_TRIGGERS ||
+      typeof layer.data == "string" ||
+      !layer.objects
+    )
+      return;
+
+    for (const trigger of layer.objects) {
+      switch (trigger.name) {
+        case OBJECT_TRIGGERS.StageLeftTrigger:
+          console.log(trigger);
+          break;
+        case OBJECT_TRIGGERS.StageCenterTrigger:
+          console.log(trigger);
+          break;
+        case OBJECT_TRIGGERS.StageRightTrigger:
+          console.log(trigger);
       }
     }
   }
