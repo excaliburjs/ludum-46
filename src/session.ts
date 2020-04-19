@@ -1,5 +1,5 @@
 import { Engine } from "excalibur";
-import Config from './config';
+import Config from "./config";
 import { Stats } from "./stats";
 import { Theater } from "./theater-scene";
 import { Inventory } from "./inventory";

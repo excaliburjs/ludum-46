@@ -88,7 +88,10 @@ export class Theater extends Scene {
     for (const trigger of layer.objects) {
       const triggerArgs: ActorArgs = {
         anchor: vec(0, 0),
-        pos: vec(this.stageTileMap.x + trigger.x, this.stageTileMap.y + trigger.y),
+        pos: vec(
+          this.stageTileMap.x + trigger.x,
+          this.stageTileMap.y + trigger.y
+        ),
         width: trigger.width,
         height: trigger.height,
       };
