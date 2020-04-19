@@ -4,6 +4,7 @@ import { Stats } from "./stats";
 import { Theater } from "./theater-scene";
 import { Inventory } from "./inventory";
 import { AudienceMeter } from "./audienceMeter";
+import { GameOver } from "./gameover";
 
 let gameStats: Stats;
 
@@ -22,13 +23,17 @@ export function newgame(game: Engine) {
   gameStats = new Stats(inventory);
   const audienceMeter = new AudienceMeter();
   const theater = new Theater(game);
+  const gameOver = new GameOver();
+  (window as any).gameOver = gameOver;
   theater.add(audienceMeter);
   theater.add(inventory);
+  theater.add(gameOver);
   game.addScene("main", theater);
   game.goToScene("main");
   game.on("postupdate", function checkGameOver(event: PostUpdateEvent) {
-    if (gameStats.currentAudienceScore == 0) {
-      gameover(game);
+    if (gameStats.currentAudienceScore <= 0) {
+      // gameover(game);
+      gameOver.show();
     }
   });
   // begin main scene

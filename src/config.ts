@@ -6,7 +6,7 @@ export default {
 
   PlayerWidth: 35,
   PlayerHeight: 35,
-  PlayerVel: 100,
+  PlayerVel: 250,
   PlayerSpriteHeight: 45,
   PlayerSpriteWidth: 45,
 
