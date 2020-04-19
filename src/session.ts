@@ -6,7 +6,7 @@ import { Player } from "./player";
 import Config from "./config";
 import { CueCardManager } from "./cuecardmanager";
 import { Inventory } from "./inventory";
-import { StageCenterTrigger } from "./stageCenterTrigger";
+import { CueCardTrigger, StageTriggerLocation } from "./cuecardtriggertrigger";
 
 let gameStats: Stats;
 
@@ -26,8 +26,13 @@ export function newgame(game: Engine) {
   const player = new Player(Config.GameWidth / 2, Config.GameHeight / 2);
   theater.add(player);
   player.body.collider.type = CollisionType.Active;
-  const stageCenterTrigger = new StageCenterTrigger(player, cuecardmanager);
+
+  const stageCenterTrigger = new CueCardTrigger(player, cuecardmanager, StageTriggerLocation.StageCenter);
+  const stageLeftTrigger = new CueCardTrigger(player, cuecardmanager, StageTriggerLocation.StageLeft);
+  const stageRightTrigger = new CueCardTrigger(player, cuecardmanager, StageTriggerLocation.StageRight);
   theater.add(stageCenterTrigger);
+  theater.add(stageLeftTrigger);
+  theater.add(stageRightTrigger);
 
   theater.add(inventory);
   game.addScene("main", theater);
