@@ -14,7 +14,7 @@ import Config from "./config";
 import { Resources } from "./resources";
 import { CueCardManager } from "./cuecardmanager";
 import { Player } from "./player";
-import { StageCenterTrigger } from "./stageCenterTrigger";
+import { CueCardTrigger, StageTriggerLocation } from "./cuecardtriggertrigger";
 
 const LAYER_IMPASSABLE = "walls";
 const LAYER_TRIGGERS = "triggers";
@@ -94,23 +94,36 @@ export class Theater extends Scene {
         ),
         width: trigger.width,
         height: trigger.height,
+        z: -2
       };
 
       switch (trigger.name) {
         case OBJECT_TRIGGERS.StageLeftTrigger:
-          console.log("todo stageLeftTrigger", trigger);
-          break;
-        case OBJECT_TRIGGERS.StageCenterTrigger:
-          const stageCenterTrigger = new StageCenterTrigger(
+          const stageLeftTrigger = new CueCardTrigger(
             this.player,
             this.cuecardmanager,
+            StageTriggerLocation.StageLeft,
+            triggerArgs
+          );
+          this.add(stageLeftTrigger);
+          break;
+        case OBJECT_TRIGGERS.StageCenterTrigger:
+          const stageCenterTrigger = new CueCardTrigger(
+            this.player,
+            this.cuecardmanager,
+            StageTriggerLocation.StageCenter,
             triggerArgs
           );
           this.add(stageCenterTrigger);
-          stageCenterTrigger.setZIndex(-2);
           break;
         case OBJECT_TRIGGERS.StageRightTrigger:
-          console.log("todo stageRightCenter", trigger);
+          const stageRightTrigger = new CueCardTrigger(
+            this.player,
+            this.cuecardmanager,
+            StageTriggerLocation.StageRight,
+            triggerArgs
+          );
+          this.add(stageRightTrigger);
           break;
       }
     }

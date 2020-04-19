@@ -1,12 +1,8 @@
 import {
-  Vector,
   Trigger,
   Actor,
-  vec,
-  Scene,
   Graphics,
   Engine,
-  GameEvent,
   Color,
   EnterTriggerEvent,
   ExitTriggerEvent,
@@ -15,7 +11,12 @@ import {
 import { Player } from "./player";
 import { CueCardManager } from "./cuecardmanager";
 
-export class StageCenterTrigger extends Actor {
+export enum StageTriggerLocation {
+  StageLeft,
+  StageCenter,
+  StageRight,
+}
+export class CueCardTrigger extends Actor {
   private trigger!: Trigger;
   private rect!: Graphics.Rect;
   private triggered: boolean = false;
@@ -25,6 +26,7 @@ export class StageCenterTrigger extends Actor {
   constructor(
     private player: Player,
     private cueCardManager: CueCardManager,
+    private triggerPosition: StageTriggerLocation,
     options: ActorArgs
   ) {
     super(options);
@@ -54,12 +56,20 @@ export class StageCenterTrigger extends Actor {
     super.update(engine, delta);
     this.timer += delta / 1000;
 
-    if (this.triggered) {
-      this.rect.opacity = 1 - this.timer / this.waitTime;
-    }
-
     if (this.timer >= this.waitTime) {
-      this.cueCardManager.SatisfyStageCenter(this.player);
+      switch (this.triggerPosition) {
+        case StageTriggerLocation.StageCenter:
+          this.cueCardManager.SatisfyStageCenter(this.player);
+          break;
+        case StageTriggerLocation.StageLeft:
+          this.cueCardManager.SatisfyStageLeft(this.player);
+          break;
+        case StageTriggerLocation.StageRight:
+          this.cueCardManager.SatisfyStageRight(this.player);
+          break;
+        default:
+          break;
+      }
       this._reset();
     }
   }
