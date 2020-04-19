@@ -79,20 +79,19 @@ export class CueCardManager {
     }
   }
 
-  private _trySatisfyCueCard(player: Player, cueCard: CueCard): boolean {
-    let satisfied = false;
-    return satisfied;
+  private _trySatisfyCueCard(player: Player, cueCard: CueCard): number {
+    return 0;
   }
 
-  public SatisfyStageLeft(player: Player): boolean {
+  public SatisfyStageLeft(player: Player): number {
     return this._trySatisfyCueCard(player, this.stageLeftCueCard);
   }
 
-  public SatisfyStageCenter(player: Player): boolean {
+  public SatisfyStageCenter(player: Player): number {
     return this._trySatisfyCueCard(player, this.stageCenterCueCard);
   }
 
-  public SatisfyStageRight(player: Player): boolean {
+  public SatisfyStageRight(player: Player): number {
     return this._trySatisfyCueCard(player, this.stageRightCueCard);
   }
 }
