@@ -50,7 +50,6 @@ export class Inventory extends Actor {
     // drop the item if holding one
     if (this._costume) {
       let currentCostume = this._costume;
-      console.log(item);
       let sprite = Items.getIconSprite(this._costume);
       let actor = new Actor(this._costumeX, this._costumeY);
       actor.graphics.show(sprite);
