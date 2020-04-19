@@ -10,7 +10,7 @@ export class Theater extends Scene {
   }
 
   public onInitialize(engine: Engine) {
-    this.map = (Resources.map as TiledResource).getTileMap();
+    this.map = (Resources.map as TiledResource).getTileMap(40, 168);
     this.map.data.forEach((c) => (c.transform.z = -3));
     this.add(this.map);
   }

@@ -156,10 +156,10 @@ export class TiledResource extends Resource<ITiledMap> {
     return null;
   }
 
-  public getTileMap(): TileMap {
+  public getTileMap(x: number, y: number): TileMap {
     var map = new TileMap(
-      0,
-      0,
+      x,
+      y,
       this.data.tilewidth,
       this.data.tileheight,
       this.data.height,
