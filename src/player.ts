@@ -13,18 +13,27 @@ import {
 import Config from "./config";
 import { Resources } from "./resources";
 
+enum PlayerInputState {
+  input_deny,
+  input_accept,
+}
+
 export class Player extends Actor {
+  private inputState: PlayerInputState = PlayerInputState.input_deny;
+
   constructor(x: number, y: number) {
     super(x, y, Config.PlayerWidth, Config.PlayerHeight);
   }
 
   public onInitialize(engine: Engine) {
     this._setupDrawing(engine);
-    this.body.collider.type = CollisionType.Active;
     this.enableTileMapCollision();
     engine.input.keyboard.on("hold", (keyHeld: Input.KeyEvent) => {
       // if (!State.gameOver) {
-      //    if (player.disableMovement) return;
+
+      if (this.inputState !== PlayerInputState.input_accept) {
+        return;
+      }
 
       switch (keyHeld.key) {
         case Input.Keys.Up:
@@ -52,6 +61,9 @@ export class Player extends Actor {
 
     engine.input.keyboard.on("release", (keyUp: Input.KeyEvent) => {
       // if (!State.gameOver) {
+      if (this.inputState !== PlayerInputState.input_accept) {
+        return;
+      }
       switch (keyUp.key) {
         case Input.Keys.Up:
         case Input.Keys.W:
@@ -74,14 +86,36 @@ export class Player extends Actor {
       //}
     });
 
-    this.on("postupdate", (evt: PostUpdateEvent) => {
-      this.vel.setTo(0, 0);
-    });
-
     //  this.on('postdraw', (evt: PostDrawEvent) => {
     //     this._selectSprite.draw(evt.ctx, -this._selectSprite.naturalWidth / 2, this._selectSprite.naturalHeight / 2);
     //  });
   }
+
+  onPostUpdate() {
+    if (this.inputState === PlayerInputState.input_accept) {
+      this.vel.setTo(0, 0);
+    }
+  }
+
+  /**
+   * Begin the enter stage transition. Block input until we're done playing actions.
+   */
+  public beginEnterStage() {
+    this.inputState = PlayerInputState.input_deny;
+    this.graphics.show("walkLeft");
+    this.body.collider.type = CollisionType.PreventCollision;
+    
+    setTimeout(() => {
+      Resources.sndDoorOpen.play()
+    }, 800);
+
+    this.actions.moveBy(-(Config.PlayerWidth * 2), 0, 40).callMethod(() => {
+      this.graphics.show("down");
+      this.inputState = PlayerInputState.input_accept;
+      this.body.collider.type = CollisionType.Active;
+    });
+  }
+
   private _setupDrawing(engine: Engine) {
     let sheet = Graphics.SpriteSheet.fromGrid({
       image: this.getCharSprite(),
@@ -107,7 +141,6 @@ export class Player extends Actor {
     this.graphics.add("up", upSprite);
     this.graphics.add("left", leftSprite);
     this.graphics.add("right", rightSprite);
-    this.graphics.add(downSprite); //default
 
     let walkDownAnim = Graphics.Animation.fromSpriteSheet(
       sheet,

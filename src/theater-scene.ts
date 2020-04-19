@@ -31,9 +31,11 @@ export class Theater extends Scene {
 
   public onInitialize(engine: Engine) {
     this.cuecardmanager = new CueCardManager(this);
-    this.player = new Player(Config.GameWidth / 2, Config.GameHeight / 2);
+    this.player = new Player(
+      Config.GameWidth - Config.PlayerWidth,
+      Config.GameHeight - (Config.PlayerHeight * 1.5)
+    );
     this.add(this.player);
-    this.player.body.collider.type = CollisionType.Active;
 
     // add a blackout area behind stage
     const stageBlackout = new Actor({
@@ -59,6 +61,17 @@ export class Theater extends Scene {
     Resources.map.data.layers.forEach((layer) => {
       this.collectSolidTiles(layer);
       this.collectStageTriggers(layer);
+    });
+  }
+
+  /**
+   * Begin the scene! Action!
+   */
+  onActivate() {
+
+    // WORKAROUND: Actors should be initialized when Scene is initialized?
+    this.player.on("initialize", () => {
+      this.player.beginEnterStage();
     });
   }
 
