@@ -7,7 +7,6 @@ export class AudienceMeter extends Actor {
   private meterHeight: number = Config.AudienceMeterHeight;
   private meterSpeed: number = 3;
   private meterRect!: Graphics.Rect;
-  private targetScore!: number;
 
   constructor() {
     super({
@@ -37,7 +36,8 @@ export class AudienceMeter extends Actor {
 
   update(gameEngine: Engine, delta: number) {
     super.update(gameEngine, delta);
-    const difference = (stats().currentAudienceScore - this.meterRect.width) * (delta/1000) / 3;
+    const difference = (stats().currentAudienceScore - this.meterRect.width);// * (delta/1000) / this.meterSpeed;
+    console.log(difference);
     this.meterRect.width += difference;
   }
 
@@ -48,7 +48,6 @@ export class AudienceMeter extends Actor {
       height: this.meterHeight,
       color: Color.Green,
     });
-    this.targetScore = stats().currentAudienceScore;
     meterLayer.show(this.meterRect);
   }
 }
