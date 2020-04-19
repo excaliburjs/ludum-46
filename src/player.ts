@@ -10,7 +10,7 @@ import {
   Resource,
   Loadable,
 } from "excalibur";
-import Config from './config';
+import Config from "./config";
 import { Resources } from "./resources";
 
 enum PlayerInputState {
