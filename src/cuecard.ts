@@ -105,7 +105,6 @@ export class CueCard extends Actor {
     this.kill();
   }
 
-
   private _calculateRelativePosition(symbolNumber: number): Vector {
     const totalPadding = symbolNumber * this.xPadding;
     const positionalOffset = (symbolNumber - 1) * this.symbolWidth;
@@ -155,8 +154,8 @@ export class CueCard extends Actor {
   }
 
   private _setUpSymbolWidthHeight(sprite: Graphics.Sprite) {
-    sprite.destSize.width = this.symbolWidth;
-    sprite.destSize.height = this.symbolHeight;
+    // sprite.destSize.width = this.symbolWidth;
+    // sprite.destSize.height = this.symbolHeight;
   }
 
   private _setUpPropSymbol(requiredProp: StageProps): void {
