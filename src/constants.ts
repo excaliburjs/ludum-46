@@ -8,6 +8,7 @@ export enum StageProps {
   rubberChicken = "rubberChicken",
   trumpet = "trumpet",
   umbrella = "umbrella",
+  toiletPaper = "toiletPaper",
 }
 
 export enum Costumes {
@@ -20,6 +21,7 @@ export const IconPosition = {
   rubberChicken: 0,
   trumpet: 1,
   umbrella: 2,
+  toiletPaper: 3,
   vikingHat: 10,
   jesterHat: 11,
   topHat: 12,
