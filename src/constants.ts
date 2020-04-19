@@ -1,3 +1,5 @@
+// BEWARE THE ORDER MATTERS HERE
+// THIS IS THE ORDER ON THE SCREEN
 export enum Locations {
   stageLeft = "stageLeft",
   stageCenter = "stageCenter",
