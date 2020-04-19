@@ -7,6 +7,7 @@ import { Resources } from "./resources";
 export class SoundManager {
   static setSoundSpecificVolume() {
     Resources.sndCardExpired.volume = Config.CueCardExpiredVolume;
+    Resources.sndDoorOpen.volume = Config.DoorOpenVolume;
   }
 
   static init() {

@@ -26,5 +26,6 @@ export default {
 
   SoundVolume: 1,
   CueCardExpiredVolume: 0.1,
+  DoorOpenVolume: 0.1,
   BackgroundVolume: 0.6,
 };
