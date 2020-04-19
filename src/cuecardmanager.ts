@@ -1,14 +1,16 @@
 import { CueCard, CueCardEvents, CueCardExpiredEvent } from "./cuecard";
 import { GameEvent, Scene, vec, EventDispatcher } from "excalibur";
 import { Locations, StageProps, Costumes } from "./constants";
+import Config from "./config";
+
 export class CueCardManager {
   private firstCueCard: CueCard;
   private secondCueCard: CueCard;
   private thirdCueCard: CueCard;
-  private cardPadding: number = 80;
-  private cardTopOffset: number = 10;
-  private cueCardHeight: number = 75;
-  private cueCardWidth: number = 300;
+  private cardPadding: number = Config.CueCardPadding;
+  private cardTopOffset: number = Config.CueCardTopOffset;
+  private cueCardHeight: number = Config.CueCardHeight;
+  private cueCardWidth: number = Config.CueCardWidth;
   private scene: Scene;
   private eventDispatcher: EventDispatcher;
 
