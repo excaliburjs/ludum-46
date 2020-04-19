@@ -5,9 +5,9 @@ export class CueCardManager {
   private firstCueCard: CueCard;
   private secondCueCard: CueCard;
   private thirdCueCard: CueCard;
-  private cardPadding: number = 20;
+  private cardPadding: number = 80;
   private cardTopOffset: number = 10;
-  private cueCardHeight: number = 100;
+  private cueCardHeight: number = 75;
   private cueCardWidth: number = 300;
   private scene: Scene;
   private eventDispatcher: EventDispatcher;

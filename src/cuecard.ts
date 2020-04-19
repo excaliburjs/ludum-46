@@ -100,12 +100,14 @@ export class CueCard extends Actor {
     return false;
   }
 
-  public trySatisfyCueCard(player: any): void {
+  public trySatisfyCueCard(player: any): boolean {
     if (this.isSatisfied(player)) {
       const event = new CueCardExpiredEvent(this);
       this.scene.emit(CueCardEvents.CueCardSatisfied, event);
       this.kill();
+      return true;
     }
+    return false;
   }
 
   private _calculateRelativePosition(symbolNumber: number): Vector {
@@ -137,7 +139,7 @@ export class CueCard extends Actor {
     this.timerRect = new Graphics.Rect({
       width: this.cueCardWidth,
       height: this.cueCardHeight,
-      color: Color.Red,
+      color: Color.White,
     });
     timerLayer.offset = this.vel;
     timerLayer.show(this.timerRect);
