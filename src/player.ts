@@ -8,6 +8,7 @@ import {
   Graphics,
   Random,
   Resource,
+  Loadable,
 } from "excalibur";
 import Config from "./config";
 import { Resources } from "./resources";
@@ -86,8 +87,8 @@ export class Player extends Actor {
       grid: {
         rows: 1,
         columns: 10,
-        spriteHeight: 45,
-        spriteWidth: 45,
+        spriteHeight: Config.PlayerSpriteHeight,
+        spriteWidth: Config.PlayerSpriteWidth,
       },
     });
     let sprites = sheet.sprites;
@@ -136,15 +137,12 @@ export class Player extends Actor {
     let gameRandom = new Random(Date.now());
     let charSheets = [];
     for (let r in Resources) {
-      console.log(r);
       if (r.search("charSheet") != -1) {
-        charSheets.push(Resources[r]);
+        charSheets.push((Resources as Record<string, Loadable>)[r]);
       }
     }
-    console.log(charSheets);
     let randCharSheets = gameRandom.shuffle(charSheets);
     let result = randCharSheets[0];
-    console.log(result);
     return <Graphics.RawImage>result;
   }
 }
