@@ -4,7 +4,9 @@ import { Locations, StageProps, Costumes } from "./constants";
 import Config from "./config";
 import { stats } from "./session";
 import { Player } from "./player";
-import { Inventory } from "inventory";
+import { Inventory } from "./inventory";
+import { Resources } from "./resources";
+
 export class CueCardManager {
   private stageLeftCueCard: CueCard;
   private stageCenterCueCard: CueCard;
@@ -67,6 +69,7 @@ export class CueCardManager {
   private CueCardExpiredEvent(cueCardEvent: CueCardExpiredEvent) {
     stats().reduceAudienceMeter(5);
     this.ReplaceCueCard(cueCardEvent.cueCard);
+    Resources.sndCardExpired.play(0.1);
   }
   private CueCardSatisfiedEvent(cueCardEvent: CueCardExpiredEvent) {
     this.ReplaceCueCard(cueCardEvent.cueCard);
@@ -94,7 +97,7 @@ export class CueCardManager {
   }
 
   public SatisfyStageLeft(inventory: Inventory): number {
-    const score =  this._trySatisfyCueCard(inventory, this.stageLeftCueCard);
+    const score = this._trySatisfyCueCard(inventory, this.stageLeftCueCard);
     this.stageLeftCueCard.Satisfied();
     return score;
   }
