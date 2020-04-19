@@ -15,7 +15,7 @@ export class Inventory extends Actor {
     this._engine = engine;
   }
 
-  public update(engine: Engine, delta: number) {}
+  public onPostUpdate(engine: Engine, delta: number) {}
 
   public addWardrobeItem(item: Costumes) {
     // drop the item if holding one
