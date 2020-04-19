@@ -14,7 +14,7 @@ import Config from "./config";
 import { Resources } from "./resources";
 import { CueCardManager } from "./cuecardmanager";
 import { Player } from "./player";
-import { CueCardTrigger, StageTriggerLocation } from "./cuecardtriggertrigger";
+import { CueCardTrigger, StageTriggerLocation } from "./cuecardtrigger";
 
 const LAYER_IMPASSABLE = "walls";
 const LAYER_TRIGGERS = "triggers";
