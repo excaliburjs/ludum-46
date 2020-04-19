@@ -16,14 +16,14 @@ import { Resources } from "./resources";
 import { CueCardManager } from "./cuecardmanager";
 import { Player } from "./player";
 import { CueCardTrigger, StageTriggerLocation } from "./cuecardtrigger";
-import { StageProps, Costumes } from "./constants"
+import { StageProps, Costumes } from "./constants";
 import Items from "./items";
 
 const LAYER_IMPASSABLE = "walls";
 const LAYER_TRIGGERS = "triggers";
-const LAYER_ITEMS = "items"
-const COSTUME_TYPE = "costume"
-const PROP_TYPE = "stageProp"
+const LAYER_ITEMS = "items";
+const COSTUME_TYPE = "costume";
+const PROP_TYPE = "stageProp";
 const OBJECT_TRIGGERS = {
   StageLeftTrigger: "stageLeftTrigger",
   StageCenterTrigger: "stageCenterTrigger",
@@ -151,36 +151,36 @@ export class Theater extends Scene {
   private spawnItems() {
     let costumePoints = this.getPoints(COSTUME_TYPE);
     let propPoints = this.getPoints(PROP_TYPE);
-    let stageProps = Object.keys(StageProps)
-    console.log(stageProps)
-    let costumes = Object.keys(Costumes)
+    let stageProps = Object.keys(StageProps);
+    console.log(stageProps);
+    let costumes = Object.keys(Costumes);
 
-    for (let i=0; i < stageProps.length; i++) {
+    for (let i = 0; i < stageProps.length; i++) {
       let resourceName = stageProps[i];
       let point = propPoints[i];
       let actor = new Actor(point.x, point.y);
-      actor.graphics.show(Items.getIconSprite(resourceName))
+      actor.graphics.show(Items.getIconSprite(resourceName));
       this.add(actor);
     }
 
-    for (let i=0; i < costumes.length; i++) {
+    for (let i = 0; i < costumes.length; i++) {
       let resourceName = costumes[i];
       let point = costumePoints[i];
       let actor = new Actor(point.x, point.y);
-      actor.graphics.show(Items.getIconSprite(resourceName))
+      actor.graphics.show(Items.getIconSprite(resourceName));
       this.add(actor);
     }
   }
 
-  private getPoints(type: string) : Vector[] {
+  private getPoints(type: string): Vector[] {
     let layer = Resources.map.data.layers.find((item) => {
       return item.name == "items";
     });
     let points: Vector[] = [];
-    for (let i=0; i < layer!.objects.length; i++) {
+    for (let i = 0; i < layer!.objects.length; i++) {
       let obj = layer!.objects[i];
       if (obj.type == type) {
-        points.push(new Vector(obj.x + 25, obj.y + 170))
+        points.push(new Vector(obj.x + 25, obj.y + 170));
       }
     }
 
