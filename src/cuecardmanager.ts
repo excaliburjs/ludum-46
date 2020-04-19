@@ -2,8 +2,9 @@ import { CueCard, CueCardEvents, CueCardExpiredEvent } from "./cuecard";
 import { Scene, vec, EventDispatcher } from "excalibur";
 import { Locations, StageProps, Costumes } from "./constants";
 import Config from "./config";
-
+import { stats } from "./session";
 import { Player } from "./player";
+import { Inventory } from "inventory";
 export class CueCardManager {
   private stageLeftCueCard: CueCard;
   private stageCenterCueCard: CueCard;
@@ -79,24 +80,24 @@ export class CueCardManager {
     }
   }
 
-  private _trySatisfyCueCard(player: Player, cueCard: CueCard): number {
-    return 0;
+  private _trySatisfyCueCard(inventory: Inventory, cueCard: CueCard): number {
+    return inventory.getQueueCardScore(cueCard);
   }
 
-  public SatisfyStageLeft(player: Player): number {
-    const score =  this._trySatisfyCueCard(player, this.stageLeftCueCard);
+  public SatisfyStageLeft(inventory: Inventory): number {
+    const score =  this._trySatisfyCueCard(inventory, this.stageLeftCueCard);
     this.stageLeftCueCard.kill();
     return score;
   }
 
-  public SatisfyStageCenter(player: Player): number {
-    const score = this._trySatisfyCueCard(player, this.stageCenterCueCard);
+  public SatisfyStageCenter(inventory: Inventory): number {
+    const score = this._trySatisfyCueCard(inventory, this.stageCenterCueCard);
     this.stageCenterCueCard.kill();
     return score;
   }
 
-  public SatisfyStageRight(player: Player): number {
-    const score = this._trySatisfyCueCard(player, this.stageRightCueCard);
+  public SatisfyStageRight(inventory: Inventory): number {
+    const score = this._trySatisfyCueCard(inventory, this.stageRightCueCard);
     this.stageRightCueCard.kill();
     return score;
   }

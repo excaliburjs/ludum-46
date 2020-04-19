@@ -11,6 +11,7 @@ import {
 } from "excalibur";
 import { Player } from "./player";
 import { CueCardManager } from "./cuecardmanager";
+import { stats } from "./session";
 
 export enum StageTriggerLocation {
   StageLeft,
@@ -65,13 +66,13 @@ export class CueCardTrigger extends Actor {
       Logger.getInstance().info("Stage trigger", this.triggerPosition);
       switch (this.triggerPosition) {
         case StageTriggerLocation.StageCenter:
-          this.cueCardManager.SatisfyStageCenter(this.player);
+          this.cueCardManager.SatisfyStageCenter(stats().inventory);
           break;
         case StageTriggerLocation.StageLeft:
-          this.cueCardManager.SatisfyStageLeft(this.player);
+          this.cueCardManager.SatisfyStageLeft(stats().inventory);
           break;
         case StageTriggerLocation.StageRight:
-          this.cueCardManager.SatisfyStageRight(this.player);
+          this.cueCardManager.SatisfyStageRight(stats().inventory);
           break;
         default:
           break;

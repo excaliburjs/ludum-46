@@ -24,8 +24,9 @@ export class Analytics {
 }
 
 export class Stats {
-  private _inventory?: Inventory;
   protected startTime = Date.now();
+  constructor(private _inventory: Inventory) {}
+
   public get start() {
     return this.startTime;
   }
@@ -33,11 +34,11 @@ export class Stats {
     return Date.now() - this.startTime;
   }
 
-  public set inventory(inventory: Inventory | undefined) {
+  public set inventory(inventory: Inventory) {
     this._inventory = inventory;
   }
 
-  public get inventory(): Inventory | undefined {
+  public get inventory(): Inventory {
     return this._inventory;
   }
 

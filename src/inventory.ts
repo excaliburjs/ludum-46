@@ -24,7 +24,7 @@ export class Inventory extends Actor {
     // drop the item if holding one
   }
 
-  public getQueueCardScore(card: CueCard) {}
+  public getQueueCardScore(card: CueCard): number {return 0;}
 
   private _getPropResource(item: Costumes) {}
 
