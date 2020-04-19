@@ -68,10 +68,7 @@ export class Theater extends Scene {
    * Begin the scene! Action!
    */
   onActivate() {
-    // WORKAROUND: Actors should be initialized when Scene is initialized?
-    this.player.on("initialize", () => {
-      this.player.beginEnterStage();
-    });
+    this.player.beginEnterStage();
   }
 
   private collectSolidTiles(layer: ITiledMapLayer) {
