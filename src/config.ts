@@ -22,5 +22,6 @@ export default {
   AudienceMeterHeight: 50,
 
   SoundVolume: 1,
+  CueCardExpiredVolume: 0.1,
   BackgroundVolume: 0.6,
 };
