@@ -2,6 +2,7 @@ import { Actor, Engine, Graphics, Color } from "excalibur";
 import { Resources } from "./resources";
 import { CueCard } from "./cuecard";
 import { Costumes, StageProps } from "./constants";
+import Items from "./items";
 
 export class Inventory extends Actor {
   private _costume?: Costumes;
@@ -16,19 +17,29 @@ export class Inventory extends Actor {
     this._setUpBackground();
   }
 
-  public addWardrobeItem(item: Costumes) {
+  public onPreUpdate() {
+    if (this._costumeSprite) {
+      this.graphics.add(this._costumeSprite);
+      this.graphics.show(this._costumeSprite);
+    }
+
+    if (this._propSprite) {
+      this.graphics.add(this._propSprite);
+      this.graphics.add(this._propSprite);
+    }
+  }
+
+  public addCostume(item: Costumes) {
     // drop the item if holding one
+    this._costumeSprite = Items.getCostumeSprite(item);
   }
 
   public addProp(item: StageProps) {
     // drop the item if holding one
+    this._propSprite = Items.getPropSprite(item);
   }
 
   public getQueueCardScore(card: CueCard): number {return 15;}
-
-  private _getPropResource(item: Costumes) {}
-
-  private _getWardrobeItemResource(item: StageProps) {}
 
   private _setUpBackground() {
     const background = this.graphics.createLayer({

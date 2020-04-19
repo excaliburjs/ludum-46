@@ -62,7 +62,7 @@ export class Theater extends Scene {
     });
   }
 
-  collectSolidTiles(layer: ITiledMapLayer) {
+  private collectSolidTiles(layer: ITiledMapLayer) {
     if (
       layer.name !== LAYER_IMPASSABLE ||
       typeof layer.data == "string" ||
@@ -77,7 +77,7 @@ export class Theater extends Scene {
     }
   }
 
-  collectStageTriggers(layer: ITiledMapLayer) {
+  private collectStageTriggers(layer: ITiledMapLayer) {
     if (
       layer.name !== LAYER_TRIGGERS ||
       typeof layer.data == "string" ||
@@ -130,4 +130,6 @@ export class Theater extends Scene {
       }
     }
   }
+
+  private spawnItems() {}
 }
