@@ -8,10 +8,10 @@ const game = new Engine({
   canvasElementId: "game",
   height: Config.GameHeight,
   width: Config.GameWidth,
-  backgroundColor: Color.fromHex('#333333')
+  backgroundColor: Color.fromHex("#333333"),
 });
 const loader = new Loader();
-loader.backgroundColor = '#333333';
+loader.backgroundColor = "#333333";
 
 for (let r in Resources) {
   loader.addResource((Resources as any)[r]);

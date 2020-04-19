@@ -1,30 +1,40 @@
 <html>
+  <head>
+    <title>Ludum Dare 46</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Aclonica&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="app.css" />
+  </head>
 
-<head>
-  <title>Ludum Dare 46</title>
-  <link href="https://fonts.googleapis.com/css2?family=Aclonica&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="app.css" />
-</head>
+  <body>
+    <div id="wrapper">
+      <h1>The Show Must Go On</h1>
+      <canvas id="game"></canvas>
+      <ul id="menu">
+        <li><a href="credits.html">Credits</a></li>
+      </ul>
+    </div>
+    <a
+      id="commitRef"
+      href="https://github.com/excaliburjs/ludum-46/commit/{{ commitRef }}"
+      >{{ commitRef }}</a
+    >
+    <script src="./src/index.ts"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-46390208-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-<body>
-  <div id="wrapper">
-    <h1>The Show Must Go On</h1>
-    <canvas id="game"></canvas>
-    <ul id="menu">
-      <li><a href="credits.html">Credits</a></li>
-    </ul>
-  </div>
-  <a id="commitRef" href="https://github.com/excaliburjs/ludum-46/commit/{{ commitRef }}">{{ commitRef }}</a>
-  <script src="./src/index.ts"></script>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46390208-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-46390208-1');
-  </script>
-</body>
-
+      gtag("config", "UA-46390208-1");
+    </script>
+  </body>
 </html>
