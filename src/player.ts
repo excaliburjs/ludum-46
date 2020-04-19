@@ -104,9 +104,9 @@ export class Player extends Actor {
     this.inputState = PlayerInputState.input_deny;
     this.graphics.show("walkLeft");
     this.body.collider.type = CollisionType.PreventCollision;
-    
+
     setTimeout(() => {
-      Resources.sndDoorOpen.play()
+      Resources.sndDoorOpen.play();
     }, 800);
 
     this.actions.moveBy(-(Config.PlayerWidth * 2), 0, 40).callMethod(() => {

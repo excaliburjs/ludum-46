@@ -33,7 +33,7 @@ export class Theater extends Scene {
     this.cuecardmanager = new CueCardManager(this);
     this.player = new Player(
       Config.GameWidth - Config.PlayerWidth,
-      Config.GameHeight - (Config.PlayerHeight * 1.5)
+      Config.GameHeight - Config.PlayerHeight * 1.5
     );
     this.add(this.player);
 
@@ -68,7 +68,6 @@ export class Theater extends Scene {
    * Begin the scene! Action!
    */
   onActivate() {
-
     // WORKAROUND: Actors should be initialized when Scene is initialized?
     this.player.on("initialize", () => {
       this.player.beginEnterStage();
