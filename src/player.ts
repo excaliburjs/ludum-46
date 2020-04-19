@@ -21,6 +21,7 @@ export class Player extends Actor {
   public onInitialize(engine: Engine) {
     this._setupDrawing(engine);
     this.body.collider.type = CollisionType.Active;
+    this.enableTileMapCollision();
     engine.input.keyboard.on("hold", (keyHeld: Input.KeyEvent) => {
       // if (!State.gameOver) {
       //    if (player.disableMovement) return;
