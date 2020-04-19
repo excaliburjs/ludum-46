@@ -29,3 +29,5 @@ export function gameover(game: Engine) {
   // TODO publish stats
   // TODO bring up player score scene or popup
 }
+
+function _spawnItems(theater: Theater) {}
