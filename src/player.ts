@@ -87,8 +87,8 @@ export class Player extends Actor {
       grid: {
         rows: 1,
         columns: 10,
-        spriteHeight: 45,
-        spriteWidth: 45,
+        spriteHeight: Config.PlayerSpriteHeight,
+        spriteWidth: Config.PlayerSpriteWidth,
       },
     });
     let sprites = sheet.sprites;
