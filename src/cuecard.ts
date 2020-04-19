@@ -89,15 +89,22 @@ export class CueCard extends Actor {
     this.timerRect.width = (this.cueCardWidth * this.timer) / this.lifeTime;
 
     if (this.timer <= 0) {
+      const event = new CueCardExpiredEvent(this);
+      this.scene.emit(CueCardEvents.CueCardExpired, event);
       this.kill();
     }
   }
 
   kill() {
-    const event = new CueCardExpiredEvent(this);
-    this.scene.emit(CueCardEvents.CueCardExpired, event);
     super.kill();
   }
+
+  public Satisfied(): void {
+    const event = new CueCardExpiredEvent(this);
+    this.scene.emit(CueCardEvents.CueCardSatisfied, event);
+    this.kill();
+  }
+
 
   private _calculateRelativePosition(symbolNumber: number): Vector {
     const totalPadding = symbolNumber * this.xPadding;

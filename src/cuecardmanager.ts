@@ -37,11 +37,11 @@ export class CueCardManager {
   private SetUpEventHooks(): void {
     this.eventDispatcher.on(
       CueCardEvents.CueCardExpired,
-      this.CueCardExpired.bind(this) as any
+      this.CueCardExpiredEvent.bind(this) as any
     );
     this.eventDispatcher.on(
       CueCardEvents.CueCardSatisfied,
-      this.CueCardExpired.bind(this) as any
+      this.CueCardSatisfiedEvent.bind(this) as any
     );
   }
 
@@ -64,15 +64,22 @@ export class CueCardManager {
     });
   }
 
-  private CueCardExpired(cueCardEvent: CueCardExpiredEvent) {
-    const target = cueCardEvent.cueCard;
-    if (target == this.stageLeftCueCard) {
+  private CueCardExpiredEvent(cueCardEvent: CueCardExpiredEvent) {
+    stats().reduceAudienceMeter(5);
+    this.ReplaceCueCard(cueCardEvent.cueCard);
+  }
+  private CueCardSatisfiedEvent(cueCardEvent: CueCardExpiredEvent) {
+    this.ReplaceCueCard(cueCardEvent.cueCard);
+  }
+
+  private ReplaceCueCard(cueCard: CueCard) {
+    if (cueCard == this.stageLeftCueCard) {
       this.stageLeftCueCard = this._GenerateCueCard(1);
       this.scene.add(this.stageLeftCueCard);
-    } else if (target == this.stageCenterCueCard) {
+    } else if (cueCard == this.stageCenterCueCard) {
       this.stageCenterCueCard = this._GenerateCueCard(2);
       this.scene.add(this.stageCenterCueCard);
-    } else if (target == this.stageRightCueCard) {
+    } else if (cueCard == this.stageRightCueCard) {
       this.stageRightCueCard = this._GenerateCueCard(3);
       this.scene.add(this.stageRightCueCard);
     } else {
@@ -81,24 +88,26 @@ export class CueCardManager {
   }
 
   private _trySatisfyCueCard(inventory: Inventory, cueCard: CueCard): number {
-    return inventory.getQueueCardScore(cueCard);
+    const score = inventory.getQueueCardScore(cueCard);
+    stats().increaseAudienceMeter(score);
+    return score;
   }
 
   public SatisfyStageLeft(inventory: Inventory): number {
     const score =  this._trySatisfyCueCard(inventory, this.stageLeftCueCard);
-    this.stageLeftCueCard.kill();
+    this.stageLeftCueCard.Satisfied();
     return score;
   }
 
   public SatisfyStageCenter(inventory: Inventory): number {
     const score = this._trySatisfyCueCard(inventory, this.stageCenterCueCard);
-    this.stageCenterCueCard.kill();
+    this.stageCenterCueCard.Satisfied();
     return score;
   }
 
   public SatisfyStageRight(inventory: Inventory): number {
     const score = this._trySatisfyCueCard(inventory, this.stageRightCueCard);
-    this.stageRightCueCard.kill();
+    this.stageRightCueCard.Satisfied();
     return score;
   }
 }
