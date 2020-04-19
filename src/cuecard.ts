@@ -204,9 +204,11 @@ export class CueCard extends Actor {
 
     const vikingHatSprite = Graphics.Sprite.from(Resources.vikingHatImage);
     const jesterHatSprite = Graphics.Sprite.from(Resources.jesterHatImage);
+    const topHatSprite = Graphics.Sprite.from(Resources.topHatImage);
 
     this._setUpSymbolWidthHeight(vikingHatSprite);
     this._setUpSymbolWidthHeight(jesterHatSprite);
+    this._setUpSymbolWidthHeight(topHatSprite);
 
     switch (requiredCostume) {
       case Costumes.vikingHat:
@@ -214,6 +216,9 @@ export class CueCard extends Actor {
         break;
       case Costumes.jesterHat:
         costumeSymbolLayer.show(jesterHatSprite);
+        break;
+      case Costumes.topHat:
+        costumeSymbolLayer.show(topHatSprite);
         break;
       default:
         costumeSymbolLayer.show(vikingHatSprite);
