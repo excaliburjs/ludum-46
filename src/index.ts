@@ -1,11 +1,18 @@
-import { Engine, Loader } from "excalibur";
+import { Engine, Loader, Color } from "excalibur";
 import { Resources } from "./resources";
 import { newgame } from "./session";
 import Config from "./config";
 
 Engine._useWebGL = true;
-const game = new Engine({ height: Config.GameHeight, width: Config.GameWidth });
+const game = new Engine({
+  canvasElementId: "game",
+  height: Config.GameHeight,
+  width: Config.GameWidth,
+  backgroundColor: Color.fromHex('#333333')
+});
 const loader = new Loader();
+loader.backgroundColor = '#333333';
+
 for (let r in Resources) {
   loader.addResource((Resources as any)[r]);
 }

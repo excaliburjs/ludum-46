@@ -1,3 +1,31 @@
+body {
+  background: #333;
+  font-family: 'Aclonica', sans-serif;
+}
+
+
+#wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  text-indent: -9999em;
+  background: url('img/show-must-go-on@2X.png') no-repeat center center;
+  height: 76px;
+  width: 834px;
+}
+
+ul#menu {
+  list-style-type: none;
+  font-size: 1.5em;
+}
+
+ul#menu a {
+  color: white;
+}
+
 #commitRef {
   position: absolute;
   bottom: 3;

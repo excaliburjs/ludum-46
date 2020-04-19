@@ -46,7 +46,7 @@ export class Theater extends Scene {
       new Graphics.Rect({
         height: stageBlackout.height,
         width: stageBlackout.width,
-        color: Color.Black,
+        color: Color.fromHex('#333333'),
       })
     );
     this.add(stageBlackout);
