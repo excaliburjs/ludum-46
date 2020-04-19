@@ -65,7 +65,7 @@ export class CueCard extends Actor {
     this.timer = this.lifeTime = options.lifeTime;
 
     this.options = options;
-    this.vel = options.cueCardLoc;
+    this.pos = options.cueCardLoc;
     this.cueCardHeight = options.cueCardHeight;
     this.cueCardWidth = options.cueCardWidth;
     this.xPaddingPercent = 0.15;
@@ -103,8 +103,8 @@ export class CueCard extends Actor {
     const totalPadding = symbolNumber * this.xPadding;
     const positionalOffset = (symbolNumber - 1) * this.symbolWidth;
     return vec(
-      this.vel.x + totalPadding + positionalOffset,
-      this.vel.y + this.yPadding
+      this.pos.x + totalPadding + positionalOffset,
+      this.pos.y + this.yPadding
     );
   }
 
@@ -118,7 +118,7 @@ export class CueCard extends Actor {
       height: this.cueCardHeight,
       color: Color.White,
     });
-    background.offset = this.vel;
+    background.offset = this.pos;
     backgroundRect.opacity = 0.33;
     background.show(backgroundRect);
   }
@@ -130,7 +130,7 @@ export class CueCard extends Actor {
       height: this.cueCardHeight,
       color: Color.White,
     });
-    timerLayer.offset = this.vel;
+    timerLayer.offset = this.pos;
     timerLayer.show(this.timerRect);
   }
 

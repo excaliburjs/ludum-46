@@ -15,10 +15,7 @@ export function newgame(game: Engine) {
   // clear stats
   let inventory = new Inventory(game, Config.GameWidth / 2, Config.GameHeight);
   gameStats = new Stats(inventory);
-
-
   const theater = new Theater(game);
-
   theater.add(inventory);
   game.addScene("main", theater);
   game.goToScene("main");

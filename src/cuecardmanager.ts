@@ -1,5 +1,5 @@
 import { CueCard, CueCardEvents, CueCardExpiredEvent } from "./cuecard";
-import { Scene, vec, EventDispatcher } from "excalibur";
+import { Scene, vec, EventDispatcher, Vector } from "excalibur";
 import { Locations, StageProps, Costumes } from "./constants";
 import Config from "./config";
 import { stats } from "./session";
@@ -28,7 +28,7 @@ export class CueCardManager {
     this.SetUpEventHooks();
   }
 
-  private _calculateCueCardPosition(cardNumber: number) {
+  private _calculateCueCardPosition(cardNumber: number): Vector {
     const padding = this.cardPadding * cardNumber;
     const cardWidth = this.cueCardWidth * (cardNumber - 1);
     return vec(padding + cardWidth, this.cardTopOffset);
