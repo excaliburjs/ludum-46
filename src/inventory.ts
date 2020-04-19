@@ -33,20 +33,15 @@ export class Inventory extends Actor {
     if (this._costume) {
       let sprite = Items.getIconSprite(this._costume);
       let layer = this.graphics.getLayer("costume");
-      let heightOffset = this.height / 2 - sprite.height / 2;
-      let widthOffset = this.width / 3 - sprite.width / 2;
-      layer!.offset = new Vector(widthOffset, heightOffset);
-      //console.log(this._costumeSprite);
+      layer!.offset = new Vector(0, 0);
       layer?.show(sprite);
     }
 
     if (this._prop) {
       let sprite = Items.getIconSprite(this._prop);
       let layer = this.graphics.getLayer("prop");
-      let heightOffset = this.height / 2 - sprite.height / 2;
-      let widthOffset = (this.width * 2) / 3 - sprite.width / 2;
-      layer!.offset = new Vector(widthOffset, heightOffset);
-      //console.log(this._propSprite);
+      let widthOffset = (this.width * 2) / 3 - 15;
+      layer!.offset = new Vector(widthOffset, 0);
       layer?.show(sprite);
     }
   }
