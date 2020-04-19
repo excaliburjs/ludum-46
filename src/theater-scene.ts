@@ -94,7 +94,7 @@ export class Theater extends Scene {
         ),
         width: trigger.width,
         height: trigger.height,
-        z: -2
+        z: -2,
       };
 
       switch (trigger.name) {
