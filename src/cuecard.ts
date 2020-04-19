@@ -57,7 +57,7 @@ export class CueCard extends Actor {
   private yPaddingPercent: number;
   private yPadding: number;
   private symbolHeight: number;
-  private options: CueCardOptions;
+  public options: CueCardOptions;
 
   constructor(options: CueCardOptions) {
     super();
@@ -88,26 +88,10 @@ export class CueCard extends Actor {
     this.timerRect.width = (this.cueCardWidth * this.timer) / this.lifeTime;
 
     if (this.timer <= 0) {
-      //do something with points
       const event = new CueCardExpiredEvent(this);
       this.scene.emit(CueCardEvents.CueCardExpired, event);
       this.kill();
     }
-  }
-
-  public isSatisfied(player: any): boolean {
-    // if player location in spot, return true;
-    return false;
-  }
-
-  public trySatisfyCueCard(player: any): boolean {
-    if (this.isSatisfied(player)) {
-      const event = new CueCardExpiredEvent(this);
-      this.scene.emit(CueCardEvents.CueCardSatisfied, event);
-      this.kill();
-      return true;
-    }
-    return false;
   }
 
   private _calculateRelativePosition(symbolNumber: number): Vector {

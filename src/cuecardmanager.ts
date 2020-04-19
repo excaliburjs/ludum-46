@@ -3,6 +3,7 @@ import { GameEvent, Scene, vec, EventDispatcher } from "excalibur";
 import { Locations, StageProps, Costumes } from "./constants";
 import Config from "./config";
 
+import { Player } from "./player";
 export class CueCardManager {
   private firstCueCard: CueCard;
   private secondCueCard: CueCard;
@@ -16,12 +17,12 @@ export class CueCardManager {
 
   constructor(scene: Scene) {
     this.scene = scene;
-    this.firstCueCard = this._GenerateCueCard(1);
-    this.secondCueCard = this._GenerateCueCard(2);
-    this.thirdCueCard = this._GenerateCueCard(3);
-    this.scene.add(this.firstCueCard);
-    this.scene.add(this.secondCueCard);
-    this.scene.add(this.thirdCueCard);
+    this.stageLeftCueCard = this._GenerateCueCard(1);
+    this.stageCenterCueCard = this._GenerateCueCard(2);
+    this.stageRightCueCard = this._GenerateCueCard(3);
+    this.scene.add(this.stageLeftCueCard);
+    this.scene.add(this.stageCenterCueCard);
+    this.scene.add(this.stageRightCueCard);
     this.eventDispatcher = this.scene.eventDispatcher;
     this.SetUpEventHooks();
   }
@@ -64,17 +65,34 @@ export class CueCardManager {
 
   private CueCardExpired(cueCardEvent: CueCardExpiredEvent) {
     const target = cueCardEvent.cueCard;
-    if (target == this.firstCueCard) {
-      this.firstCueCard = this._GenerateCueCard(1);
-      this.scene.add(this.firstCueCard);
-    } else if (target == this.secondCueCard) {
-      this.secondCueCard = this._GenerateCueCard(2);
-      this.scene.add(this.secondCueCard);
-    } else if (target == this.thirdCueCard) {
-      this.thirdCueCard = this._GenerateCueCard(3);
-      this.scene.add(this.thirdCueCard);
+    if (target == this.stageLeftCueCard) {
+      this.stageLeftCueCard = this._GenerateCueCard(1);
+      this.scene.add(this.stageLeftCueCard);
+    } else if (target == this.stageCenterCueCard) {
+      this.stageCenterCueCard = this._GenerateCueCard(2);
+      this.scene.add(this.stageCenterCueCard);
+    } else if (target == this.stageRightCueCard) {
+      this.stageRightCueCard = this._GenerateCueCard(3);
+      this.scene.add(this.stageRightCueCard);
     } else {
       throw new Error();
     }
+  }
+
+  private _trySatisfyCueCard(player: Player, cueCard: CueCard): boolean {
+    let satisfied = false;
+    return satisfied;
+  }
+
+  public SatisfyStageLeft(player: Player): boolean {
+   return this._trySatisfyCueCard(player,  this.stageLeftCueCard);
+  }
+
+  public SatisfyStageCenter(player: Player): boolean {
+    return this._trySatisfyCueCard(player,  this.stageCenterCueCard);
+  }
+
+  public SatisfyStageRight(player:Player): boolean {
+    return this._trySatisfyCueCard(player,  this.stageRightCueCard);
   }
 }
