@@ -44,11 +44,11 @@ export class CueCardManager {
     );
   }
 
-  private randomEnum<T>(anEnum: T): T[keyof T] {
+  private randomEnum<T extends Record<string, string>>(anEnum: T): T[keyof T] {
     const enumValues = Object.keys(anEnum);
     const randomIndex = Math.floor(Math.random() * enumValues.length);
     const randomEnumValue = enumValues[randomIndex];
-    return randomEnumValue;
+    return randomEnumValue as T[keyof T];
   }
 
   private _GenerateCueCard(num: number): CueCard {
@@ -85,14 +85,14 @@ export class CueCardManager {
   }
 
   public SatisfyStageLeft(player: Player): boolean {
-   return this._trySatisfyCueCard(player,  this.stageLeftCueCard);
+    return this._trySatisfyCueCard(player, this.stageLeftCueCard);
   }
 
   public SatisfyStageCenter(player: Player): boolean {
-    return this._trySatisfyCueCard(player,  this.stageCenterCueCard);
+    return this._trySatisfyCueCard(player, this.stageCenterCueCard);
   }
 
-  public SatisfyStageRight(player:Player): boolean {
-    return this._trySatisfyCueCard(player,  this.stageRightCueCard);
+  public SatisfyStageRight(player: Player): boolean {
+    return this._trySatisfyCueCard(player, this.stageRightCueCard);
   }
 }

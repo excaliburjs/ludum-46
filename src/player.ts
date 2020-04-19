@@ -8,6 +8,7 @@ import {
   Graphics,
   Random,
   Resource,
+  Loadable,
 } from "excalibur";
 import Config from "./config";
 import { Resources } from "./resources";
@@ -137,7 +138,7 @@ export class Player extends Actor {
     let charSheets = [];
     for (let r in Resources) {
       if (r.search("charSheet") != -1) {
-        charSheets.push(Resources[r]);
+        charSheets.push((Resources as Record<string, Loadable>)[r]);
       }
     }
     let randCharSheets = gameRandom.shuffle(charSheets);
