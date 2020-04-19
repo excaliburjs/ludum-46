@@ -1,4 +1,4 @@
-import { Scene, Engine, TileMap } from "excalibur";
+import { Scene, Engine, TileMap, Actor, vec, Color, Graphics } from "excalibur";
 import { Resources } from "./resources";
 import { ITiledMapLayer } from "excalibur-tiled";
 
@@ -7,11 +7,24 @@ const LAYER_IMPASSABLE = "walls";
 export class Theater extends Scene {
   public stageTileMap!: TileMap;
 
-  constructor(engine: Engine) {
-    super(engine);
-  }
-
   public onInitialize(engine: Engine) {
+    // add a blackout area behind stage
+    const stageBlackout = new Actor({
+      anchor: vec(0, 0),
+      pos: vec(0, 168),
+      width: engine.canvasWidth,
+      height: engine.canvasHeight - 168
+    });
+    stageBlackout.graphics.add(
+      new Graphics.Rect({
+        height: stageBlackout.height,
+        width: stageBlackout.width,
+        color: Color.Black,
+      })
+    );
+    this.add(stageBlackout);
+    stageBlackout.setZIndex(-4);
+
     this.stageTileMap = Resources.map.getTileMap(40, 168);
     this.stageTileMap.data.forEach((c) => (c.transform.z = -3));
     this.add(this.stageTileMap);
