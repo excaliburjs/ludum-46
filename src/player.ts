@@ -109,7 +109,7 @@ export class Player extends Actor {
       Resources.sndDoorOpen.play();
     }, 800);
 
-    this.actions.moveBy(-(Config.PlayerWidth * 2), 0, 40).callMethod(() => {
+    this.actions.moveBy(-(Config.PlayerWidth * 3), 0, 60).callMethod(() => {
       this.graphics.show("down");
       this.inputState = PlayerInputState.input_accept;
       this.body.collider.type = CollisionType.Active;

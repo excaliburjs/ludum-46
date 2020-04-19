@@ -32,7 +32,7 @@ export class Theater extends Scene {
   public onInitialize(engine: Engine) {
     this.cuecardmanager = new CueCardManager(this);
     this.player = new Player(
-      Config.GameWidth - Config.PlayerWidth,
+      Config.GameWidth,
       Config.GameHeight - Config.PlayerHeight * 1.5
     );
     this.add(this.player);
