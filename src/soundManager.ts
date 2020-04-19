@@ -5,7 +5,12 @@ import { Preferences, savePreferences } from "./preferences";
 import { Resources } from "./resources";
 
 export class SoundManager {
+  static setSoundSpecificVolume() {
+    Resources.sndCardExpired.volume = Config.CueCardExpiredVolume;
+  }
+
   static init() {
+    SoundManager.setSoundSpecificVolume();
     if (Preferences.muteBackgroundMusic) {
       SoundManager.muteBackgroundMusic();
     }
@@ -58,6 +63,7 @@ export class SoundManager {
         snd.volume = Config.SoundVolume;
       }
     }
+    SoundManager.setSoundSpecificVolume();
     SoundManager.unmuteBackgroundMusic();
     SoundManager._updateMuteAllButton();
   }

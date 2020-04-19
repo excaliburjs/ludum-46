@@ -69,7 +69,7 @@ export class CueCardManager {
   private CueCardExpiredEvent(cueCardEvent: CueCardExpiredEvent) {
     stats().reduceAudienceMeter(5);
     this.ReplaceCueCard(cueCardEvent.cueCard);
-    Resources.sndCardExpired.play(0.1);
+    Resources.sndCardExpired.play();
   }
   private CueCardSatisfiedEvent(cueCardEvent: CueCardExpiredEvent) {
     this.ReplaceCueCard(cueCardEvent.cueCard);
