@@ -5,6 +5,7 @@ import { CueCard } from "./cuecard";
 import { Player } from "./player";
 import Config from "./config";
 import { CueCardManager } from "./cuecardmanager";
+import { Inventory } from "./inventory";
 
 let gameStats: Stats;
 
@@ -16,6 +17,11 @@ export function stats() {
 export function newgame(game: Engine) {
   // clear stats
   gameStats = new Stats();
+  gameStats.inventory = new Inventory(
+    game,
+    Config.GameWidth / 2,
+    Config.GameHeight
+  );
 
   const theater = new Theater(game);
   const cueCardManager = new CueCardManager(theater);

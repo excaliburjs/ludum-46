@@ -11,7 +11,7 @@ export class Inventory extends Actor {
   private _propSprite: any;
 
   constructor(engine: Engine, x: number, y: number) {
-    super(x, y);
+    super(x, y, 45, 100);
     this._engine = engine;
   }
 
