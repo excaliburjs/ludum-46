@@ -78,7 +78,7 @@ export class Theater extends Scene {
     });
     backgroundActor.graphics.add(Graphics.Sprite.from(Resources.background));
     this.add(backgroundActor);
-    backgroundActor.z = -10;
+    backgroundActor.z = -4;
   }
 
   /**
