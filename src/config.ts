@@ -22,5 +22,5 @@ export default {
   AudienceMeterHeight: 50,
 
   SoundVolume: 1,
-  BackgroundVolume: 0.6
+  BackgroundVolume: 0.6,
 };

@@ -29,5 +29,5 @@ export const Resources = {
   charSheet10: new Graphics.RawImage(player5long),
   map: new TiledResource("./map/map.json"),
 
-  music: /* todo */ new Sound('')
+  music: /* todo */ new Sound(""),
 };
