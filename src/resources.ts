@@ -30,4 +30,5 @@ export const Resources = {
   map: new TiledResource("./map/map.json"),
 
   music: /* todo */ new Sound(""),
+  sndDoorOpen: new Sound('./wav/doorOpen.wav')
 };
