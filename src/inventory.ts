@@ -12,9 +12,9 @@ export class Inventory extends Actor {
   private _propSprite: any;
 
   constructor(engine: Engine, x: number, y: number) {
-    super(x, y, 200, 60);
+    super(x, y, 200, 80);
     this._engine = engine;
-    this._setUpBackground();
+    this._setUpLayers();
     this._costumeSprite = Items.getIconSprite(Costumes.topHat);
     this._propSprite = Items.getIconSprite(StageProps.rubberChicken);
   }
@@ -22,16 +22,16 @@ export class Inventory extends Actor {
   public onPreUpdate() {
     if (this._costumeSprite) {
       let layer = this.graphics.getLayer("costume");
-      let heightOffset = this.height / 2 - this._costumeSprite.height / 2;
-      let widthOffset = this.width / 3 - this._costumeSprite.width / 2;
+      let heightOffset = (this.height / 2) - (this._costumeSprite.height / 2);
+      let widthOffset = (this.width / 3) - (this._costumeSprite.width / 2);
       layer!.offset = new Vector(widthOffset, heightOffset);
       layer?.show(this._costumeSprite);
     }
 
     if (this._propSprite) {
       let layer = this.graphics.getLayer("prop");
-      let heightOffset = this.height / 2 - this._propSprite.height / 2;
-      let widthOffset = (this.width * 2) / 3 - this._propSprite.width / 2;
+      let heightOffset = (this.height / 2) - (this._propSprite.height / 2);
+      let widthOffset = (this.width * 2) / 3 - (this._propSprite.width / 2);
       layer!.offset = new Vector(widthOffset, heightOffset);
       layer?.show(this._propSprite);
     }
@@ -51,7 +51,7 @@ export class Inventory extends Actor {
     return 15;
   }
 
-  private _setUpBackground() {
+  private _setUpLayers() {
     const background = this.graphics.createLayer({
       name: "background",
       order: -1,
