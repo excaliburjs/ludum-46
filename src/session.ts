@@ -18,11 +18,8 @@ export function stats() {
 export function newgame(game: Engine) {
   // clear stats
   gameStats = new Stats();
-  gameStats.inventory = new Inventory(
-    game,
-    Config.GameWidth / 2,
-    Config.GameHeight
-  );
+  let inventory = new Inventory(game, Config.GameWidth / 2, Config.GameHeight);
+  gameStats.inventory = inventory;
 
   const theater = new Theater(game);
   const cuecardmanager = new CueCardManager(theater);
@@ -32,6 +29,7 @@ export function newgame(game: Engine) {
   const stageCenterTrigger = new StageCenterTrigger(player, cuecardmanager);
   theater.add(stageCenterTrigger);
 
+  theater.add(inventory);
   game.addScene("main", theater);
   game.goToScene("main");
   // begin main scene

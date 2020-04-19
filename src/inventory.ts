@@ -1,4 +1,4 @@
-import { Actor, Engine } from "excalibur";
+import { Actor, Engine, Graphics, Color } from "excalibur";
 import { Resources } from "./resources";
 import { CueCard } from "./cuecard";
 import { Costumes, StageProps } from "./constants";
@@ -11,8 +11,9 @@ export class Inventory extends Actor {
   private _propSprite: any;
 
   constructor(engine: Engine, x: number, y: number) {
-    super(x, y, 45, 100);
+    super(x, y, 200, 125);
     this._engine = engine;
+    this._setUpBackground();
   }
 
   public onPostUpdate(engine: Engine, delta: number) {}
@@ -30,4 +31,19 @@ export class Inventory extends Actor {
   private _getPropResource(item: Costumes) {}
 
   private _getWardrobeItemResource(item: StageProps) {}
+
+  private _setUpBackground() {
+    const background = this.graphics.createLayer({
+      name: "background",
+      order: -1,
+    });
+    const backgroundRect = new Graphics.Rect({
+      width: this.width,
+      height: this.height,
+      color: Color.ExcaliburBlue,
+    });
+    background.offset = this.vel;
+    backgroundRect.opacity = 0.33;
+    background.show(backgroundRect);
+  }
 }
