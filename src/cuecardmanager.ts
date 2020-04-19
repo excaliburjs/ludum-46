@@ -84,14 +84,20 @@ export class CueCardManager {
   }
 
   public SatisfyStageLeft(player: Player): number {
-    return this._trySatisfyCueCard(player, this.stageLeftCueCard);
+    const score =  this._trySatisfyCueCard(player, this.stageLeftCueCard);
+    this.stageLeftCueCard.kill();
+    return score;
   }
 
   public SatisfyStageCenter(player: Player): number {
-    return this._trySatisfyCueCard(player, this.stageCenterCueCard);
+    const score = this._trySatisfyCueCard(player, this.stageCenterCueCard);
+    this.stageCenterCueCard.kill();
+    return score;
   }
 
   public SatisfyStageRight(player: Player): number {
-    return this._trySatisfyCueCard(player, this.stageRightCueCard);
+    const score = this._trySatisfyCueCard(player, this.stageRightCueCard);
+    this.stageRightCueCard.kill();
+    return score;
   }
 }
