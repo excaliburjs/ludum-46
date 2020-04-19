@@ -136,15 +136,12 @@ export class Player extends Actor {
     let gameRandom = new Random(Date.now());
     let charSheets = [];
     for (let r in Resources) {
-      console.log(r);
       if (r.search("charSheet") != -1) {
         charSheets.push(Resources[r]);
       }
     }
-    console.log(charSheets);
     let randCharSheets = gameRandom.shuffle(charSheets);
     let result = randCharSheets[0];
-    console.log(result);
     return <Graphics.RawImage>result;
   }
 }
