@@ -20,4 +20,7 @@ export default {
   AudienceMeterMaxWidth: 600,
   AudienceMeterStartingWidth: 400,
   AudienceMeterHeight: 50,
+
+  SoundVolume: 1,
+  BackgroundVolume: 0.6
 };

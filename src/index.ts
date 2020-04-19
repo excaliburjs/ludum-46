@@ -2,6 +2,7 @@ import { Engine, Loader, Color } from "excalibur";
 import { Resources } from "./resources";
 import { newgame } from "./session";
 import Config from "./config";
+import { SoundManager } from "./soundManager";
 
 Engine._useWebGL = true;
 const game = new Engine({
@@ -16,6 +17,8 @@ loader.backgroundColor = "#333333";
 for (let r in Resources) {
   loader.addResource((Resources as any)[r]);
 }
+
+SoundManager.init();
 
 game.start(loader).then(() => {
   newgame(game);
