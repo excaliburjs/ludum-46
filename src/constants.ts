@@ -7,6 +7,7 @@ export enum Locations {
 export enum StageProps {
   rubberChicken = "rubberChicken",
   umbrella = "umbrella",
+  trumpet = "trumpet",
 }
 
 export enum Costumes {

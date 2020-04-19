@@ -4,6 +4,7 @@ import stageRight from "../img/locations/stage-right.png";
 import stageCenter from "../img/locations/stage-center.png";
 import rubberChicken from "../img/props/rubber-chicken.png";
 import umbrella from "../img/props/umbrella.png";
+import trumpet from "../img/props/trumpet.png";
 import vikingHat from "../img/costumes/viking-hat.png";
 import jesterHat from "../img/costumes/jester-hat.png";
 import player1 from "../img/char-sprites/player-1.png";
@@ -27,6 +28,7 @@ export const Resources = {
   stageCenterImage: new Graphics.RawImage(stageCenter),
   rubberChickenImage: new Graphics.RawImage(rubberChicken),
   umbrellaImage: new Graphics.RawImage(umbrella),
+  trumpetImage: new Graphics.RawImage(trumpet),
   vikingHatImage: new Graphics.RawImage(vikingHat),
   jesterHatImage: new Graphics.RawImage(jesterHat),
   charSheet1: new Graphics.RawImage(player1),

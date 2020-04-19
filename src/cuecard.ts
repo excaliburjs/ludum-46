@@ -167,11 +167,15 @@ export class CueCard extends Actor {
       order: 3,
     });
 
-    const rubberChickenSprite = Graphics.Sprite.from(Resources.rubberChickenImage);
+    const rubberChickenSprite = Graphics.Sprite.from(
+      Resources.rubberChickenImage
+    );
     const umbrellaSprite = Graphics.Sprite.from(Resources.umbrellaImage);
+    const trumpetSprite = Graphics.Sprite.from(Resources.trumpetImage);
 
     this._setUpSymbolWidthHeight(rubberChickenSprite);
     this._setUpSymbolWidthHeight(umbrellaSprite);
+    this._setUpSymbolWidthHeight(trumpetSprite);
 
     propSymbolLayer.offset = this._calculateRelativePosition(2);
 
@@ -181,6 +185,9 @@ export class CueCard extends Actor {
         break;
       case StageProps.umbrella:
         propSymbolLayer.show(umbrellaSprite);
+        break;
+      case StageProps.trumpet:
+        propSymbolLayer.show(trumpetSprite);
         break;
       default:
         propSymbolLayer.show(rubberChickenSprite);
