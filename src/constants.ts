@@ -12,6 +12,7 @@ export enum StageProps {
   umbrella = "umbrella",
   toiletPaper = "toiletPaper",
   tomato = "tomato",
+  sword = "sword",
 }
 
 export enum Costumes {
@@ -29,6 +30,7 @@ export const IconPosition: { [key: string]: number } = {
   umbrella: 2,
   toiletPaper: 3,
   tomato: 4,
+  sword: 5,
   vikingHat: 10,
   jesterHat: 11,
   topHat: 12,
