@@ -47,5 +47,5 @@ export default {
   NumCueCardsToWin: 7,
 
   GreatScoreCutoff: 450,
-  RoaringScoreCutoff: 750,
+  RoaringScoreCutoff: 700,
 };
