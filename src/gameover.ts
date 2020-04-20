@@ -13,7 +13,7 @@ import { DialogCard } from "./dialogCard";
 import Config from "./config";
 import config from "./config";
 import { Button } from "./button";
-import {newgame} from "./session";
+import {newgame, stats} from "./session";
 import { SoundManager } from "./soundManager";
 
 export class GameOver extends Actor {
@@ -22,23 +22,38 @@ export class GameOver extends Actor {
   private backShadow!: Graphics.Rect;
   private backshadowLayer!: Graphics.GraphicsLayer;
   private button!: Button;
-
+  private engine!: Engine;
   constructor() {
     super(Config.GameWidth / 2, Config.GameHeight * 2, 600, 600);
   }
 
   onInitialize(engine: Engine) {
+    this.engine = engine;
+  }
 
-
+  public updateEndScreen() {
     const cardPos = vec(
       this.pos.x,
       this.pos.y
     );
-    this.card = new DialogCard("The show has not gone on!", {
+    let text = "The show has not gone on!";
+    if (stats().numLinesDelivered >= Config.NumCueCardsToWin) {
+      let descriptor = "";
+      const score = stats().currentAudienceScore;
+      if (score >= 200) {
+        descriptor = "great ";
+      }
+      if (score >= 350) {
+        descriptor = "roaring ";
+      }
+      text = `The show was a ${descriptor}success!`;
+    }
+    this.card = new DialogCard(text, {
       pos: cardPos,
     });
     this.scene.add(this.card);
     this.card.z = 100;
+
     this.backshadowLayer = this.graphics.createLayer({name: "backshadow", order: 1});
     this.backShadow = new Graphics.Rect({
       width: Config.GameWidth + 500,
@@ -47,25 +62,24 @@ export class GameOver extends Actor {
     });
     this.z = 100;
 
-    this.pos = vec(100,100);
     this.button = new Button("Play Again?",{
       pos: cardPos,
       width: 200,
       height: 100
     });
-    this.scene.add(this.button);
-    this.button.z = 100;
-
     this.button.on("pointerup", () => {
       if (this.button.isKilled()) return;
       console.log(`reset button alive?: ${this.button.isKilled()}`);
       for (let actor of this.scene.actors) {
         actor.kill();
       }
-      engine.removeScene(this.scene);
+      this.engine.removeScene(this.scene);
       this.button.pos.add(vec(10000,10000));
-      newgame(engine);
+      newgame(this.engine);
     });
+    this.scene.add(this.button);
+    this.button.z = 100;
+
   }
 
   show() {

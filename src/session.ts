@@ -28,9 +28,13 @@ export function newgame(game: Engine) {
   theater.add(gameOver);
   game.addScene("main", theater);
   game.goToScene("main");
+  let triggered = false;
   game.on("postupdate", function checkGameOver(event: PostUpdateEvent) {
+    if (triggered) return;
     if (gameStats.isGameOver) {
+      gameOver.updateEndScreen();
       gameOver.show();
+      triggered = true;
     }
   });
   // begin main scene
