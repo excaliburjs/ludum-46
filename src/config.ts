@@ -32,7 +32,7 @@ export default {
   BackgroundVolume: 0.6,
 
   //Scoring
-  ScoreDecayRate: 1, // per second
+  ScoreDecayRate: 2, // per second
   ScoreBaseIncrease: 10, // amt achieved for just sitting in spot
   ScoreIncreasePerProp: 10, //amt gained for having a correct prop
   ScoreMultiplier: 1, // multiplier for having every correct prop.  1 means nothing
