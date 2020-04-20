@@ -110,6 +110,8 @@ export class CueCardTrigger extends Actor {
 
   private onTriggerExit(event: ExitTriggerEvent): void {
     this._reset();
-    this._cueCard?.play();
+    if (!this._cueCard?.failed) {
+      this._cueCard?.play();
+    }
   }
 }
