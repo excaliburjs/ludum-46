@@ -29,7 +29,7 @@ export default {
   CueCardSuccessVolume: 0.1,
   DoorOpenVolume: 0.1,
   PickupItemVolume: 0.1,
-  BackgroundVolume: 0.6,
+  BackgroundVolume: 0.1,
 
   //Scoring
   ScoreDecayRate: 1, // per second

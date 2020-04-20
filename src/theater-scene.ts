@@ -19,6 +19,7 @@ import { CueCardTrigger, StageTriggerLocation } from "./cuecardtrigger";
 import { StageProps, Costumes } from "./constants";
 import Items, { Item } from "./items";
 import { stats } from "./session";
+import { SoundManager } from "./soundManager";
 
 const LAYER_IMPASSABLE = "walls";
 const LAYER_TRIGGERS = "triggers";
@@ -86,6 +87,7 @@ export class Theater extends Scene {
    * Begin the scene! Action!
    */
   onActivate() {
+    SoundManager.startBackgroundMusic();
     this.player.beginEnterStage();
   }
 
