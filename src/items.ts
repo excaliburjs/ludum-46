@@ -44,8 +44,6 @@ export class Item extends Actor {
     this.graphics.show(this.sprite);
     this.on("precollision", (event) => {
       if (event.other instanceof Player) {
-        this.kill();
-
         if (this.kind === "prop") {
           stats().inventory.addProp(<StageProps>this.resourceName, this.pos);
         } else if (this.kind === "costume") {
@@ -53,6 +51,7 @@ export class Item extends Actor {
         }
 
         Resources.sndPickupItem.play();
+        this.kill();
       }
     });
 
