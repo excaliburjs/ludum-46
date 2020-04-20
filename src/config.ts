@@ -45,4 +45,7 @@ export default {
   ScoreLossPerMissedCard: 15,
   ScorePunishment: 30, //Punishment for triggering spotlight with neigher correct prop
   NumCueCardsToWin: 7,
+
+  GreatScoreCutoff: 300,
+  RoaringScoreCutoff: 450,
 };

@@ -46,10 +46,10 @@ export class GameOver extends Actor {
     if (stats().numLinesDelivered >= Config.NumCueCardsToWin) {
       let descriptor = "";
       const score = stats().currentAudienceScore;
-      if (score >= 200) {
+      if (score >= Config.GreatScoreCutoff) {
         descriptor = "great ";
       }
-      if (score >= 350) {
+      if (score >= Config.RoaringScoreCutoff) {
         descriptor = "roaring ";
       }
       text = `The show was a ${descriptor}success!`;
