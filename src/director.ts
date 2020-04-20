@@ -27,6 +27,9 @@ export class DirectorNPC extends Actor {
     const card2 = new DialogCard(["Get dressed and get out there!"], {
       pos: cardPos,
     });
+    const card3 = new DialogCard(["Use the arrow keys or WASD keys to move!"], {
+      pos: cardPos,
+    });
 
     this.scene.add(card1);
 
@@ -39,6 +42,11 @@ export class DirectorNPC extends Actor {
       .delay(4000)
       .callMethod(() => {
         card2.kill();
+        this.scene.add(card3);
+      })
+      .delay(4000)
+      .callMethod(() => {
+        card3.kill();
         this._player.AllowUserControl();
       })
       .asPromise();
