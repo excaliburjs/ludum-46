@@ -50,14 +50,14 @@ export class Inventory extends Actor {
     // drop the item if holding one
     if (this._costume) {
       let currentCostume = this._costume;
-      let sprite = Items.getIconSprite(this._costume);
+      let sprite = Items.getIconSprite(currentCostume);
       let actor = new Item(
         "costume",
         currentCostume,
+        sprite,
         this._costumeX!,
         this._costumeY!
       );
-      actor.graphics.show(sprite);
       this.scene.add(actor);
     }
     this._costume = item;
@@ -70,8 +70,13 @@ export class Inventory extends Actor {
     if (this._prop) {
       let currentProp = this._prop;
       let sprite = Items.getIconSprite(this._prop);
-      let actor = new Item("prop", currentProp, this._propX!, this._propY!);
-      actor.graphics.show(sprite);
+      let actor = new Item(
+        "prop",
+        currentProp,
+        sprite,
+        this._propX!,
+        this._propY!
+      );
       this.scene.add(actor);
     }
 

@@ -26,6 +26,7 @@ export class Item extends Actor {
   constructor(
     private kind: "prop" | "costume",
     private resourceName: Costumes | StageProps,
+    private sprite: Graphics.Sprite,
     x: number,
     y: number
   ) {
@@ -34,7 +35,7 @@ export class Item extends Actor {
 
   onInitialize() {
     this.body.collider.type = CollisionType.Passive;
-
+    this.graphics.show(this.sprite);
     this.on("precollision", (event) => {
       if (event.other instanceof Player) {
         this.kill();

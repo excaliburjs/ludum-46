@@ -169,8 +169,13 @@ export class Theater extends Scene {
       let resourceName = stageProps[i];
       let point = propPoints[i];
       let sprite = Items.getIconSprite(resourceName);
-      let actor = new Item("prop", <StageProps>resourceName, point.x, point.y);
-      actor.graphics.show(sprite);
+      let actor = new Item(
+        "prop",
+        <StageProps>resourceName,
+        sprite,
+        point.x,
+        point.y
+      );
       this.add(actor);
     }
 
@@ -178,8 +183,13 @@ export class Theater extends Scene {
       let resourceName = costumes[i];
       let point = costumePoints[i];
       let sprite = Items.getIconSprite(resourceName);
-      let actor = new Item("costume", <Costumes>resourceName, point.x, point.y);
-      actor.graphics.show(sprite);
+      let actor = new Item(
+        "costume",
+        <Costumes>resourceName,
+        sprite,
+        point.x,
+        point.y
+      );
       this.add(actor);
     }
   }
