@@ -29,7 +29,7 @@ export function newgame(game: Engine) {
   game.addScene("main", theater);
   game.goToScene("main");
   game.on("postupdate", function checkGameOver(event: PostUpdateEvent) {
-    if (gameStats.currentAudienceScore <= 0) {
+    if (gameStats.isGameOver) {
       gameOver.show();
     }
   });

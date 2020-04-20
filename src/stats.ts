@@ -58,6 +58,7 @@ export class Stats {
     }
   }
 
+  public isGameOver = false;
   public numLinesDelivered = 0;
   public numPropsUsed = 0;
   public numCostumeChanges = 0;
