@@ -64,7 +64,6 @@ export class AudienceMeter extends Actor {
 
     if (stats().currentAudienceScore == 0) {
       stats().isGameOver = true;
-      console.log("game over (loss)");
     }
   }
 

@@ -104,7 +104,6 @@ export class CueCardManager {
     }
     stats().numLinesDelivered++;
     if (stats().numLinesDelivered >= Config.NumCueCardsToWin) {
-      console.log("game over (victory)");
       stats().isGameOver = true;
     }
   }

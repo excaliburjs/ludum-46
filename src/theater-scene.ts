@@ -183,7 +183,7 @@ export class Theater extends Scene {
     let costumePoints = this.getPoints(COSTUME_TYPE);
     let propPoints = this.getPoints(PROP_TYPE);
     let stageProps = Object.keys(StageProps);
-    console.log(stageProps);
+    // console.log(stageProps);
     let costumes = Object.keys(Costumes);
 
     for (let i = 0; i < stageProps.length; i++) {
