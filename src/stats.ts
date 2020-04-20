@@ -58,6 +58,19 @@ export class Stats {
     }
   }
 
+  public publishStats() {
+    const commit = document.getElementById("commitRef")?.innerText;
+    return Analytics.publish({
+      commit: commit as string,
+      date: new Date().toISOString(),
+      started: this.start,
+      duration: this.duration,
+      numPropsused: this.numPropsUsed,
+      numCostumeChanges: this.numCostumeChanges,
+      numLinesDelivered: this.numLinesDelivered,
+    });
+  }
+
   public isGameOver = false;
   public numLinesDelivered = 0;
   public numPropsUsed = 0;

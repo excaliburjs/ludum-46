@@ -34,6 +34,9 @@ export function newgame(game: Engine) {
     if (gameStats.isGameOver) {
       gameOver.updateEndScreen();
       gameOver.show();
+      gameStats.publishStats().then(() => {
+        console.log("Stats collected ❤");
+      });
       triggered = true;
     }
   });
