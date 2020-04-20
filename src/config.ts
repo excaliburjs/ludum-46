@@ -35,8 +35,8 @@ export default {
   BackgroundVolume: 0.1,
 
   //Scoring
-  ScoreDecayRate: 2, // per second
-  ScoreBaseIncrease: 10, // amt achieved for just sitting in spot
+  ScoreDecayRate: 3, // per second
+  ScoreBaseIncrease: 5, // amt achieved for just sitting in spot
   ScoreIncreasePerProp: 10, //amt gained for having a correct prop
   ScoreMultiplier: 1, // multiplier for having every correct prop.  1 means nothing
   ScoreLossPerMissedCard: 15,
