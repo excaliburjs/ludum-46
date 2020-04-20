@@ -2,7 +2,7 @@ import { Vector, vec } from "excalibur";
 
 export default {
   AnalyticsEndpoint: "https://ludum46stats.azurewebsites.net/api/LD46Stats",
-  RandomSeed: 12345, // classic
+  RandomSeed: Date.now(), // classic
 
   PlayerWidth: 35,
   PlayerHeight: 35,
@@ -46,6 +46,6 @@ export default {
   ScorePunishment: 30, //Punishment for triggering spotlight with neigher correct prop
   NumCueCardsToWin: 7,
 
-  GreatScoreCutoff: 300,
-  RoaringScoreCutoff: 450,
+  GreatScoreCutoff: 450,
+  RoaringScoreCutoff: 750,
 };
