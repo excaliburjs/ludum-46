@@ -42,7 +42,7 @@ export class GameOver extends Actor {
     this.backshadowLayer = this.graphics.createLayer({name: "backshadow", order: 1});
     this.backShadow = new Graphics.Rect({
       width: Config.GameWidth + 500,
-      height: config.GameHeight + 500,
+      height: Config.GameHeight + 500,
       color: Color.fromRGB(51, 51, 51, 0.5)
     });
     this.z = 100;
