@@ -19,6 +19,7 @@ export default {
   CueCardWidth: 300,
   CueCardLifeMinSeconds: 15,
   CueCardLifeMaxSeconds: 35,
+  CueCardScoreDelaySeconds: 3, // Time necessary to wait in location before card is scored
   CueCardSuccessReplacementDelay: 0, // Delay to repalce cue card on success
   CueCardFailReplacementDelay: 0,
 

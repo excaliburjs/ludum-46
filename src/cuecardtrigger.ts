@@ -13,6 +13,7 @@ import {
 import { Player } from "./player";
 import { CueCardManager } from "./cuecardmanager";
 import { stats } from "./session";
+import Config from "./config";
 
 export enum StageTriggerLocation {
   StageLeft,
@@ -23,7 +24,7 @@ export class CueCardTrigger extends Actor {
   private trigger!: Trigger;
   private rect!: Graphics.Rect;
   private triggered: boolean = false;
-  private waitTime: number = 3;
+  private waitTime: number = Config.CueCardScoreDelaySeconds;
   private timer: number = 0;
 
   constructor(
