@@ -14,6 +14,7 @@ import cuecardBase from "../img/cuecard-base.png";
 import cuecardTimer from "../img/cuecard-timer.png";
 import background from "../img/background.png";
 import titleCard from "../img/silent-card-template.png";
+import playAgainButton from "../img/play-again-button.png";
 
 import { Graphics, Sound } from "excalibur";
 import { TiledResource } from "excalibur-tiled";
@@ -36,6 +37,7 @@ export const Resources = {
   map: new TiledResource("./map/map.json"),
   background: new Graphics.RawImage(background),
   titleCard: new Graphics.RawImage(titleCard),
+  playAgainButton: new Graphics.RawImage(playAgainButton),
 
   music: new Sound("./mp3/background.mp3"),
   sndDoorOpen: new Sound("./wav/doorOpen.wav"),

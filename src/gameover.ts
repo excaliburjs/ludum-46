@@ -52,12 +52,17 @@ export class GameOver extends Actor {
       width: 200,
       height: 100
     });
-    this.button.debugDraw;
     this.scene.add(this.button);
     this.button.z = 100;
 
     this.button.on("pointerup", () => {
-      console.log("reset");
+      if (this.button.isKilled()) return;
+      console.log(`reset button alive?: ${this.button.isKilled()}`);
+      for (let actor of this.scene.actors) {
+        actor.kill();
+      }
+      engine.removeScene(this.scene);
+      this.button.pos.add(vec(10000,10000));
       newgame(engine);
     });
 
@@ -86,6 +91,12 @@ export class GameOver extends Actor {
   hide() {
     this.backshadowLayer.hide();
     this.card.actions.easeTo(
+      Config.GameWidth / 2,
+      Config.GameHeight * 2,
+      500,
+      EasingFunctions.EaseInOutCubic
+    );
+    this.button.actions.easeTo(
       Config.GameWidth / 2,
       Config.GameHeight * 2,
       500,
