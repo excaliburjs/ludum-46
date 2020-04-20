@@ -30,7 +30,6 @@ export function newgame(game: Engine) {
   game.goToScene("main");
   game.on("postupdate", function checkGameOver(event: PostUpdateEvent) {
     if (gameStats.currentAudienceScore <= 0) {
-      // gameover(game);
       gameOver.show();
     }
   });
