@@ -107,19 +107,25 @@ export class CueCardManager {
 
   public SatisfyStageLeft(inventory: Inventory): number {
     const score = this._trySatisfyCueCard(inventory, this.stageLeftCueCard);
-    this.stageLeftCueCard.Satisfied();
+    setTimeout(() => {
+      this.stageLeftCueCard.Satisfied();
+    }, 1000);
     return score;
   }
 
   public SatisfyStageCenter(inventory: Inventory): number {
     const score = this._trySatisfyCueCard(inventory, this.stageCenterCueCard);
-    this.stageCenterCueCard.Satisfied();
+    setTimeout(() => {
+      this.stageCenterCueCard.Satisfied();
+    }, 1000);
     return score;
   }
 
   public SatisfyStageRight(inventory: Inventory): number {
     const score = this._trySatisfyCueCard(inventory, this.stageRightCueCard);
-    this.stageRightCueCard.Satisfied();
+    setTimeout(() => {
+      this.stageRightCueCard.Satisfied();
+    }, 1000);
     return score;
   }
 }

@@ -10,7 +10,7 @@ import {
 } from "excalibur";
 import { Resources } from "./resources";
 import { Locations, StageProps, Costumes } from "./constants";
-import Items from "./items";
+import Items, { Item } from "./items";
 export interface CueCardOptions {
   // The lifetime in seconds of the cue card
   lifeTime: number;
@@ -80,6 +80,8 @@ export class CueCard extends Actor {
     this._setUpLocationSymbol(options.requiredLocation);
     this._setUpPropSymbol(options.requiredProp);
     this._setUpCostumeSymbol(options.requiredCostume);
+    this._setUpFailedPropSymbol();
+    this._setUpFailedCostumeSymbol();
   }
 
   public onInitialize(engine: Engine) {}
@@ -182,5 +184,33 @@ export class CueCard extends Actor {
     let sprite = Items.getIconSprite(requiredCostume);
     this._setUpSymbolWidthHeight(sprite);
     costumeSymbolLayer.show(sprite);
+  }
+
+  private _setUpFailedPropSymbol(): void {
+    const failedLayer = this.graphics.createLayer({
+      name: "failedPropSymbol",
+      order: 5,
+    });
+
+    failedLayer.offset = this._calculateRelativePosition(2);
+  }
+
+  private _setUpFailedCostumeSymbol(): void {
+    const failedLayer = this.graphics.createLayer({
+      name: "failedCostumeSymbol",
+      order: 5,
+    });
+
+    failedLayer.offset = this._calculateRelativePosition(3);
+  }
+
+  showFailedCostume() {
+    let redCheck = Items.getIconSprite("redCheck");
+    this.graphics.getLayer("failedCostumeSymbol")?.show(redCheck);
+  }
+
+  showFailedProp() {
+    let redCheck = Items.getIconSprite("redCheck");
+    this.graphics.getLayer("failedPropSymbol")?.show(redCheck);
   }
 }

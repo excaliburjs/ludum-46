@@ -40,4 +40,5 @@ export const IconPosition: { [key: string]: number } = {
   stageCenter: 25,
   stageLeft: 26,
   stageRight: 27,
+  redCheck: 28,
 };
