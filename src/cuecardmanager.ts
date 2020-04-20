@@ -6,20 +6,21 @@ import { stats } from "./session";
 import { Player } from "./player";
 import { Inventory } from "./inventory";
 import { Resources } from "./resources";
+import { Theater } from "theater-scene";
 
 export class CueCardManager {
   private _random: Random = new Random(Config.RandomSeed);
-  private stageLeftCueCard: CueCard;
-  private stageCenterCueCard: CueCard;
-  private stageRightCueCard: CueCard;
+  private stageLeftCueCard!: CueCard;
+  private stageCenterCueCard!: CueCard;
+  private stageRightCueCard!: CueCard;
   private cardPadding: number = Config.CueCardPadding;
   private cardTopOffset: number = Config.CueCardTopOffset;
   private cueCardHeight: number = Config.CueCardHeight;
   private cueCardWidth: number = Config.CueCardWidth;
-  private scene: Scene;
+  private scene: Theater;
   private eventDispatcher: EventDispatcher;
 
-  constructor(scene: Scene) {
+  constructor(scene: Theater) {
     this.scene = scene;
     this.eventDispatcher = this.scene.eventDispatcher;
     this.SetUpEventHooks();
@@ -35,7 +36,7 @@ export class CueCardManager {
   }
 
   private _calculateCueCardPosition(cardNumber: number): Vector {
-    const padding = this.cardPadding * cardNumber;
+    const padding = this.cardPadding * (cardNumber - 1);
     const cardWidth = this.cueCardWidth * (cardNumber - 1);
     return vec(padding + cardWidth, this.cardTopOffset);
   }
@@ -59,7 +60,7 @@ export class CueCardManager {
   }
 
   private _GenerateCueCard(num: number): CueCard {
-    return new CueCard({
+    let cueCard = new CueCard({
       lifeTime: this._random.integer(
         Config.CueCardLifeMinSeconds,
         Config.CueCardLifeMaxSeconds
@@ -71,6 +72,20 @@ export class CueCardManager {
       cueCardWidth: this.cueCardWidth,
       cueCardLoc: this._calculateCueCardPosition(num),
     });
+
+    switch (num) {
+      case 1:
+        this.scene.leftSpotlight.setCueCard(cueCard);
+        break;
+      case 2:
+        this.scene.centerSpotlight.setCueCard(cueCard);
+        break;
+      case 3:
+        this.scene.rightSpotlight.setCueCard(cueCard);
+        break;
+    }
+
+    return cueCard;
   }
 
   private CueCardExpiredEvent(cueCardEvent: CueCardExpiredEvent) {
@@ -102,7 +117,8 @@ export class CueCardManager {
       this.stageRightCueCard = this._GenerateCueCard(3);
       this.scene.add(this.stageRightCueCard);
     } else {
-      throw new Error();
+      // weird but still works
+      // throw new Error();
     }
   }
 

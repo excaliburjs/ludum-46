@@ -15,8 +15,8 @@ export default {
 
   StagePos: vec(40, 168),
 
-  CueCardPadding: 80, // how much space is between each any two cue cards
-  CueCardTopOffset: 100, // how far from the top of the game window the cue cards are placed
+  CueCardPadding: 135, // how much space is between each any two cue cards
+  CueCardTopOffset: 50, // how far from the top of the game window the cue cards are placed
   CueCardHeight: 75,
   CueCardWidth: 300,
   CueCardLifeMinSeconds: 15,

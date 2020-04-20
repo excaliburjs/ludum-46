@@ -13,6 +13,7 @@ import { Player } from "./player";
 import { CueCardManager } from "./cuecardmanager";
 import { stats } from "./session";
 import Config from "./config";
+import { CueCard } from "cuecard";
 
 export enum StageTriggerLocation {
   StageLeft,
@@ -25,8 +26,12 @@ export class CueCardTrigger extends Actor {
   private triggered: boolean = false;
   private waitTime: number = Config.CueCardScoreDelaySeconds;
   private timer: number = 0;
-  private minAlpha:number = 0.1;
+  private minAlpha: number = 0.1;
   private maxAlpha: number = 0.6;
+
+  private _cueCard: CueCard | null = null;
+
+  public active = true;
 
   constructor(
     private player: Player,
@@ -49,22 +54,28 @@ export class CueCardTrigger extends Actor {
     this.trigger.body.useBoxCollider(this.width, this.height, this.anchor);
     this.trigger.on("enter", this.onTriggerEnter.bind(this));
     this.trigger.on("exit", this.onTriggerExit.bind(this));
-    this.rect =new Graphics.Circle({
-      radius: this.width/2,
-      color: Color.Yellow
+    this.rect = new Graphics.Circle({
+      radius: this.width / 2,
+      color: Color.Yellow,
     });
     this.rect.color.a = this.minAlpha;
     this.graphics.add(this.rect);
     this.scene.add(this.trigger);
   }
 
+  public setCueCard(cueCard: CueCard) {
+    this._cueCard = cueCard;
+  }
+
   public update(engine: Engine, delta: number) {
     super.update(engine, delta);
 
     if (!this.triggered) return;
+    if (!this.active) return;
 
     this.timer += delta / 1000;
-    this.rect.color.a = this.maxAlpha * this.timer / this.waitTime + this.minAlpha;
+    this.rect.color.a =
+      (this.maxAlpha * this.timer) / this.waitTime + this.minAlpha;
 
     if (this.timer >= this.waitTime) {
       Logger.getInstance().info("Stage trigger", this.triggerPosition);
@@ -94,9 +105,11 @@ export class CueCardTrigger extends Actor {
 
   private onTriggerEnter(event: EnterTriggerEvent): void {
     this.triggered = true;
+    this._cueCard?.pause();
   }
 
   private onTriggerExit(event: ExitTriggerEvent): void {
     this._reset();
+    this._cueCard?.play();
   }
 }

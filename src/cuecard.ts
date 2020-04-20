@@ -61,7 +61,9 @@ export class CueCard extends Actor {
   private yPadding: number;
   private symbolHeight: number;
   public options: CueCardOptions;
-  private _timerAnimation!: Graphics.Animation;
+  public timerAnimation!: Graphics.Animation;
+
+  private _running: boolean = true;
 
   constructor(options: CueCardOptions) {
     super();
@@ -89,7 +91,17 @@ export class CueCard extends Actor {
 
   public onInitialize(engine: Engine) {}
 
+  public pause() {
+    this._running = false;
+    this.timerAnimation.pause();
+  }
+  public play() {
+    this._running = true;
+    this.timerAnimation.play();
+  }
+
   public update(engine: Engine, delta: number) {
+    if (!this._running) return;
     this.timer -= delta / 1000;
     // this.timerRect.width = (this.cueCardWidth * this.timer) / this.lifeTime;
 
@@ -148,7 +160,7 @@ export class CueCard extends Actor {
     const timerLayer = this.graphics.createLayer({ name: "timer", order: 0 });
     timerLayer.offset = this.pos.add(vec(174, 90));
     timerLayer.show(timer);
-    this._timerAnimation = timer;
+    this.timerAnimation = timer;
   }
 
   private _setUpLocationSymbol(requiredLocation: Locations): void {

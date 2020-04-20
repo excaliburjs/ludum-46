@@ -40,6 +40,9 @@ export class Theater extends Scene {
   private cuecardmanager!: CueCardManager;
   private director!: DirectorNPC;
   private audienceMeter!: AudienceMeter;
+  public leftSpotlight!: CueCardTrigger;
+  public centerSpotlight!: CueCardTrigger;
+  public rightSpotlight!: CueCardTrigger;
 
   public onInitialize(engine: Engine) {
     this.cuecardmanager = new CueCardManager(this);
@@ -140,34 +143,34 @@ export class Theater extends Scene {
 
       switch (trigger.name) {
         case OBJECT_TRIGGERS.StageLeftTrigger:
-          const stageLeftTrigger = new CueCardTrigger(
+          this.leftSpotlight = new CueCardTrigger(
             this.player,
             this.cuecardmanager,
             StageTriggerLocation.StageLeft,
             triggerArgs
           );
-          this.add(stageLeftTrigger);
-          stageLeftTrigger.setZIndex(-2);
+          this.add(this.leftSpotlight);
+          this.leftSpotlight.setZIndex(-2);
           break;
         case OBJECT_TRIGGERS.StageCenterTrigger:
-          const stageCenterTrigger = new CueCardTrigger(
+          this.centerSpotlight = new CueCardTrigger(
             this.player,
             this.cuecardmanager,
             StageTriggerLocation.StageCenter,
             triggerArgs
           );
-          this.add(stageCenterTrigger);
-          stageCenterTrigger.setZIndex(-2);
+          this.add(this.centerSpotlight);
+          this.centerSpotlight.setZIndex(-2);
           break;
         case OBJECT_TRIGGERS.StageRightTrigger:
-          const stageRightTrigger = new CueCardTrigger(
+          this.rightSpotlight = new CueCardTrigger(
             this.player,
             this.cuecardmanager,
             StageTriggerLocation.StageRight,
             triggerArgs
           );
-          this.add(stageRightTrigger);
-          stageRightTrigger.setZIndex(-2);
+          this.add(this.rightSpotlight);
+          this.rightSpotlight.setZIndex(-2);
           break;
       }
     }
