@@ -147,7 +147,7 @@ export class CueCard extends Actor {
     background.show(back);
   }
 
-  private _setUpTimer(totaltime: number): void {
+  private _setUpTimer(totalTime: number): void {
     const sheet = Graphics.SpriteSheet.fromGrid({
       image: Resources.cuecardTimerSheet,
       grid: {
@@ -160,7 +160,7 @@ export class CueCard extends Actor {
     const timer = Graphics.Animation.fromSpriteSheet(
       sheet,
       Util.range(0, 37),
-      (totaltime * 1000) / 38,
+      (totalTime * 1000) / 38,
       Graphics.AnimationStrategy.Freeze
     );
     const timerLayer = this.graphics.createLayer({ name: "timer", order: 0 });
