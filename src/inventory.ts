@@ -107,6 +107,11 @@ export class Inventory extends Actor {
     ) {
       inventoryBonus *= Config.ScoreMultiplier;
     }
+    if (card.options.requiredProp != this._prop
+      && card.options.requiredCostume != this._costume
+      ) {
+        inventoryBonus = -Config.ScorePunishment;
+    }
     return score + inventoryBonus;
   }
 
