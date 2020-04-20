@@ -12,10 +12,13 @@ export class Button extends Actor {
             members: [
                 {
                     graphic: Graphics.Sprite.from(Resources.playAgainButton),
-                    pos: vec(-this.width / 2, -this.height / 2 + 15),
+                    pos: vec(-this.width/4,0),
                 },
+
             ],
         });
+        group.width = this.width;
+        group.height = this.height;
         this.graphics.add(group);
     }
 }
