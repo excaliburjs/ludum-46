@@ -13,6 +13,8 @@ export default {
   GameWidth: 1280,
   GameHeight: 720,
 
+  StagePos: vec(40, 168),
+
   CueCardPadding: 80, // how much space is between each any two cue cards
   CueCardTopOffset: 100, // how far from the top of the game window the cue cards are placed
   CueCardHeight: 75,

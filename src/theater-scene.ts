@@ -45,24 +45,10 @@ export class Theater extends Scene {
     );
     this.add(this.player);
 
-    // add a blackout area behind stage
-    const stageBlackout = new Actor({
-      anchor: vec(0, 0),
-      pos: vec(0, 168),
-      width: engine.canvasWidth,
-      height: engine.canvasHeight - 168,
-    });
-    stageBlackout.graphics.add(
-      new Graphics.Rect({
-        height: stageBlackout.height,
-        width: stageBlackout.width,
-        color: Color.fromHex("#333333"),
-      })
+    this.stageTileMap = Resources.map.getTileMap(
+      Config.StagePos.x,
+      Config.StagePos.y
     );
-    this.add(stageBlackout);
-    stageBlackout.setZIndex(-4);
-
-    this.stageTileMap = Resources.map.getTileMap(40, 168);
     this.stageTileMap.data.forEach((c) => (c.transform.z = -3));
     this.add(this.stageTileMap);
 
