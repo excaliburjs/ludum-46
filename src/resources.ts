@@ -34,4 +34,5 @@ export const Resources = {
   music: /* todo */ new Sound(""),
   sndDoorOpen: new Sound("./wav/doorOpen.wav"),
   sndCardExpired: new Sound("./wav/cardExpired.wav"),
+  sndCardSuccess: new Sound("./wav/cardSuccess.wav"),
 };

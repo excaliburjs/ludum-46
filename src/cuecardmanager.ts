@@ -77,6 +77,7 @@ export class CueCardManager {
   }
   private CueCardSatisfiedEvent(cueCardEvent: CueCardExpiredEvent) {
     this.ReplaceCueCard(cueCardEvent.cueCard);
+    Resources.sndCardSuccess.play();
   }
 
   private ReplaceCueCard(cueCard: CueCard) {
