@@ -19,6 +19,8 @@ export default {
   CueCardWidth: 300,
   CueCardLifeMinSeconds: 15,
   CueCardLifeMaxSeconds: 35,
+  CueCardSuccessReplacementDelay: 0, // Delay to repalce cue card on success
+  CueCardFailReplacementDelay: 0,
 
   AudienceMeterMaxWidth: 600,
   AudienceMeterStartingWidth: 400,
