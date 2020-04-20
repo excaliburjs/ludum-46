@@ -21,14 +21,17 @@ export class CueCardManager {
 
   constructor(scene: Scene) {
     this.scene = scene;
+    this.eventDispatcher = this.scene.eventDispatcher;
+    this.SetUpEventHooks();
+  }
+
+  public start() {
     this.stageLeftCueCard = this._GenerateCueCard(1);
     this.stageCenterCueCard = this._GenerateCueCard(2);
     this.stageRightCueCard = this._GenerateCueCard(3);
     this.scene.add(this.stageLeftCueCard);
     this.scene.add(this.stageCenterCueCard);
     this.scene.add(this.stageRightCueCard);
-    this.eventDispatcher = this.scene.eventDispatcher;
-    this.SetUpEventHooks();
   }
 
   private _calculateCueCardPosition(cardNumber: number): Vector {

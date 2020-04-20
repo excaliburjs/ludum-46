@@ -1,21 +1,46 @@
-import { Actor, Engine, ActorArgs, Graphics } from "excalibur";
+import { Actor, Engine, ActorArgs, Graphics, vec } from "excalibur";
 import Config from "./config";
 import { Player } from "./player";
+import { DialogCard } from "./dialogCard";
 
 export class DirectorNPC extends Actor {
+  private _engine!: Engine;
+
   constructor(private _player: Player, options: ActorArgs) {
     super(options);
   }
 
-  onInitialize() {
+  onInitialize(engine: Engine) {
+    this._engine = engine;
     this._setupDrawing();
   }
 
   public playGreetingSequence() {
     /* TODO: Remove until this is done */
-    this.kill();
+    const cardPos = vec(
+      this._engine.halfCanvasWidth,
+      this._engine.halfCanvasHeight
+    );
+    const card1 = new DialogCard("You're late! The audience is waiting...", {
+      pos: cardPos,
+    });
+    const card2 = new DialogCard("Get dressed and get out there!", {
+      pos: cardPos,
+    });
 
-    return Promise.resolve();
+    this.scene.add(card1);
+
+    return this.actions
+      .delay(4000)
+      .callMethod(() => {
+        card1.kill();
+        this.scene.add(card2);
+      })
+      .delay(4000)
+      .callMethod(() => {
+        card2.kill();
+      })
+      .asPromise();
   }
 
   private _setupDrawing() {

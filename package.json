@@ -4,7 +4,7 @@
   "description": "Ludum Dare 46 Game Jam (April 17-20, 2020)",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel index.html --no-autoinstall",
     "typecheck": "tsc -p . --noEmit",
     "build": "npm run build:excalibur && parcel build index.html",
     "build:excalibur": "cd lib/excalibur && npm install && npm run core && cd ../../"

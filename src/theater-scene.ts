@@ -71,6 +71,7 @@ export class Theater extends Scene {
     });
 
     this.spawnItems();
+
     let backgroundActor = new Actor({
       width: 50,
       height: 50,
@@ -87,9 +88,16 @@ export class Theater extends Scene {
    */
   onActivate() {
     SoundManager.startBackgroundMusic();
-    this.player.beginEnterStage().then(() => {
-      return this.director.playGreetingSequence();
-    });
+    this.player
+      .beginEnterStage()
+      .then(() => {
+        return this.director.playGreetingSequence();
+      })
+      .then(() => {
+        // start cue cards
+        this.director.kill();
+        this.cuecardmanager.start();
+      });
   }
 
   private collectSolidTiles(layer: ITiledMapLayer) {

@@ -3,7 +3,7 @@ import { Resources } from "./resources";
 import { newgame } from "./session";
 import Config from "./config";
 import { SoundManager } from "./soundManager";
-import { loadPreferences } from "preferences";
+import { loadPreferences } from "./preferences";
 
 Engine._useWebGL = true;
 const game = new Engine({
