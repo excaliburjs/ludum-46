@@ -31,7 +31,7 @@ export const Resources = {
   map: new TiledResource("./map/map.json"),
   background: new Graphics.RawImage(background),
 
-  music: new Sound("./wav/background-lol.wav"),
+  music: new Sound("./wav/background.wav"),
   sndDoorOpen: new Sound("./wav/doorOpen.wav"),
   sndCardExpired: new Sound("./wav/cardExpired.wav"),
   sndCardSuccess: new Sound("./wav/cardSuccess.wav"),
