@@ -91,16 +91,23 @@ export class Inventory extends Actor {
     let inventoryBonus = 0;
     if (card.options.requiredProp == this._prop) {
       inventoryBonus += Config.ScoreIncreasePerProp;
+    } else {
+      card.showFailedProp();
+      Resources.sndNope.play();
     }
     if (card.options.requiredCostume == this._costume) {
       inventoryBonus += Config.ScoreIncreasePerProp;
+    } else {
+      card.showFailedCostume();
+      Resources.sndNope.play();
     }
-    if (card.options.requiredCostume == this._costume
-        && card.options.requiredProp == this._prop
-        ) {
+    if (
+      card.options.requiredCostume == this._costume &&
+      card.options.requiredProp == this._prop
+    ) {
       inventoryBonus *= Config.ScoreMultiplier;
     }
-    return score + inventoryBonus ;
+    return score + inventoryBonus;
   }
 
   private _setUpLayers() {
