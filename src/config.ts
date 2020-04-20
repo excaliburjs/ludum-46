@@ -13,6 +13,8 @@ export default {
   GameWidth: 1280,
   GameHeight: 720,
 
+  TomatoPercentage: 0.25,
+
   StagePos: vec(40, 168),
 
   CueCardPadding: 135, // how much space is between each any two cue cards

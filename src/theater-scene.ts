@@ -22,6 +22,7 @@ import { stats } from "./session";
 import { SoundManager } from "./soundManager";
 import { DirectorNPC } from "./director";
 import { AudienceMeter } from "./audienceMeter";
+import { Tomatoes } from "./tomatoEmitter";
 
 const LAYER_IMPASSABLE = "walls";
 const LAYER_TRIGGERS = "triggers";
@@ -40,13 +41,15 @@ export class Theater extends Scene {
   private cuecardmanager!: CueCardManager;
   private director!: DirectorNPC;
   private audienceMeter!: AudienceMeter;
+  private tomatoes!: Tomatoes;
   public leftSpotlight!: CueCardTrigger;
   public centerSpotlight!: CueCardTrigger;
   public rightSpotlight!: CueCardTrigger;
 
   public onInitialize(engine: Engine) {
+    this.tomatoes = new Tomatoes(this);
     this.cuecardmanager = new CueCardManager(this);
-    this.audienceMeter = new AudienceMeter();
+    this.audienceMeter = new AudienceMeter(this.tomatoes);
     this.add(this.audienceMeter);
     // Player
     this.player = new Player(
