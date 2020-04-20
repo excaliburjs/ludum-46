@@ -36,7 +36,8 @@ export class AudienceMeter extends Actor {
 
   update(gameEngine: Engine, delta: number) {
     super.update(gameEngine, delta);
-    const difference = (stats().currentAudienceScore - this.meterRect.width);// * (delta/1000) / this.meterSpeed;
+    let difference = (stats().currentAudienceScore - this.meterRect.width);
+    difference -= (Config.ScoreDecayRate * delta) / 1000;
     this.meterRect.width += difference;
   }
 

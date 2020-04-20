@@ -12,6 +12,7 @@ import { Costumes, StageProps } from "./constants";
 import Items, { Item } from "./items";
 import { stats } from "./session";
 import { Player } from "./player";
+import Config from "./config";
 
 export class Inventory extends Actor {
   private _costume?: Costumes;
@@ -86,7 +87,20 @@ export class Inventory extends Actor {
   }
 
   public getQueueCardScore(card: CueCard): number {
-    return 15;
+    let score = Config.ScoreBaseIncrease;
+    let inventoryBonus = 0;
+    if (card.options.requiredProp == this._prop) {
+      inventoryBonus += Config.ScoreIncreasePerProp;
+    }
+    if (card.options.requiredCostume == this._costume) {
+      inventoryBonus += Config.ScoreIncreasePerProp;
+    }
+    if (card.options.requiredCostume == this._costume
+        && card.options.requiredProp == this._prop
+        ) {
+      inventoryBonus *= Config.ScoreMultiplier;
+    }
+    return score + inventoryBonus ;
   }
 
   private _setUpLayers() {
