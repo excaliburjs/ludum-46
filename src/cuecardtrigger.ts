@@ -72,6 +72,7 @@ export class CueCardTrigger extends Actor {
 
     if (!this.triggered) return;
     if (!this.active) return;
+    if (!this._cueCard) return;
 
     this.timer += delta / 1000;
     this.rect.color.a =
@@ -82,12 +83,15 @@ export class CueCardTrigger extends Actor {
       switch (this.triggerPosition) {
         case StageTriggerLocation.StageCenter:
           this.cueCardManager.SatisfyStageCenter(stats().inventory);
+          this._cueCard = null;
           break;
         case StageTriggerLocation.StageLeft:
           this.cueCardManager.SatisfyStageLeft(stats().inventory);
+          this._cueCard = null;
           break;
         case StageTriggerLocation.StageRight:
           this.cueCardManager.SatisfyStageRight(stats().inventory);
+          this._cueCard = null;
           break;
         default:
           break;
