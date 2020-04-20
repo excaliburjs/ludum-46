@@ -45,8 +45,9 @@ export class AudienceMeter extends Actor {
     stats().reduceAudienceMeter((Config.ScoreDecayRate * delta) / 1000);
     let difference = stats().currentAudienceScore - this.meterRect.width;
     this.meterRect.width += difference;
-    if ((stats().currentAudienceScore = 0)) {
+    if (stats().currentAudienceScore == 0) {
       stats().isGameOver = true;
+      console.log("game over (loss)");
     }
   }
 

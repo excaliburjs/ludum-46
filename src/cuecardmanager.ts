@@ -103,7 +103,8 @@ export class CueCardManager {
       Resources.sndCardSuccess.play();
     }
     stats().numLinesDelivered++;
-    if (stats().numLinesDelivered === Config.NumCueCardsToWin) {
+    if (stats().numLinesDelivered >= Config.NumCueCardsToWin) {
+      console.log("game over (victory)");
       stats().isGameOver = true;
     }
   }
