@@ -84,7 +84,7 @@ export class CueCard extends Actor {
 
     this._setUpBackground();
     this._setUpTimer(this.timer);
-    this._setUpLocationSymbol(options.requiredLocation);
+    // this._setUpLocationSymbol(options.requiredLocation);
     this._setUpPropSymbol(options.requiredProp);
     this._setUpCostumeSymbol(options.requiredCostume);
     this._setUpFailedPropSymbol();
