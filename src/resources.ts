@@ -47,4 +47,6 @@ export const Resources = {
   sndCardSuccess: new Sound("./wav/cardSuccess.wav"),
   sndPickupItem: new Sound("./wav/pickupItem.wav"),
   sndNope: new Sound("./wav/nope2.wav"),
+  applause: new Sound("./mp3/applause2.mp3"),
+  boo: new Sound("./mp3/boo2.mp3"),
 };
