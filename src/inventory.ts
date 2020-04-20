@@ -31,16 +31,17 @@ export class Inventory extends Actor {
 
   public update(engine: Engine, delta: number) {
     super.update(engine, delta);
-    if (this._costume) {
-      let sprite = Items.getIconSprite(this._costume);
-      let layer = this.graphics.getLayer("costume");
-      layer!.offset = new Vector(0, 0);
-      layer?.show(sprite);
-    }
 
     if (this._prop) {
       let sprite = Items.getIconSprite(this._prop);
       let layer = this.graphics.getLayer("prop");
+      layer!.offset = new Vector(0, 0);
+      layer?.show(sprite);
+    }
+
+    if (this._costume) {
+      let sprite = Items.getIconSprite(this._costume);
+      let layer = this.graphics.getLayer("costume");
       let widthOffset = (this.width * 2) / 3 - 15;
       layer!.offset = new Vector(widthOffset, 0);
       layer?.show(sprite);
@@ -107,10 +108,11 @@ export class Inventory extends Actor {
     ) {
       inventoryBonus *= Config.ScoreMultiplier;
     }
-    if (card.options.requiredProp != this._prop
-      && card.options.requiredCostume != this._costume
-      ) {
-        inventoryBonus = -Config.ScorePunishment;
+    if (
+      card.options.requiredProp != this._prop &&
+      card.options.requiredCostume != this._costume
+    ) {
+      inventoryBonus = -Config.ScorePunishment;
     }
     return score + inventoryBonus;
   }
