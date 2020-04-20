@@ -1,16 +1,23 @@
 import { Actor, ActorArgs, Graphics, vec, Color } from "excalibur";
 import { Resources } from "./resources";
 
+export interface DialogCardOptions {
+  topPadding?: number
+}
 export class DialogCard extends Actor {
-  constructor(private text: string[], options: ActorArgs) {
+  private topPadding: number;
+
+  constructor(private text: string[], options: ActorArgs & DialogCardOptions) {
     super({ ...options, width: 837, height: 480 });
+    this.topPadding = options.topPadding || 0;
   }
 
   onInitialize() {
+
     let graphicsMember: Graphics.GraphicsGrouping[] = [];
     graphicsMember.push({
-        graphic: Graphics.Sprite.from(Resources.titleCard),
-        pos: vec(0, 0)
+      graphic: Graphics.Sprite.from(Resources.titleCard),
+      pos: vec(0, 0)
     });
     for (let index = 0; index < this.text.length; index++) {
       graphicsMember.push({
@@ -23,7 +30,10 @@ export class DialogCard extends Actor {
             textAlign: Graphics.TextAlign.Center,
           }),
         } as any),
-        pos: vec(this.width / 2, this.height * ((index + 1) / (this.text.length + 1))),
+        pos: vec(
+          this.width / 2,
+          this.height * ((index + 1) / (this.text.length + 1)) + this.topPadding
+        ),
       });
     }
     const group = new Graphics.GraphicsGroup({
