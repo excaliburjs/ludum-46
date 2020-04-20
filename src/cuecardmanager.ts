@@ -139,6 +139,9 @@ export class CueCardManager {
       },
       this.stageLeftCueCard.failed ? 1000 : 0
     );
+    if (this.stageLeftCueCard.failed) {
+      Resources.sndNope.play();
+    }
 
     return score;
   }
@@ -147,11 +150,14 @@ export class CueCardManager {
     const score = this._trySatisfyCueCard(inventory, this.stageCenterCueCard);
     setTimeout(
       () => {
-        debugger;
         this.stageCenterCueCard.Satisfied();
       },
       this.stageCenterCueCard.failed ? 1000 : 0
     );
+    if (this.stageCenterCueCard.failed) {
+      Resources.sndNope.play();
+    }
+
     return score;
   }
 
@@ -163,6 +169,10 @@ export class CueCardManager {
       },
       this.stageRightCueCard.failed ? 1000 : 0
     );
+    if (this.stageRightCueCard.failed) {
+      Resources.sndNope.play();
+    }
+
     return score;
   }
 }

@@ -94,14 +94,12 @@ export class Inventory extends Actor {
     } else {
       card.failed = true;
       card.showFailedProp();
-      Resources.sndNope.play();
     }
     if (card.options.requiredCostume == this._costume) {
       inventoryBonus += Config.ScoreIncreasePerProp;
     } else {
       card.failed = true;
       card.showFailedCostume();
-      Resources.sndNope.play();
     }
     if (
       card.options.requiredCostume == this._costume &&
