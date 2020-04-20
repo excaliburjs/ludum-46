@@ -3,6 +3,7 @@ import { Resources } from "./resources";
 import { newgame } from "./session";
 import Config from "./config";
 import { SoundManager } from "./soundManager";
+import { loadPreferences } from "preferences";
 
 Engine._useWebGL = true;
 const game = new Engine({
@@ -18,6 +19,7 @@ for (let r in Resources) {
   loader.addResource((Resources as any)[r]);
 }
 
+loadPreferences();
 SoundManager.init();
 
 game.start(loader).then(() => {
