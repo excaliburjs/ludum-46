@@ -9,6 +9,7 @@ export class SoundManager {
     Resources.sndCardExpired.volume = Config.CueCardExpiredVolume;
     Resources.sndCardSuccess.volume = Config.CueCardSuccessVolume;
     Resources.sndDoorOpen.volume = Config.DoorOpenVolume;
+    Resources.sndPickupItem.volume = Config.PickupItemVolume;
   }
 
   static init() {

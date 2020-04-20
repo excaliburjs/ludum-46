@@ -9,7 +9,7 @@ import {
 import { Resources } from "./resources";
 import { CueCard } from "./cuecard";
 import { Costumes, StageProps } from "./constants";
-import Items from "./items";
+import Items, { Item } from "./items";
 import { stats } from "./session";
 import { Player } from "./player";
 
@@ -51,15 +51,13 @@ export class Inventory extends Actor {
     if (this._costume) {
       let currentCostume = this._costume;
       let sprite = Items.getIconSprite(this._costume);
-      let actor = new Actor(this._costumeX, this._costumeY);
+      let actor = new Item(
+        "costume",
+        currentCostume,
+        this._costumeX!,
+        this._costumeY!
+      );
       actor.graphics.show(sprite);
-      actor.body.collider.type = CollisionType.Passive;
-      actor.on("precollision", (event) => {
-        if (event.other instanceof Player) {
-          actor.kill();
-          stats().inventory.addCostume(currentCostume, actor.pos);
-        }
-      });
       this.scene.add(actor);
     }
     this._costume = item;
@@ -72,15 +70,8 @@ export class Inventory extends Actor {
     if (this._prop) {
       let currentProp = this._prop;
       let sprite = Items.getIconSprite(this._prop);
-      let actor = new Actor(this._propX, this._propY);
+      let actor = new Item("prop", currentProp, this._propX!, this._propY!);
       actor.graphics.show(sprite);
-      actor.body.collider.type = CollisionType.Passive;
-      actor.on("precollision", (event) => {
-        if (event.other instanceof Player) {
-          actor.kill();
-          stats().inventory.addProp(currentProp, actor.pos);
-        }
-      });
       this.scene.add(actor);
     }
 

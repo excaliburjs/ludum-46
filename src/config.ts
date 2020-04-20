@@ -28,5 +28,6 @@ export default {
   CueCardExpiredVolume: 0.1,
   CueCardSuccessVolume: 0.1,
   DoorOpenVolume: 0.1,
+  PickupItemVolume: 0.1,
   BackgroundVolume: 0.6,
 };

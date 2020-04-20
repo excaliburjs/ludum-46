@@ -35,4 +35,5 @@ export const Resources = {
   sndDoorOpen: new Sound("./wav/doorOpen.wav"),
   sndCardExpired: new Sound("./wav/cardExpired.wav"),
   sndCardSuccess: new Sound("./wav/cardSuccess.wav"),
+  sndPickupItem: new Sound("./wav/pickupItem.wav"),
 };
