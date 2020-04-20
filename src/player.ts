@@ -20,6 +20,7 @@ enum PlayerInputState {
 
 export class Player extends Actor {
   private inputState: PlayerInputState = PlayerInputState.input_deny;
+  public charImage!: Graphics.RawImage;
 
   constructor(x: number, y: number) {
     super(x, y, Config.PlayerWidth, Config.PlayerHeight);
@@ -117,8 +118,9 @@ export class Player extends Actor {
   }
 
   private _setupDrawing(engine: Engine) {
+    this.charImage = this.getCharSprite();
     let sheet = Graphics.SpriteSheet.fromGrid({
-      image: this.getCharSprite(),
+      image: this.charImage,
       grid: {
         rows: 1,
         columns: 10,
