@@ -54,7 +54,9 @@ export class GameOver extends Actor {
       }
       text = `The show was a ${descriptor}success!`;
     }
-    this.card = new DialogCard([text], {
+    const costumesChanged = `You changed costumes ${stats().numCostumeChanges} times.`;
+    const propsUsed = `You used ${stats().numPropsUsed} props.`;
+    this.card = new DialogCard([text, costumesChanged, propsUsed], {
       pos: cardPos,
     });
     this.scene.add(this.card);
