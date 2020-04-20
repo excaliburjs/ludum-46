@@ -1,4 +1,10 @@
-import { Graphics, Actor, CollisionType } from "excalibur";
+import {
+  Graphics,
+  Actor,
+  CollisionType,
+  EasingFunctions,
+  Random,
+} from "excalibur";
 import { IconPosition, Costumes, StageProps } from "./constants";
 import { Resources } from "./resources";
 import { stats } from "./session";
@@ -49,5 +55,20 @@ export class Item extends Actor {
         Resources.sndPickupItem.play();
       }
     });
+
+    // floaty up and down
+    const rand = new Random();
+    const origY = this.pos.y;
+
+    this.actions
+      .delay(rand.integer(0, 500))
+      .easeTo(
+        this.pos.x,
+        this.pos.y - rand.integer(3, 9),
+        1500,
+        EasingFunctions.EaseInCubic
+      )
+      .easeTo(this.pos.x, origY, 1000, EasingFunctions.EaseOutCubic)
+      .repeatForever();
   }
 }
