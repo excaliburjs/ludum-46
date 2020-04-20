@@ -57,6 +57,10 @@ export class CueCardTrigger extends Actor {
     this.rect = new Graphics.Circle({
       radius: this.width / 2,
       color: Color.Yellow,
+      lineDash: [5, 3],
+      lineWidth: 3,
+      strokeColor: Color.White,
+      padding: 1,
     });
     this.rect.color.a = this.minAlpha;
     this.graphics.add(this.rect);
