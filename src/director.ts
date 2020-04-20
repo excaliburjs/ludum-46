@@ -16,7 +16,6 @@ export class DirectorNPC extends Actor {
   }
 
   public playGreetingSequence() {
-    /* TODO: Remove until this is done */
     const cardPos = vec(
       this._engine.halfCanvasWidth,
       this._engine.halfCanvasHeight
