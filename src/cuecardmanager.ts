@@ -127,7 +127,6 @@ export class CueCardManager {
   private _trySatisfyCueCard(inventory: Inventory, cueCard: CueCard): number {
     const score = inventory.getQueueCardScore(cueCard);
     stats().increaseAudienceMeter(score);
-    console.log("Audience Increased");
     return score;
   }
 
