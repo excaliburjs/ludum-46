@@ -11,6 +11,7 @@ import {
 import Config from "./config";
 import { stats } from "./session";
 import { Resources } from "./resources";
+import { Tomatoes } from "tomatoEmitter";
 
 export class AudienceMeter extends Actor {
   private meterWidth: number = Config.AudienceMeterMaxWidth;
@@ -19,9 +20,10 @@ export class AudienceMeter extends Actor {
   private meterRect!: Graphics.Rect;
   private started: boolean = false;
 
+  private _tomatoes!: Tomatoes;
   private _meterAnim!: Graphics.Animation;
 
-  constructor() {
+  constructor(tomatoes: Tomatoes) {
     super({
       x: Config.GameWidth / 2,
       y: 0,
@@ -30,6 +32,7 @@ export class AudienceMeter extends Actor {
       anchor: vec(0.5, 0),
     });
 
+    this._tomatoes = tomatoes;
     this._setUpMeter();
   }
 
@@ -52,9 +55,15 @@ export class AudienceMeter extends Actor {
         )
     );
 
+    if (
+      stats().currentAudienceScore / Config.AudienceMeterMaxWidth <=
+      Config.TomatoPercentage
+    ) {
+      this._tomatoes.show();
+    }
+
     if (stats().currentAudienceScore == 0) {
       stats().isGameOver = true;
-      console.log("game over (loss)");
     }
   }
 

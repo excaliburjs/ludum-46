@@ -42,7 +42,7 @@ export class GameOver extends Actor {
 
   public updateEndScreen() {
     const cardPos = vec(this.pos.x, this.pos.y);
-    let text = "The show has not gone on!";
+    let text = "The audience was not impressed";
     if (stats().numLinesDelivered >= Config.NumCueCardsToWin) {
       let descriptor = "";
       Resources.applause.play();
@@ -77,7 +77,7 @@ export class GameOver extends Actor {
     });
     this.button.on("pointerup", () => {
       if (this.button.isKilled()) return;
-      console.log(`reset button alive?: ${this.button.isKilled()}`);
+      // console.log(`reset button alive?: ${this.button.isKilled()}`);
       for (let actor of this.scene.actors) {
         actor.kill();
       }

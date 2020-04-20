@@ -13,6 +13,8 @@ export default {
   GameWidth: 1280,
   GameHeight: 720,
 
+  TomatoPercentage: 0.25,
+
   StagePos: vec(40, 168),
 
   CueCardPadding: 135, // how much space is between each any two cue cards
@@ -46,6 +48,6 @@ export default {
   ScorePunishment: 30, //Punishment for triggering spotlight with neigher correct prop
   NumCueCardsToWin: 7,
 
-  GreatScoreCutoff: 450,
-  RoaringScoreCutoff: 750,
+  GreatScoreCutoff: 400,
+  RoaringScoreCutoff: 600,
 };
