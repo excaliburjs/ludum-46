@@ -229,14 +229,12 @@ export class CueCard extends Actor {
   showFailedCostume() {
     let redCheck = Items.getIconSprite("redCheck");
     this.graphics.getLayer("failedCostumeSymbol")?.show(redCheck);
-    this.failed = true;
     this.pause();
   }
 
   showFailedProp() {
     let redCheck = Items.getIconSprite("redCheck");
     this.graphics.getLayer("failedPropSymbol")?.show(redCheck);
-    this.failed = true;
     this.pause();
   }
 }

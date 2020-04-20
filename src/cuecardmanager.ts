@@ -99,7 +99,9 @@ export class CueCardManager {
     setTimeout(() => {
       this.ReplaceCueCard(cueCardEvent.cueCard);
     }, Config.CueCardSuccessReplacementDelay);
-    Resources.sndCardSuccess.play();
+    if (!cueCardEvent.cueCard.failed) {
+      Resources.sndCardSuccess.play();
+    }
     stats().numLinesDelivered++;
     if (stats().numLinesDelivered === Config.NumCueCardsToWin) {
       stats().isGameOver = true;
@@ -130,26 +132,36 @@ export class CueCardManager {
 
   public SatisfyStageLeft(inventory: Inventory): number {
     const score = this._trySatisfyCueCard(inventory, this.stageLeftCueCard);
-    setTimeout(() => {
-      this.stageLeftCueCard.Satisfied();
-    }, 1000);
+    setTimeout(
+      () => {
+        this.stageLeftCueCard.Satisfied();
+      },
+      this.stageLeftCueCard.failed ? 1000 : 0
+    );
+
     return score;
   }
 
   public SatisfyStageCenter(inventory: Inventory): number {
     const score = this._trySatisfyCueCard(inventory, this.stageCenterCueCard);
-    setTimeout(() => {
-      debugger;
-      this.stageCenterCueCard.Satisfied();
-    }, 1000);
+    setTimeout(
+      () => {
+        debugger;
+        this.stageCenterCueCard.Satisfied();
+      },
+      this.stageCenterCueCard.failed ? 1000 : 0
+    );
     return score;
   }
 
   public SatisfyStageRight(inventory: Inventory): number {
     const score = this._trySatisfyCueCard(inventory, this.stageRightCueCard);
-    setTimeout(() => {
-      this.stageRightCueCard.Satisfied();
-    }, 1000);
+    setTimeout(
+      () => {
+        this.stageRightCueCard.Satisfied();
+      },
+      this.stageRightCueCard.failed ? 1000 : 0
+    );
     return score;
   }
 }
