@@ -71,7 +71,7 @@ export class CueCardManager {
   }
 
   private CueCardExpiredEvent(cueCardEvent: CueCardExpiredEvent) {
-    stats().reduceAudienceMeter(5);
+    stats().reduceAudienceMeter(Config.ScoreLossPerMissedCard);
     this.ReplaceCueCard(cueCardEvent.cueCard);
     Resources.sndCardExpired.play();
   }
