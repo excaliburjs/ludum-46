@@ -46,8 +46,10 @@ export class Item extends Actor {
       if (event.other instanceof Player) {
         if (this.kind === "prop") {
           stats().inventory.addProp(<StageProps>this.resourceName, this.pos);
+          stats().numPropsUsed++;
         } else if (this.kind === "costume") {
           stats().inventory.addCostume(<Costumes>this.resourceName, this.pos);
+          stats().numCostumeChanges++;
         }
 
         Resources.sndPickupItem.play();

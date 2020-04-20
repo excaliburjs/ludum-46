@@ -85,6 +85,10 @@ export class CueCardManager {
       this.ReplaceCueCard(cueCardEvent.cueCard);
     }, Config.CueCardSuccessReplacementDelay);
     Resources.sndCardSuccess.play();
+    stats().numLinesDelivered++;
+    if (stats().numLinesDelivered === Config.NumCueCardsToWin) {
+      stats().isGameOver = true;
+    }
   }
 
   private ReplaceCueCard(cueCard: CueCard) {

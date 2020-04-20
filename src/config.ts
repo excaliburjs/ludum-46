@@ -42,4 +42,5 @@ export default {
   ScoreIncreasePerProp: 30, //amt gained for having a correct prop
   ScoreMultiplier: 1.5, // multiplier for having every correct prop.  1 means nothing
   ScoreLossPerMissedCard: 15,
+  NumCueCardsToWin: 7,
 };
