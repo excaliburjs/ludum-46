@@ -25,9 +25,10 @@ export default {
   CueCardSuccessReplacementDelay: 7000, // Delay to repalce cue card on success
   CueCardFailReplacementDelay: 0,
 
-  AudienceMeterMaxWidth: 600,
+  AudienceMeterXOffset: 200,
+  AudienceMeterMaxWidth: 934,
   AudienceMeterStartingWidth: 400,
-  AudienceMeterHeight: 50,
+  AudienceMeterHeight: 20,
 
   SoundVolume: 1,
   CueCardExpiredVolume: 0.1,

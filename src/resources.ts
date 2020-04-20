@@ -12,6 +12,7 @@ import player4long from "../img/char-sprites/player-4-long.png";
 import player5long from "../img/char-sprites/player-5-long.png";
 import cuecardBase from "../img/cuecard-base.png";
 import cuecardTimer from "../img/cuecard-timer.png";
+import audienceMeter from "../img/meter.png";
 import background from "../img/background.png";
 import titleCard from "../img/silent-card-template.png";
 import playAgainButton from "../img/play-again-button.png";
@@ -34,6 +35,7 @@ export const Resources = {
   charSheet10: new Graphics.RawImage(player5long),
   cuecardBaseImage: new Graphics.RawImage(cuecardBase),
   cuecardTimerSheet: new Graphics.RawImage(cuecardTimer),
+  audienceMeterSheet: new Graphics.RawImage(audienceMeter),
   map: new TiledResource("./map/map.json"),
   background: new Graphics.RawImage(background),
   titleCard: new Graphics.RawImage(titleCard),

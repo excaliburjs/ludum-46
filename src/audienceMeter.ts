@@ -1,50 +1,57 @@
-import { Actor, Color, Engine, Graphics, ActorArgs } from "excalibur";
+import {
+  Actor,
+  Color,
+  Engine,
+  Graphics,
+  ActorArgs,
+  Util,
+  Vector,
+  vec,
+} from "excalibur";
 import Config from "./config";
 import { stats } from "./session";
+import { Resources } from "./resources";
 
 export class AudienceMeter extends Actor {
   private meterWidth: number = Config.AudienceMeterMaxWidth;
   private meterHeight: number = Config.AudienceMeterHeight;
   private meterSpeed: number = 3;
   private meterRect!: Graphics.Rect;
-  private started!: boolean = false;
+  private started: boolean = false;
+
+  private _meterAnim!: Graphics.Animation;
 
   constructor() {
     super({
       x: Config.GameWidth / 2,
-      y: Config.AudienceMeterHeight,
+      y: 0,
       width: Config.AudienceMeterMaxWidth,
       height: Config.AudienceMeterHeight,
+      anchor: vec(0.5, 0),
     });
 
-    this._setUpBackground();
     this._setUpMeter();
   }
 
   public start(): void {
     this.started = true;
-  }
-
-  private _setUpBackground(): void {
-    const background = this.graphics.createLayer({
-      name: "background",
-      order: -1,
-    });
-    const backgroundRect = new Graphics.Rect({
-      width: this.meterWidth,
-      height: this.meterHeight,
-      color: Color.White,
-    });
-    backgroundRect.opacity = 0.33;
-    background.show(backgroundRect);
+    this.graphics.getLayer("meter")!.show(this._meterAnim);
   }
 
   update(gameEngine: Engine, delta: number) {
     super.update(gameEngine, delta);
     if (!this.started) return;
     stats().reduceAudienceMeter((Config.ScoreDecayRate * delta) / 1000);
-    let difference = stats().currentAudienceScore - this.meterRect.width;
-    this.meterRect.width += difference;
+    // let difference = stats().currentAudienceScore - this.meterRect.width;
+    // this.meterRect.width += difference;
+
+    this._meterAnim.goToFrame(
+      127 -
+        Math.floor(
+          (stats().currentAudienceScore / Config.AudienceMeterMaxWidth) * 128
+        )
+    );
+
     if (stats().currentAudienceScore == 0) {
       stats().isGameOver = true;
       console.log("game over (loss)");
@@ -58,6 +65,29 @@ export class AudienceMeter extends Actor {
       height: this.meterHeight,
       color: Color.Green,
     });
-    meterLayer.show(this.meterRect);
+
+    const sheet = Graphics.SpriteSheet.fromGrid({
+      image: Resources.audienceMeterSheet,
+      grid: {
+        rows: 128,
+        columns: 1,
+        spriteWidth: 934,
+        spriteHeight: 40,
+      },
+    });
+    this._meterAnim = Graphics.Animation.fromSpriteSheet(
+      sheet,
+      Util.range(0, 127),
+      200,
+      Graphics.AnimationStrategy.Freeze
+    );
+    this._meterAnim.pause();
+    this._meterAnim.goToFrame(
+      127 -
+        Math.floor(
+          (Config.AudienceMeterStartingWidth / Config.AudienceMeterMaxWidth) *
+            128
+        )
+    );
   }
 }
