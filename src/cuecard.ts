@@ -7,6 +7,8 @@ import {
   vec,
   GameEvent,
   Resource,
+  Animation,
+  Util,
 } from "excalibur";
 import { Resources } from "./resources";
 import { Locations, StageProps, Costumes } from "./constants";
@@ -59,6 +61,7 @@ export class CueCard extends Actor {
   private yPadding: number;
   private symbolHeight: number;
   public options: CueCardOptions;
+  private _timerAnimation!: Graphics.Animation;
 
   constructor(options: CueCardOptions) {
     super();
@@ -76,7 +79,7 @@ export class CueCard extends Actor {
     this.symbolHeight = (1 - this.yPaddingPercent) * this.cueCardHeight;
 
     this._setUpBackground();
-    this._setUpTimer();
+    this._setUpTimer(this.timer);
     this._setUpLocationSymbol(options.requiredLocation);
     this._setUpPropSymbol(options.requiredProp);
     this._setUpCostumeSymbol(options.requiredCostume);
@@ -88,7 +91,7 @@ export class CueCard extends Actor {
 
   public update(engine: Engine, delta: number) {
     this.timer -= delta / 1000;
-    this.timerRect.width = (this.cueCardWidth * this.timer) / this.lifeTime;
+    // this.timerRect.width = (this.cueCardWidth * this.timer) / this.lifeTime;
 
     if (this.timer <= 0) {
       const event = new CueCardExpiredEvent(this);
@@ -121,25 +124,31 @@ export class CueCard extends Actor {
       name: "background",
       order: -1,
     });
-    const backgroundRect = new Graphics.Rect({
-      width: this.cueCardWidth,
-      height: this.cueCardHeight,
-      color: Color.White,
-    });
-    background.offset = this.pos;
-    backgroundRect.opacity = 0.33;
-    background.show(backgroundRect);
+    const back = Graphics.Sprite.from(Resources.cuecardBaseImage);
+    background.offset = this.pos.add(vec(90, -50));
+    background.show(back);
   }
 
-  private _setUpTimer(): void {
-    const timerLayer = this.graphics.createLayer({ name: "timer", order: 0 });
-    this.timerRect = new Graphics.Rect({
-      width: this.cueCardWidth,
-      height: this.cueCardHeight,
-      color: Color.White,
+  private _setUpTimer(totaltime: number): void {
+    const sheet = Graphics.SpriteSheet.fromGrid({
+      image: Resources.cuecardTimerSheet,
+      grid: {
+        rows: 1,
+        columns: 38,
+        spriteWidth: 53,
+        spriteHeight: 52,
+      },
     });
-    timerLayer.offset = this.pos;
-    timerLayer.show(this.timerRect);
+    const timer = Graphics.Animation.fromSpriteSheet(
+      sheet,
+      Util.range(0, 37),
+      (totaltime * 1000) / 38,
+      Graphics.AnimationStrategy.Freeze
+    );
+    const timerLayer = this.graphics.createLayer({ name: "timer", order: 0 });
+    timerLayer.offset = this.pos.add(vec(174, 90));
+    timerLayer.show(timer);
+    this._timerAnimation = timer;
   }
 
   private _setUpLocationSymbol(requiredLocation: Locations): void {
