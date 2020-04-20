@@ -77,13 +77,13 @@ export class SoundManager {
       ? 0
       : Config.BackgroundVolume;
     Resources.music.loop = true;
-    Resources.music.play();
+    if(!Resources.music.isPlaying())
+      Resources.music.play();
   }
 
   static stopBackgroundMusic() {
     // stop bg music
     Resources.music.loop = false;
-    Resources.music.stop();
   }
 
   static muteBackgroundMusic() {

@@ -139,6 +139,7 @@ export class CueCardManager {
   public SatisfyStageCenter(inventory: Inventory): number {
     const score = this._trySatisfyCueCard(inventory, this.stageCenterCueCard);
     setTimeout(() => {
+      debugger;
       this.stageCenterCueCard.Satisfied();
     }, 1000);
     return score;
