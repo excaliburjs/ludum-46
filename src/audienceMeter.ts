@@ -43,7 +43,7 @@ export class AudienceMeter extends Actor {
 
   update(gameEngine: Engine, delta: number) {
     super.update(gameEngine, delta);
-    if (!this.started || stats().isGameOver) return;
+    if (!this.started) return;
     stats().reduceAudienceMeter((Config.ScoreDecayRate * delta) / 1000);
     // let difference = stats().currentAudienceScore - this.meterRect.width;
     // this.meterRect.width += difference;
@@ -65,6 +65,7 @@ export class AudienceMeter extends Actor {
     if (stats().currentAudienceScore == 0) {
       stats().isGameOver = true;
     }
+    this.started = !stats().isGameOver;
   }
 
   private _setUpMeter(): void {

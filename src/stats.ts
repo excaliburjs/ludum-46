@@ -9,6 +9,7 @@ interface Payload {
   numLinesDelivered: number;
   numPropsused: number;
   numCostumeChanges: number;
+  randomSeed: number;
 }
 
 export class Analytics {
@@ -68,6 +69,7 @@ export class Stats {
       numPropsused: this.numPropsUsed,
       numCostumeChanges: this.numCostumeChanges,
       numLinesDelivered: this.numLinesDelivered,
+      randomSeed: Config.RandomSeed,
     });
   }
 
