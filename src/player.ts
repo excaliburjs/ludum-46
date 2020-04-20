@@ -110,11 +110,14 @@ export class Player extends Actor {
       Resources.sndDoorOpen.play();
     }, 800);
 
-    this.actions.moveBy(-(Config.PlayerWidth * 3), 0, 60).callMethod(() => {
-      this.graphics.show("down");
-      this.inputState = PlayerInputState.input_accept;
-      this.body.collider.type = CollisionType.Active;
-    });
+    return this.actions
+      .moveBy(-(Config.PlayerWidth * 3), 0, 60)
+      .callMethod(() => {
+        this.graphics.show("down");
+        this.inputState = PlayerInputState.input_accept;
+        this.body.collider.type = CollisionType.Active;
+      })
+      .asPromise();
   }
 
   private _setupDrawing(engine: Engine) {
@@ -169,12 +172,17 @@ export class Player extends Actor {
     this.graphics.add("walkRight", walkRightAnim);
   }
 
-  public getCharSprite(): Graphics.RawImage {
+  public getCharSprite(excludeCurrent?: boolean): Graphics.RawImage {
     let gameRandom = new Random(Date.now());
     let charSheets = [];
     for (let r in Resources) {
       if (r.search("charSheet") != -1) {
-        charSheets.push((Resources as Record<string, Loadable>)[r]);
+        let img = (Resources as Record<string, Loadable>)[r];
+
+        if (excludeCurrent && img === this.charImage) {
+          continue;
+        }
+        charSheets.push(img);
       }
     }
     let randCharSheets = gameRandom.shuffle(charSheets);

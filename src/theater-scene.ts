@@ -20,6 +20,7 @@ import { StageProps, Costumes } from "./constants";
 import Items, { Item } from "./items";
 import { stats } from "./session";
 import { SoundManager } from "./soundManager";
+import { DirectorNPC } from "./director";
 
 const LAYER_IMPASSABLE = "walls";
 const LAYER_TRIGGERS = "triggers";
@@ -36,14 +37,26 @@ export class Theater extends Scene {
   public stageTileMap!: TileMap;
   private player!: Player;
   private cuecardmanager!: CueCardManager;
+  private director!: DirectorNPC;
 
   public onInitialize(engine: Engine) {
     this.cuecardmanager = new CueCardManager(this);
+
+    // Player
     this.player = new Player(
       Config.GameWidth,
       Config.GameHeight - Config.PlayerHeight * 1.5
     );
     this.add(this.player);
+
+    // Director
+    this.director = new DirectorNPC(this.player, {
+      pos: vec(
+        Config.GameWidth - Config.PlayerWidth * 4,
+        Config.GameHeight - Config.PlayerHeight * 1.5
+      ),
+    });
+    this.add(this.director);
 
     this.stageTileMap = Resources.map.getTileMap(
       Config.StagePos.x,
@@ -74,7 +87,9 @@ export class Theater extends Scene {
    */
   onActivate() {
     SoundManager.startBackgroundMusic();
-    this.player.beginEnterStage();
+    this.player.beginEnterStage().then(() => {
+      return this.director.playGreetingSequence();
+    });
   }
 
   private collectSolidTiles(layer: ITiledMapLayer) {
