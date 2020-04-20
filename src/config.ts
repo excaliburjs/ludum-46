@@ -19,6 +19,8 @@ export default {
   CueCardWidth: 300,
   CueCardLifeMinSeconds: 15,
   CueCardLifeMaxSeconds: 35,
+  CueCardSuccessReplacementDelay: 0, // Delay to repalce cue card on success
+  CueCardFailReplacementDelay: 0,
 
   AudienceMeterMaxWidth: 600,
   AudienceMeterStartingWidth: 400,
@@ -32,7 +34,7 @@ export default {
   BackgroundVolume: 0.1,
 
   //Scoring
-  ScoreDecayRate: 1, // per second
+  ScoreDecayRate: 2, // per second
   ScoreBaseIncrease: 10, // amt achieved for just sitting in spot
   ScoreIncreasePerProp: 10, //amt gained for having a correct prop
   ScoreMultiplier: 1, // multiplier for having every correct prop.  1 means nothing

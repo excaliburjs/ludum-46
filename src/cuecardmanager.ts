@@ -72,11 +72,15 @@ export class CueCardManager {
 
   private CueCardExpiredEvent(cueCardEvent: CueCardExpiredEvent) {
     stats().reduceAudienceMeter(Config.ScoreLossPerMissedCard);
-    this.ReplaceCueCard(cueCardEvent.cueCard);
+    setTimeout(() => {
+      this.ReplaceCueCard(cueCardEvent.cueCard);
+    }, Config.CueCardFailReplacementDelay);
     Resources.sndCardExpired.play();
   }
   private CueCardSatisfiedEvent(cueCardEvent: CueCardExpiredEvent) {
-    this.ReplaceCueCard(cueCardEvent.cueCard);
+    setTimeout(() => {
+      this.ReplaceCueCard(cueCardEvent.cueCard);
+    }, Config.CueCardSuccessReplacementDelay);
     Resources.sndCardSuccess.play();
   }
 
