@@ -21,10 +21,10 @@ export class DirectorNPC extends Actor {
       this._engine.halfCanvasWidth,
       this._engine.halfCanvasHeight
     );
-    const card1 = new DialogCard("You're late! The audience is waiting...", {
+    const card1 = new DialogCard(["You're late! The audience is waiting..."], {
       pos: cardPos,
     });
-    const card2 = new DialogCard("Get dressed and get out there!", {
+    const card2 = new DialogCard(["Get dressed and get out there!"], {
       pos: cardPos,
     });
 

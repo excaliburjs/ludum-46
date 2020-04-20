@@ -54,7 +54,7 @@ export class GameOver extends Actor {
       }
       text = `The show was a ${descriptor}success!`;
     }
-    this.card = new DialogCard(text, {
+    this.card = new DialogCard([text], {
       pos: cardPos,
     });
     this.scene.add(this.card);
