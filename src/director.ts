@@ -39,6 +39,7 @@ export class DirectorNPC extends Actor {
       .delay(4000)
       .callMethod(() => {
         card2.kill();
+        this._player.AllowUserControl();
       })
       .asPromise();
   }
