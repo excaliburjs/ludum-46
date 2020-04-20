@@ -113,7 +113,7 @@ export class Player extends Actor {
     return this.actions
       .moveBy(-(Config.PlayerWidth * 3), 0, 60)
       .callMethod(() => {
-        this.graphics.show("down");
+        this.graphics.show("left");
         this.inputState = PlayerInputState.input_accept;
         this.body.collider.type = CollisionType.Active;
       })
