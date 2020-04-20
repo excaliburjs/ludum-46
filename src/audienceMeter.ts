@@ -7,6 +7,7 @@ export class AudienceMeter extends Actor {
   private meterHeight: number = Config.AudienceMeterHeight;
   private meterSpeed: number = 3;
   private meterRect!: Graphics.Rect;
+  private started!: boolean = false;
 
   constructor() {
     super({
@@ -18,6 +19,10 @@ export class AudienceMeter extends Actor {
 
     this._setUpBackground();
     this._setUpMeter();
+  }
+
+  public start(): void {
+    this.started = true;
   }
 
   private _setUpBackground(): void {
@@ -36,6 +41,7 @@ export class AudienceMeter extends Actor {
 
   update(gameEngine: Engine, delta: number) {
     super.update(gameEngine, delta);
+    if (!this.started) return;
     stats().reduceAudienceMeter(Config.ScoreDecayRate * delta/1000);
     let difference = (stats().currentAudienceScore - this.meterRect.width);
     this.meterRect.width += difference;

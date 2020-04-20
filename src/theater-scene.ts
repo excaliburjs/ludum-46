@@ -21,6 +21,7 @@ import Items, { Item } from "./items";
 import { stats } from "./session";
 import { SoundManager } from "./soundManager";
 import { DirectorNPC } from "./director";
+import { AudienceMeter } from "./audienceMeter";
 
 const LAYER_IMPASSABLE = "walls";
 const LAYER_TRIGGERS = "triggers";
@@ -38,10 +39,12 @@ export class Theater extends Scene {
   private player!: Player;
   private cuecardmanager!: CueCardManager;
   private director!: DirectorNPC;
+  private audienceMeter!: AudienceMeter;
 
   public onInitialize(engine: Engine) {
     this.cuecardmanager = new CueCardManager(this);
-
+    this.audienceMeter = new AudienceMeter();
+    this.add(this.audienceMeter);
     // Player
     this.player = new Player(
       Config.GameWidth,
@@ -97,6 +100,7 @@ export class Theater extends Scene {
         // start cue cards
         this.director.kill();
         this.cuecardmanager.start();
+        this.audienceMeter.start();
       });
   }
 

@@ -21,11 +21,9 @@ export function newgame(game: Engine) {
     Config.GameHeight - 40
   );
   gameStats = new Stats(inventory);
-  const audienceMeter = new AudienceMeter();
   const theater = new Theater(game);
   const gameOver = new GameOver();
   (window as any).gameOver = gameOver;
-  theater.add(audienceMeter);
   theater.add(inventory);
   theater.add(gameOver);
   game.addScene("main", theater);
