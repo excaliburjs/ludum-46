@@ -20,7 +20,7 @@ export default {
   CueCardLifeMinSeconds: 15,
   CueCardLifeMaxSeconds: 35,
   CueCardScoreDelaySeconds: 3, // Time necessary to wait in location before card is scored
-  CueCardSuccessReplacementDelay: 0, // Delay to repalce cue card on success
+  CueCardSuccessReplacementDelay: 3000, // Delay to repalce cue card on success
   CueCardFailReplacementDelay: 0,
 
   AudienceMeterMaxWidth: 600,
@@ -35,9 +35,9 @@ export default {
   BackgroundVolume: 0.05,
 
   //Scoring
-  ScoreDecayRate: 3, // per second
-  ScoreBaseIncrease: 5, // amt achieved for just sitting in spot
-  ScoreIncreasePerProp: 10, //amt gained for having a correct prop
-  ScoreMultiplier: 1, // multiplier for having every correct prop.  1 means nothing
+  ScoreDecayRate: 5, // per second
+  ScoreBaseIncrease: 0, // amt achieved for just sitting in spot
+  ScoreIncreasePerProp: 15, //amt gained for having a correct prop
+  ScoreMultiplier: 2, // multiplier for having every correct prop.  1 means nothing
   ScoreLossPerMissedCard: 15,
 };
