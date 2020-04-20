@@ -8,7 +8,6 @@ import {
   ExitTriggerEvent,
   ActorArgs,
   Logger,
-  vec,
 } from "excalibur";
 import { Player } from "./player";
 import { CueCardManager } from "./cuecardmanager";
@@ -26,6 +25,8 @@ export class CueCardTrigger extends Actor {
   private triggered: boolean = false;
   private waitTime: number = Config.CueCardScoreDelaySeconds;
   private timer: number = 0;
+  private minAlpha:number = 0.1;
+  private maxAlpha: number = 0.6;
 
   constructor(
     private player: Player,
@@ -48,11 +49,11 @@ export class CueCardTrigger extends Actor {
     this.trigger.body.useBoxCollider(this.width, this.height, this.anchor);
     this.trigger.on("enter", this.onTriggerEnter.bind(this));
     this.trigger.on("exit", this.onTriggerExit.bind(this));
-    this.rect = new Graphics.Rect({
-      width: this.width,
-      height: this.height,
-      color: Color.fromRGB(255, 255, 255, 0.0),
+    this.rect =new Graphics.Circle({
+      radius: this.width/2,
+      color: Color.Yellow
     });
+    this.rect.color.a = this.minAlpha;
     this.graphics.add(this.rect);
     this.scene.add(this.trigger);
   }
@@ -63,7 +64,7 @@ export class CueCardTrigger extends Actor {
     if (!this.triggered) return;
 
     this.timer += delta / 1000;
-    this.rect.color.a = 1 * this.timer / this.waitTime;
+    this.rect.color.a = this.maxAlpha * this.timer / this.waitTime + this.minAlpha;
 
     if (this.timer >= this.waitTime) {
       Logger.getInstance().info("Stage trigger", this.triggerPosition);
@@ -88,7 +89,7 @@ export class CueCardTrigger extends Actor {
     this.triggered = false;
     this.timer = 0;
     this.rect.opacity = 1;
-    this.rect.color.a = 0;
+    this.rect.color.a = this.minAlpha;
   }
 
   private onTriggerEnter(event: EnterTriggerEvent): void {
