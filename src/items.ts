@@ -5,19 +5,19 @@ import { stats } from "./session";
 import { Player } from "./player";
 
 export default class Items {
-  public static getIconSprite(key: string): Graphics.Sprite {
-    const spriteSheet = Graphics.SpriteSheet.fromGrid({
-      image: <Graphics.RawImage>Resources.icons,
-      grid: {
-        rows: 6,
-        columns: 5,
-        spriteHeight: 80,
-        spriteWidth: 80,
-      },
-    });
+  static sheet = Graphics.SpriteSheet.fromGrid({
+    image: <Graphics.RawImage>Resources.icons,
+    grid: {
+      rows: 6,
+      columns: 5,
+      spriteHeight: 80,
+      spriteWidth: 80,
+    },
+  });
 
+  public static getIconSprite(key: string): Graphics.Sprite {
     const index = IconPosition[key];
-    const sprite = spriteSheet.sprites[index];
+    const sprite = Items.sheet.sprites[index];
     return sprite;
   }
 }
