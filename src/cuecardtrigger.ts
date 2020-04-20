@@ -8,6 +8,7 @@ import {
   ExitTriggerEvent,
   ActorArgs,
   Logger,
+  vec,
 } from "excalibur";
 import { Player } from "./player";
 import { CueCardManager } from "./cuecardmanager";
@@ -49,7 +50,7 @@ export class CueCardTrigger extends Actor {
     this.rect = new Graphics.Rect({
       width: this.width,
       height: this.height,
-      color: Color.fromRGB(255, 0, 0, 0.4),
+      color: Color.fromRGB(255, 255, 255, 0.0),
     });
     this.graphics.add(this.rect);
     this.scene.add(this.trigger);
@@ -61,6 +62,7 @@ export class CueCardTrigger extends Actor {
     if (!this.triggered) return;
 
     this.timer += delta / 1000;
+    this.rect.color.a = 1 * this.timer / this.waitTime;
 
     if (this.timer >= this.waitTime) {
       Logger.getInstance().info("Stage trigger", this.triggerPosition);
@@ -85,6 +87,7 @@ export class CueCardTrigger extends Actor {
     this.triggered = false;
     this.timer = 0;
     this.rect.opacity = 1;
+    this.rect.color.a = 0;
   }
 
   private onTriggerEnter(event: EnterTriggerEvent): void {
