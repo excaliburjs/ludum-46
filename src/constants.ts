@@ -11,7 +11,7 @@ export enum StageProps {
   trumpet = "trumpet",
   umbrella = "umbrella",
   toiletPaper = "toiletPaper",
-  tomato = "tomato",
+  skull = "skull",
   sword = "sword",
 }
 
@@ -29,7 +29,7 @@ export const IconPosition: { [key: string]: number } = {
   trumpet: 1,
   umbrella: 2,
   toiletPaper: 3,
-  tomato: 4,
+  skull: 7,
   sword: 5,
   vikingHat: 10,
   jesterHat: 11,
