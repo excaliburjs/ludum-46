@@ -13,6 +13,7 @@ import {
 import { Resources } from "./resources";
 import { Locations, StageProps, Costumes } from "./constants";
 import Items, { Item } from "./items";
+import { stats } from "./session";
 export interface CueCardOptions {
   // The lifetime in seconds of the cue card
   lifeTime: number;
@@ -110,6 +111,10 @@ export class CueCard extends Actor {
       const event = new CueCardExpiredEvent(this);
       this.scene.emit(CueCardEvents.CueCardExpired, event);
       this.kill();
+    } else {
+      if (stats().isGameOver === true) {
+        this.pause();
+      }
     }
   }
 
