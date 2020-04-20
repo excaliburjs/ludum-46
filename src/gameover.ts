@@ -45,8 +45,9 @@ export class GameOver extends Actor {
       height: config.GameHeight + 500,
       color: Color.fromRGB(51, 51, 51, 0.5)
     });
-    this.z = 99;
+    this.z = 100;
 
+    this.pos = vec(100,100);
     this.button = new Button("Play Again?",{
       pos: cardPos,
       width: 200,
@@ -65,11 +66,6 @@ export class GameOver extends Actor {
       this.button.pos.add(vec(10000,10000));
       newgame(engine);
     });
-
-    //this.graphics.getLayer("button")!.offset = vec(0, 500);
-
-
-    this.z = 100;
   }
 
   show() {
