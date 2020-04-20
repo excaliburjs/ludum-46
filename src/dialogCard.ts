@@ -29,6 +29,8 @@ export class DialogCard extends Actor {
     const group = new Graphics.GraphicsGroup({
       members: graphicsMember,
     });
+    group.width = this.width;
+    group.height = this.height;
     this.graphics.add(group);
   }
 }
