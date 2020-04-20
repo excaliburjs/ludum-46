@@ -48,6 +48,6 @@ export default {
   ScorePunishment: 30, //Punishment for triggering spotlight with neigher correct prop
   NumCueCardsToWin: 7,
 
-  GreatScoreCutoff: 450,
-  RoaringScoreCutoff: 700,
+  GreatScoreCutoff: 400,
+  RoaringScoreCutoff: 600,
 };
