@@ -28,6 +28,7 @@ export const IconPosition: { [key: string]: number } = {
   rubberChicken: 0,
   trumpet: 1,
   umbrella: 2,
+  tomato: 4,
   toiletPaper: 3,
   skull: 7,
   sword: 5,
