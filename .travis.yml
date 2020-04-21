@@ -5,7 +5,7 @@ branches:
   only:
     - master
 before_deploy:
-  - npm run build -- --public-url ./ludum-46
+  - npm run build -- --public-url /ludum-46
 deploy:
   provider: pages
   skip_cleanup: true
