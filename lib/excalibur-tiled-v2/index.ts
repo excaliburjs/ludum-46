@@ -197,9 +197,9 @@ export class TiledResource extends Resource<ITiledMap> {
         for (var i = 0; i < layer.data.length; i++) {
           let gid = <number>layer.data[i];
 
-          if (gid !== 0) {
+          // TODO clear tile at 223!!
+          if (gid !== 0 && gid !== 223) {
             var ts = this.getTilesetForTile(gid);
-
             map.data[i].sprites.push(
               new TileSprite(ts.firstgid.toString(), gid - ts.firstgid)
             );
