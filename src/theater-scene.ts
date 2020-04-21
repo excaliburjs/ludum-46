@@ -48,6 +48,7 @@ export class Theater extends Scene {
 
   public onInitialize(engine: Engine) {
     this.tomatoes = new Tomatoes(this);
+    (window as any).tomatoes = this.tomatoes;
     this.cuecardmanager = new CueCardManager(this);
     this.audienceMeter = new AudienceMeter(this.tomatoes);
     this.add(this.audienceMeter);
