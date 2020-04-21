@@ -12,6 +12,7 @@ import {
 } from "excalibur";
 import Config from "./config";
 import { Resources } from "./resources";
+import { stats } from "./session";
 
 enum PlayerInputState {
   input_deny,
@@ -35,7 +36,7 @@ export class Player extends Actor {
       if (this.inputState !== PlayerInputState.input_accept) {
         return;
       }
-
+      if (stats().isGameOver == true) return;
       switch (keyHeld.key) {
         case Input.Keys.Up:
         case Input.Keys.W:
@@ -65,6 +66,7 @@ export class Player extends Actor {
       if (this.inputState !== PlayerInputState.input_accept) {
         return;
       }
+      if (stats().isGameOver == true) return;
       switch (keyUp.key) {
         case Input.Keys.Up:
         case Input.Keys.W:
