@@ -17,8 +17,8 @@ export class DirectorNPC extends Actor {
 
   public playGreetingSequence() {
     const cardPos = vec(
-      this._engine.halfCanvasWidth,
-      this._engine.halfCanvasHeight
+      this._engine.halfDrawWidth,
+      this._engine.halfDrawHeight
     );
     const card1 = new DialogCard(["You're late! The audience is waiting..."], {
       pos: cardPos,
