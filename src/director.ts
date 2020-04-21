@@ -23,12 +23,15 @@ export class DirectorNPC extends Actor {
     const card1 = new DialogCard(["You're late! The audience is waiting..."], {
       pos: cardPos,
     });
-    const card2 = new DialogCard(["Use the arrow keys or WASD keys to move!"], {
+    const card2 = new DialogCard(["Get ready and get out there!"], {
       pos: cardPos,
     });
-    const card3 = new DialogCard(["Get ready and get out there!"], {
-      pos: cardPos,
-    });
+    const card3 = new DialogCard(
+      ["(Use the arrow keys or WASD keys to move)"],
+      {
+        pos: cardPos,
+      }
+    );
 
     this.scene.add(card3);
     this.scene.add(card2);
